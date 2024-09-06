@@ -21,12 +21,12 @@ services:
         condition: service_healthy
     develop:
       watch:
-        - action: sync
-          path: .
-          target: /usr/src/app
-          ignore:
-            - node_modules
-            - package.json
+#        - action: sync
+#          path: .
+#          target: /usr/src/app
+#          ignore:
+#            - node_modules
+#            - package.json
         - action: rebuild
           path: package.json
 
