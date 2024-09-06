@@ -1,0 +1,60 @@
+services:
+  cms:
+    build:
+      context: .
+      dockerfile: Dev.Dockerfile
+    container_name: strapi_app
+    restart: on-failure
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: development
+#    volumes:
+#      - ./my-strapi-app:/usr/src/app
+    networks:
+      - data-db-network
+    ports:
+      - '1337:1337'
+    command: npm run develop
+    depends_on:
+      db:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /usr/src/app
+          ignore:
+            - node_modules
+            - package.json
+        - action: rebuild
+          path: package.json
+
+  db:
+    image: postgres:15.1-alpine
+    command: postgres -c listen_addresses='*'
+    restart: on-failure
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_SERVER: ${DATABASE_HOST}
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_PORT: ${DATABASE_PORT}
+      ALLOW_IP_RANGE: 0.0.0.0/0
+    volumes:
+      - ./database/postgresql/data:/var/lib/postgresql/data
+    networks:
+      - data-db-network
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}" ]
+      interval: 2s
+      timeout: 5s
+      retries: 10
+
+networks:
+  data-db-network:
+    driver: bridge
