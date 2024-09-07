@@ -24,14 +24,14 @@ services:
         condition: service_healthy
     develop:
       watch:
-#        - action: sync
+#        - action: sync+restart
 #          path: .
 #          target: /usr/src/app
 #          ignore:
 #            - node_modules
 #            - package.json
         - action: rebuild
-          path: package.json
+          path: ./package.json
 
   db:
     image: postgres:15.1-alpine
