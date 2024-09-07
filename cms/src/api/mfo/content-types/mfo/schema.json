@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "mfos",
+  "info": {
+    "singularName": "mfo",
+    "pluralName": "mfos",
+    "displayName": "MFO"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
