@@ -47,7 +47,7 @@ services:
       POSTGRES_PORT: ${DATABASE_PORT}
       ALLOW_IP_RANGE: 0.0.0.0/0
     volumes:
-      - ./database/postgresql/data:/var/lib/postgresql/data
+      - ../database/postgresql/data:/var/lib/postgresql/data
     networks:
       - data-db-network
     ports:
