@@ -1,6 +1,7 @@
-import {graphql} from './gql/gql'
+import { graphql } from './gql/gql'
+import cmsGraphQLRequest from "@/app/_lib/graphQL/cmsGraphQLFetch";
 
-export const allFilmsWithVariablesQueryDocument =
+const allMfosWithVariablesQueryDocument =
   graphql(/* GraphQL */ `
     query MFO {
       mfos {
@@ -13,3 +14,10 @@ export const allFilmsWithVariablesQueryDocument =
       }
     }
   `);
+
+export const getMfos = async () =>
+  cmsGraphQLRequest(allMfosWithVariablesQueryDocument,
+    // {
+    //   first: 10
+    // }
+  );

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
-import Mfos, { queryFn } from "@/app/mfos";
+import Mfos from "@/app/mfos";
+import { getMfos } from "@/app/_queries/mfo";
 
 export default async function Home() {
 
@@ -8,8 +9,10 @@ export default async function Home() {
 
   await queryClient.prefetchQuery({
     queryKey: [ 'mfos' ],
-    queryFn: queryFn
+    queryFn: getMfos
   })
+
+  // TODO: different url for ssr and client
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
