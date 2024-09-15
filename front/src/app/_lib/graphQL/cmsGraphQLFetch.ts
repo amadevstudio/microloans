@@ -1,12 +1,10 @@
-import env from "@/app/hooks/env";
+import env from "@/app/_lib/env";
+import graphQLRequest from "@/lib/graphQL/graphQLFetch";
 
-import {request} from 'graphql-request'
-import {TypedDocumentNode} from "@graphql-typed-document-node/core";
-import {RequestDocument} from "graphql-request/src/legacy/helpers/types";
-
-const token = env.CMS_TOKEN;
+const token = env.NEXT_PUBLIC_CMS_TOKEN;
+const url = env.NEXT_PUBLIC_CMS_URL;
 const tokenHeaders: { Authorization: string } | {} = token !== undefined && token !== ''
-  ? {'Authorization': `Bearer ${token}`}
+  ? { 'Authorization': `Bearer ${token}` }
   : {};
 
 // export default async function cmsFetch(url: string, options: RequestInit = {}): Promise<{ [key: string]: any }> {
@@ -29,13 +27,10 @@ const tokenHeaders: { Authorization: string } | {} = token !== undefined && toke
 //   return respose.json();
 // }
 
-export default async function cmsGraphqlRequest(
-  url: string,
-  document: RequestDocument | TypedDocumentNode<unknown, any>,
-  ...variablesAndRequestHeaders: [variables: any, requestHeaders: HeadersInit | undefined]
-) {
-  // Destructure the variables and requestHeaders
-  const [variables, requestHeaders] = variablesAndRequestHeaders;
+export default async function cmsGraphQLRequest(
+  ...args: Parameters<typeof graphQLRequest> extends [any, ...infer Rest] ? Rest : never
+): Promise<ReturnType<typeof graphQLRequest>> {
+  const [ document, variables, requestHeaders ] = args;
 
   const headers = {
     'Content-Type': 'application/json',
@@ -43,7 +38,5 @@ export default async function cmsGraphqlRequest(
     ...requestHeaders // Use requestHeaders directly
   };
 
-  const response = await request(url, document, variables, headers);
-
-  console.log(response);
+  return await graphQLRequest(url, document, variables, headers);
 }

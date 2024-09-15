@@ -14,7 +14,6 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n    query MFO {\n      mfos {\n        data {\n          id\n          attributes {\n            name\n          }\n        }\n      }\n    }\n  ": types.MfoDocument,
-    "\n  query MFO {\n    mfos {\n      data {\n        id\n        attributes {\n          name\n        }\n      }\n    }\n  }\n": types.MfoDocument,
 };
 
 /**
@@ -35,10 +34,6 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n    query MFO {\n      mfos {\n        data {\n          id\n          attributes {\n            name\n          }\n        }\n      }\n    }\n  "): (typeof documents)["\n    query MFO {\n      mfos {\n        data {\n          id\n          attributes {\n            name\n          }\n        }\n      }\n    }\n  "];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  query MFO {\n    mfos {\n      data {\n        id\n        attributes {\n          name\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query MFO {\n    mfos {\n      data {\n        id\n        attributes {\n          name\n        }\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

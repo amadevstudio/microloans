@@ -3,7 +3,7 @@
 ## Run GraphQL generator
 
 ```bash
-npm run graphql-codegen --watch
+npm run codegen
 ```
 
 ## Run Application
