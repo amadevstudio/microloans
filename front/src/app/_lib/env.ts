@@ -8,6 +8,8 @@ export default createEnv({
    */
   server: {
     NODE_ENV: z.enum([ 'development', 'production' ]),
+    CMS_URL: z.string().url().min(1),
+    CMS_TOKEN: z.string().min(1)
   },
   /*
    * Environment variables available on the client (and server).
@@ -26,6 +28,10 @@ export default createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+
+    CMS_URL: process.env.CMS_URL,
+    CMS_TOKEN: process.env.CMS_TOKEN,
+
     NEXT_PUBLIC_CMS_URL: process.env.NEXT_PUBLIC_CMS_URL,
     NEXT_PUBLIC_CMS_TOKEN: process.env.NEXT_PUBLIC_CMS_TOKEN,
   },

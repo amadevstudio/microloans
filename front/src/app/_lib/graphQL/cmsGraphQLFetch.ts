@@ -1,8 +1,11 @@
-import env from "@/app/_lib/env";
 import graphQLRequest from "@/lib/graphQL/graphQLFetch";
+import { isServer } from "@tanstack/react-query";
+import env from "@/app/_lib/env";
 
-const token = env.NEXT_PUBLIC_CMS_TOKEN;
-const url = env.NEXT_PUBLIC_CMS_URL;
+const [ token, url ] = isServer
+  ? [ env.CMS_TOKEN, env.CMS_URL ]
+  : [ env.NEXT_PUBLIC_CMS_TOKEN, env.NEXT_PUBLIC_CMS_URL ];
+
 const tokenHeaders: { Authorization: string } | {} = token !== undefined && token !== ''
   ? { 'Authorization': `Bearer ${token}` }
   : {};
