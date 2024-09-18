@@ -3,35 +3,35 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #007BFF; /* Синий */
-  --color-secondary: #28A745; /* Зеленый */
-  --color-background: #F8F9FA; /* Светло-серый */
-  --color-text: #343A40; /* Темно-серый */
-  --color-accent: #FF8C00; /* Оранжевый */
-  --color-link: #0056b3; /* Темно-синий */
+  --project-color-primary: #007BFF; /* Синий */
+  --project-color-secondary: #28A745; /* Зеленый */
+  --project-color-background: #F8F9FA; /* Светло-серый */
+  --project-color-text: #343A40; /* Темно-серый */
+  --project-color-accent: #FF8C00; /* Оранжевый */
+  --project-color-link: #0056b3; /* Темно-синий */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-text: #F8F9FA; /* Светло-серый */
-    --color-background: #343A40; /* Темно-серый */
+    --project-color-text: #F8F9FA; /* Светло-серый */
+    --project-color-background: #1c1b22; /* Темно-серый */
   }
 }
 
 body {
-  color: var(--color-text);
-  background: var(--color-background);
+  color: var(--project-color-text);
+  background: var(--project-color-background);
 
   font-family: 'Open Sans', sans-serif;
 }
 
-h1, h2 {
-  font-family: 'Roboto', sans-serif;
-}
+/*h1, h2 {*/
+/*  font-family: 'Roboto', sans-serif;*/
+/*}*/
 
 a {
   text-decoration: none;
-  color: var(--color-link);
+  color: var(--project-color-link);
 }
 
 @layer utilities {
