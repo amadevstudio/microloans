@@ -1,16 +1,22 @@
+'use client'
+
 import { Mfo } from "@/app/_types/mfo";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { useQuery } from "@tanstack/react-query";
+import { getMfos } from "@/app/_queries/mfo";
 
-const mfos: Mfo[] = Array(10).fill({ name: "Быстрые деньги" });
+export default function Root({ specialOfferCount }: { specialOfferCount: number }) {
+  const { data } = useQuery({
+    queryKey: [ 'mfos' ],
+    queryFn: () => getMfos(),
+  });
 
-export default function Root() {
-  const specialOfferCount = Math.round(Math.random() * 4) + 3;
+  const mfos: Mfo[] = Array(10).fill(data.mfos.data[0])
 
   return (
     <main>
-
       <header className="px-10 py-6 container mx-auto">
         <h1 className="text-3xl font-bold text-project-primary">Микрозаймы</h1>
         <p className="mt-2">Небольшие займы для больших идей</p>
@@ -35,7 +41,7 @@ export default function Root() {
                   <div className="p-1">
                     <Card>
                       <CardContent className="flex aspect-square items-center justify-center p-6">
-                        <span className="text-xl font-semibold">{index + 1}. {mfo.name}</span>
+                        <span className="text-xl font-semibold">{index + 1}. {mfo.attributes.name}</span>
                       </CardContent>
                     </Card>
                   </div>
