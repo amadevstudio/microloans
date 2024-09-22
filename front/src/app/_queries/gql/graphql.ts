@@ -952,10 +952,10 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
-export type MfoQueryVariables = Exact<{ [key: string]: never; }>;
+export type MfosQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MfoQuery = { __typename?: 'Query', mfos?: { __typename?: 'MfoEntityResponseCollection', data: Array<{ __typename?: 'MfoEntity', id?: string | null, attributes?: { __typename?: 'Mfo', name: string } | null }> } | null };
+export type MfosQuery = { __typename?: 'Query', mfos?: { __typename?: 'MfoEntityResponseCollection', data: Array<{ __typename?: 'MfoEntity', id?: string | null, attributes?: { __typename?: 'Mfo', name: string } | null }> } | null };
 
 
-export const MfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MFO"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<MfoQuery, MfoQueryVariables>;
+export const MfosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Mfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<MfosQuery, MfosQueryVariables>;

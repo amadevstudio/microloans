@@ -1,9 +1,10 @@
 import { graphql } from './gql/gql'
 import cmsGraphQLRequest from "@/app/_lib/graphQL/cmsGraphQLFetch";
+import { MfoEntityResponse } from "@/app/_queries/gql/graphql";
 
-const allMfosWithVariablesQueryDocument =
+export const mfosQueryDocument =
   graphql(/* GraphQL */ `
-    query MFO {
+    query Mfos {
       mfos {
         data {
           id
@@ -14,10 +15,3 @@ const allMfosWithVariablesQueryDocument =
       }
     }
   `);
-
-export const getMfos = async () =>
-  cmsGraphQLRequest(allMfosWithVariablesQueryDocument,
-    // {
-    //   first: 10
-    // }
-  );

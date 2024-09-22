@@ -1,6 +1,14 @@
-import graphQLRequest from "@/lib/graphQL/graphQLFetch";
+// import graphQLRequest from "@/lib/graphQL/graphQLFetch";
 import { isServer } from "@tanstack/react-query";
 import env from "@/app/_lib/env";
+import { request } from 'graphql-request'
+import type {
+  RequestDocument,
+  Variables,
+  VariablesAndRequestHeadersArgs
+// @ts-ignore
+} from "graphql-request/src/legacy/helpers/types";
+import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
 
 const [ token, url ] = isServer
   ? [ env.CMS_TOKEN, env.CMS_URL ]
@@ -30,10 +38,17 @@ const tokenHeaders: { Authorization: string } | {} = token !== undefined && toke
 //   return respose.json();
 // }
 
-export default async function cmsGraphQLRequest(
-  ...args: Parameters<typeof graphQLRequest> extends [any, ...infer Rest] ? Rest : never
-): Promise<ReturnType<typeof graphQLRequest>> {
-  const [ document, variables, requestHeaders ] = args;
+type LocalVariables = Variables;
+type LocalRequestDocument = RequestDocument;
+type LocalTypedDocumentNode<T, V> = TypedDocumentNode<T, V>;
+type LocalVariablesAndRequestHeadersArgs<V> = VariablesAndRequestHeadersArgs<V>;
+
+export default async function cmsGraphQLRequest<T, V extends LocalVariables = LocalVariables>(
+  document: LocalRequestDocument | LocalTypedDocumentNode<T, V>,
+  ...variablesAndRequestHeaders: LocalVariablesAndRequestHeadersArgs<V>
+): Promise<T> {
+  const [ variables, requestHeaders ] =
+    variablesAndRequestHeaders;
 
   const headers = {
     'Content-Type': 'application/json',
@@ -41,5 +56,6 @@ export default async function cmsGraphQLRequest(
     ...requestHeaders // Use requestHeaders directly
   };
 
-  return await graphQLRequest(url, document, variables, headers);
+  // return await graphQLRequest(url, document, variables, headers);
+  return await request(url, document, variables, headers);
 }
