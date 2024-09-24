@@ -1,4 +1,3 @@
-// import graphQLRequest from "@/lib/graphQL/graphQLFetch";
 import { isServer } from "@tanstack/react-query";
 import env from "@/app/_lib/env";
 import { request } from 'graphql-request'
@@ -43,7 +42,7 @@ type LocalRequestDocument = RequestDocument;
 type LocalTypedDocumentNode<T, V> = TypedDocumentNode<T, V>;
 type LocalVariablesAndRequestHeadersArgs<V> = VariablesAndRequestHeadersArgs<V>;
 
-export default async function cmsGraphQLRequest<T, V extends LocalVariables = LocalVariables>(
+async function cmsGraphQLRequestMethod<T, V extends LocalVariables = LocalVariables>(
   document: LocalRequestDocument | LocalTypedDocumentNode<T, V>,
   ...variablesAndRequestHeaders: LocalVariablesAndRequestHeadersArgs<V>
 ): Promise<T> {
@@ -57,5 +56,19 @@ export default async function cmsGraphQLRequest<T, V extends LocalVariables = Lo
   };
 
   // return await graphQLRequest(url, document, variables, headers);
-  return await request(url, document, variables, headers);
+  return await request(url, document, [ variables, headers ]);
+}
+
+export async function cmsGraphQLRequestWithRequestDocument<T, V extends LocalVariables = LocalVariables>(
+  document: LocalRequestDocument,
+  ...variablesAndRequestHeaders: LocalVariablesAndRequestHeadersArgs<V>
+): Promise<T> {
+  return await cmsGraphQLRequestMethod(document, variablesAndRequestHeaders);
+}
+
+export default async function cmsGraphQLRequest<T, V extends LocalVariables = LocalVariables>(
+  document: LocalTypedDocumentNode<T, V>,
+  ...variablesAndRequestHeaders: LocalVariablesAndRequestHeadersArgs<V>
+): Promise<T> {
+  return await cmsGraphQLRequestMethod(document, variablesAndRequestHeaders);
 }
