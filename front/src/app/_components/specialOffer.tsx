@@ -3,14 +3,15 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
-import { mfosQueryDocument } from "@/app/_queries/mfo";
+import { getMfos } from "@/app/_queries/mfo";
 import { MfosQuery } from "@/app/_queries/gql/graphql";
 import cmsGraphQLRequest from "@/app/_lib/graphQL/cmsGraphQLFetch";
 
 export default function SpecialOffer({ specialOfferCount }: { specialOfferCount: number }) {
   const { data } = useQuery<MfosQuery>({
     queryKey: [ 'mfos' ],
-    queryFn: async () => await cmsGraphQLRequest(mfosQueryDocument)
+    // queryFn: async () => await cmsGraphQLRequest(mfosQueryDocument)
+    queryFn: getMfos
   })
 
   const firstMfo = data?.mfos?.data;

@@ -2,8 +2,7 @@ import SpecialOffer from "@/app/_components/specialOffer";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { Separator } from "@/components/ui/separator";
 import MfosCatalog from "@/app/_components/MfosCatalog";
-import cmsGraphQLRequest from "@/app/_lib/graphQL/cmsGraphQLFetch";
-import { mfosQueryDocument } from "@/app/_queries/mfo";
+import { getMfos } from "@/app/_queries/mfo";
 
 function getSpecialOfferCount() {
   return Math.round(Math.random() * 4) + 3;
@@ -15,7 +14,7 @@ export default async function Home() {
 
   await queryClient.prefetchQuery({
     queryKey: [ 'mfos' ],
-    queryFn: async () => await cmsGraphQLRequest(mfosQueryDocument)
+    queryFn: getMfos
   })
 
   return (
