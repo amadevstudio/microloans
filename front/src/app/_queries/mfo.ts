@@ -5,12 +5,8 @@ const mfosQueryDocument =
 graphql(/* GraphQL */ `
     query Mfos {
         mfos {
-            data {
-                id
-                attributes {
-                    name
-                }
-            }
+            documentId
+            name
         }
     }
 `);

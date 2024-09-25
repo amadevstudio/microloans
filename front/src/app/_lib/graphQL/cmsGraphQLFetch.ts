@@ -8,6 +8,7 @@ import type {
 // @ts-ignore
 } from "graphql-request/src/legacy/helpers/types";
 import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
+import { HeadersInit } from "undici-types";
 
 const [ token, url ] = isServer
   ? [ env.CMS_TOKEN, env.CMS_URL ]
@@ -42,13 +43,12 @@ type LocalRequestDocument = RequestDocument;
 type LocalTypedDocumentNode<T, V> = TypedDocumentNode<T, V>;
 type LocalVariablesAndRequestHeadersArgs<V> = VariablesAndRequestHeadersArgs<V>;
 
+type LocalHeaders = [string, string][] | Record<string, string> | Headers;
+
 async function cmsGraphQLRequestMethod<T, V extends LocalVariables = LocalVariables>(
   document: LocalRequestDocument | LocalTypedDocumentNode<T, V>,
-  ...variablesAndRequestHeaders: LocalVariablesAndRequestHeadersArgs<V>
+  { variables, requestHeaders }: { variables?: V; requestHeaders?: LocalHeaders }
 ): Promise<T> {
-  const [ variables, requestHeaders ] =
-    variablesAndRequestHeaders;
-
   const headers = {
     'Content-Type': 'application/json',
     ...tokenHeaders,
@@ -56,19 +56,19 @@ async function cmsGraphQLRequestMethod<T, V extends LocalVariables = LocalVariab
   };
 
   // return await graphQLRequest(url, document, variables, headers);
-  return await request(url, document, [ variables, headers ]);
+  return await request(url, document, variables, headers);
 }
 
 export async function cmsGraphQLRequestWithRequestDocument<T, V extends LocalVariables = LocalVariables>(
   document: LocalRequestDocument,
-  ...variablesAndRequestHeaders: LocalVariablesAndRequestHeadersArgs<V>
+  { variables, requestHeaders }: { variables?: V; requestHeaders?: LocalHeaders } = {}
 ): Promise<T> {
-  return await cmsGraphQLRequestMethod(document, variablesAndRequestHeaders);
+  return await cmsGraphQLRequestMethod(document, { variables, requestHeaders });
 }
 
 export default async function cmsGraphQLRequest<T, V extends LocalVariables = LocalVariables>(
   document: LocalTypedDocumentNode<T, V>,
-  ...variablesAndRequestHeaders: LocalVariablesAndRequestHeadersArgs<V>
+  { variables, requestHeaders }: { variables?: V; requestHeaders?: LocalHeaders } = {}
 ): Promise<T> {
-  return await cmsGraphQLRequestMethod(document, variablesAndRequestHeaders);
+  return await cmsGraphQLRequestMethod(document, { variables, requestHeaders });
 }

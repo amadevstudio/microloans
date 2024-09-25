@@ -5,7 +5,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 import { getMfos } from "@/app/_queries/mfo";
 import { MfosQuery } from "@/app/_queries/gql/graphql";
-import cmsGraphQLRequest from "@/app/_lib/graphQL/cmsGraphQLFetch";
 
 export default function SpecialOffer({ specialOfferCount }: { specialOfferCount: number }) {
   const { data } = useQuery<MfosQuery>({
@@ -14,13 +13,13 @@ export default function SpecialOffer({ specialOfferCount }: { specialOfferCount:
     queryFn: getMfos
   })
 
-  const firstMfo = data?.mfos?.data;
-  if (!firstMfo) {
+  const mfos = data?.mfos;
+  if (mfos === undefined || mfos.length === 0) {
     return <></>
   }
 
 
-  const specialOfferMfos: Exclude<typeof firstMfo, undefined> = Array(specialOfferCount).fill(firstMfo[0]);
+  const specialOfferMfos: Exclude<typeof mfos, undefined> = Array(specialOfferCount).fill(mfos[0]);
 
   return (
     <section className="container mx-auto px-10 py-6">
@@ -40,7 +39,8 @@ export default function SpecialOffer({ specialOfferCount }: { specialOfferCount:
                 <div className="p-1">
                   <Card>
                     <CardContent className="flex aspect-square items-center justify-center p-6">
-                      <span className="text-xl font-semibold">{index + 1}. {mfo?.attributes?.name}</span>
+                      <span className="text-xl font-semibold">{index + 1}. {mfo?.name} <p
+                        className="text-xs break-all">(id {mfo?.documentId})</p></span>
                     </CardContent>
                   </Card>
                 </div>
