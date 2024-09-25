@@ -1,36 +1,40 @@
 {
   "name": "cms",
-  "private": true,
   "version": "0.1.0",
+  "private": true,
   "description": "A Strapi application",
   "scripts": {
-    "develop": "strapi develop",
-    "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi",
-    "deploy": "strapi deploy"
+    "deploy": "strapi deploy",
+    "develop": "strapi develop",
+    "seed:example": "node ./scripts/seed.js",
+    "start": "strapi start",
+    "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "4.25.10",
-    "@strapi/plugin-graphql": "^4.25.10",
-    "@strapi/plugin-i18n": "4.25.10",
-    "@strapi/plugin-users-permissions": "4.25.10",
-    "@strapi/strapi": "4.25.11",
+    "@strapi/plugin-cloud": "5.0.1",
+    "@strapi/plugin-graphql": "^5.0.1",
+    "@strapi/plugin-users-permissions": "5.0.1",
+    "@strapi/strapi": "5.0.1",
+    "fs-extra": "^10.0.0",
+    "mime-types": "^2.1.27",
     "pg": "8.8.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-router-dom": "5.3.4",
-    "styled-components": "5.3.3"
+    "react-router-dom": "^6.0.0",
+    "styled-components": "^6.0.0"
   },
-  "author": {
-    "name": "A Strapi developer"
-  },
-  "strapi": {
-    "uuid": "9721aa09-5dad-4d1b-b300-248f77cc1ae3"
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5"
   },
   "engines": {
     "node": ">=18.0.0 <=20.x.x",
     "npm": ">=6.0.0"
   },
-  "license": "MIT"
+  "strapi": {
+    "uuid": "4c837d05-9e91-4675-a5d8-0dd53b65a90b"
+  }
 }
