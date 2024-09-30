@@ -1,0 +1,74 @@
+{
+  "fields": {
+    "errors": {
+      "error": {
+        "en": "Mistake",
+        "ru": "Поле заполнено неправильно"
+      }
+    }
+  },
+  "filters": {
+    "additional": {
+      "firstFree": {
+        "en": "First load free",
+        "ru": "Первый займ бесплатно"
+      },
+      "momentDecision": {
+        "en": "Moment decision",
+        "ru": "Моментальное решение"
+      },
+      "withoutIncomeCertificate": {
+        "en": "Without certificate of income",
+        "ru": "Без справки о доходах"
+      }
+    }
+  },
+
+  "sex": {
+    "male": {
+      "en": "male",
+      "ru": "мужской"
+    },
+    "female": {
+      "en": "female",
+      "ru": "женский"
+    },
+    "empty": {
+      "en": "",
+      "ru": ""
+    }
+  },
+  "cooperationForm": {
+    "barter": {
+      "en": "barter",
+      "ru": "бартер"
+    },
+    "commerce": {
+      "en": "commerce",
+      "ru": "коммерция"
+    }
+  },
+  "socialNetworkThemes": {
+    "lifestyle": {
+      "en": "lifestyle",
+      "ru": "образ жизни"
+    }
+  },
+  "general": {
+    "subscribers": {
+      "singular": {
+        "ru": "подписчик",
+        "en": "subscriber"
+      },
+      "few": {
+        "ru": "подписчика"
+      },
+      "many": {
+        "ru": "подписчиков"
+      },
+      "unite": {
+        "en": "subscribers"
+      }
+    }
+  }
+}
