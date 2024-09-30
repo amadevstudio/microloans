@@ -41,7 +41,6 @@ const tokenHeaders: { Authorization: string } | {} = token !== undefined && toke
 type LocalVariables = Variables;
 type LocalRequestDocument = RequestDocument;
 type LocalTypedDocumentNode<T, V> = TypedDocumentNode<T, V>;
-type LocalVariablesAndRequestHeadersArgs<V> = VariablesAndRequestHeadersArgs<V>;
 
 type LocalHeaders = [string, string][] | Record<string, string> | Headers;
 
