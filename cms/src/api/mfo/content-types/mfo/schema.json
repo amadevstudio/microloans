@@ -4,7 +4,8 @@
   "info": {
     "singularName": "mfo",
     "pluralName": "mfos",
-    "displayName": "Mfo"
+    "displayName": "Mfo",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,6 +16,32 @@
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "Logo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.media"
+    },
+    "amount": {
+      "type": "integer"
+    },
+    "term": {
+      "type": "integer"
+    },
+    "interestRate": {
+      "type": "integer"
+    },
+    "obtaining_methods": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::obtaining-method.obtaining-method",
+      "inversedBy": "mfos"
+    },
+    "additional_filters": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::additional-filter.additional-filter",
+      "inversedBy": "mfos"
     }
   }
 }

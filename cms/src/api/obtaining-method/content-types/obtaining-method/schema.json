@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "obtaining_methods",
+  "info": {
+    "singularName": "obtaining-method",
+    "pluralName": "obtaining-methods",
+    "displayName": "Obtaining method",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "mfos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::mfo.mfo",
+      "mappedBy": "obtaining_methods"
+    }
+  }
+}

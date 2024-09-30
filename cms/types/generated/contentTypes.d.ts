@@ -513,6 +513,38 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiAdditionalFilterAdditionalFilter
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'additional_filters';
+  info: {
+    singularName: 'additional-filter';
+    pluralName: 'additional-filters';
+    displayName: 'Additional filter';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    mfos: Schema.Attribute.Relation<'manyToMany', 'api::mfo.mfo'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::additional-filter.additional-filter'
+    >;
+  };
+}
+
 export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   collectionName: 'articles';
   info: {
@@ -645,6 +677,7 @@ export interface ApiMfoMfo extends Struct.CollectionTypeSchema {
     singularName: 'mfo';
     pluralName: 'mfos';
     displayName: 'Mfo';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -653,6 +686,18 @@ export interface ApiMfoMfo extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
+    Logo: Schema.Attribute.Component<'shared.media', false>;
+    amount: Schema.Attribute.Integer;
+    term: Schema.Attribute.Integer;
+    interestRate: Schema.Attribute.Integer;
+    obtaining_methods: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::obtaining-method.obtaining-method'
+    >;
+    additional_filters: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::additional-filter.additional-filter'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -662,6 +707,38 @@ export interface ApiMfoMfo extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::mfo.mfo'>;
+  };
+}
+
+export interface ApiObtainingMethodObtainingMethod
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'obtaining_methods';
+  info: {
+    singularName: 'obtaining-method';
+    pluralName: 'obtaining-methods';
+    displayName: 'Obtaining method';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    mfos: Schema.Attribute.Relation<'manyToMany', 'api::mfo.mfo'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::obtaining-method.obtaining-method'
+    >;
   };
 }
 
@@ -1041,11 +1118,13 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::about.about': ApiAboutAbout;
+      'api::additional-filter.additional-filter': ApiAdditionalFilterAdditionalFilter;
       'api::article.article': ApiArticleArticle;
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
       'api::mfo.mfo': ApiMfoMfo;
+      'api::obtaining-method.obtaining-method': ApiObtainingMethodObtainingMethod;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;

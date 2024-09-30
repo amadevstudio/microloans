@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "additional_filters",
+  "info": {
+    "singularName": "additional-filter",
+    "pluralName": "additional-filters",
+    "displayName": "Additional filter",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "pluginOptions": {},
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "mfos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::mfo.mfo",
+      "mappedBy": "additional_filters"
+    }
+  }
+}
