@@ -49,6 +49,80 @@ export type AboutRelationResponseCollection = {
   nodes: Array<About>;
 };
 
+export type AdditionalFilter = {
+  __typename?: 'AdditionalFilter';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  documentId: Scalars['ID']['output'];
+  locale?: Maybe<Scalars['String']['output']>;
+  localizations: Array<Maybe<AdditionalFilter>>;
+  localizations_connection?: Maybe<AdditionalFilterRelationResponseCollection>;
+  mfos: Array<Maybe<Mfo>>;
+  mfos_connection?: Maybe<MfoRelationResponseCollection>;
+  name: Scalars['String']['output'];
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type AdditionalFilterLocalizationsArgs = {
+  filters?: InputMaybe<AdditionalFilterFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type AdditionalFilterLocalizations_ConnectionArgs = {
+  filters?: InputMaybe<AdditionalFilterFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type AdditionalFilterMfosArgs = {
+  filters?: InputMaybe<MfoFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type AdditionalFilterMfos_ConnectionArgs = {
+  filters?: InputMaybe<MfoFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type AdditionalFilterEntityResponseCollection = {
+  __typename?: 'AdditionalFilterEntityResponseCollection';
+  nodes: Array<AdditionalFilter>;
+  pageInfo: Pagination;
+};
+
+export type AdditionalFilterFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<AdditionalFilterFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  documentId?: InputMaybe<IdFilterInput>;
+  locale?: InputMaybe<StringFilterInput>;
+  localizations?: InputMaybe<AdditionalFilterFiltersInput>;
+  mfos?: InputMaybe<MfoFiltersInput>;
+  name?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<AdditionalFilterFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<AdditionalFilterFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type AdditionalFilterInput = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  mfos?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type AdditionalFilterRelationResponseCollection = {
+  __typename?: 'AdditionalFilterRelationResponseCollection';
+  nodes: Array<AdditionalFilter>;
+};
+
 export type Article = {
   __typename?: 'Article';
   author?: Maybe<Author>;
@@ -313,6 +387,17 @@ export type ComponentSharedMedia = {
   id: Scalars['ID']['output'];
 };
 
+export type ComponentSharedMediaFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentSharedMediaFiltersInput>>>;
+  not?: InputMaybe<ComponentSharedMediaFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentSharedMediaFiltersInput>>>;
+};
+
+export type ComponentSharedMediaInput = {
+  file?: InputMaybe<Scalars['ID']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
 export type ComponentSharedQuote = {
   __typename?: 'ComponentSharedQuote';
   body?: Maybe<Scalars['String']['output']>;
@@ -429,7 +514,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = About | Article | Author | Category | ComponentSharedMedia | ComponentSharedQuote | ComponentSharedRichText | ComponentSharedSeo | ComponentSharedSlider | Global | I18NLocale | Mfo | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = About | AdditionalFilter | Article | Author | Category | ComponentSharedMedia | ComponentSharedQuote | ComponentSharedRichText | ComponentSharedSeo | ComponentSharedSlider | Global | I18NLocale | Mfo | ObtainingMethod | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Global = {
   __typename?: 'Global';
@@ -589,14 +674,36 @@ export type JsonFilterInput = {
 
 export type Mfo = {
   __typename?: 'Mfo';
+  Logo?: Maybe<ComponentSharedMedia>;
+  additional_filters: Array<Maybe<AdditionalFilter>>;
+  additional_filters_connection?: Maybe<AdditionalFilterRelationResponseCollection>;
+  amount?: Maybe<Scalars['Int']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   documentId: Scalars['ID']['output'];
+  interestRate?: Maybe<Scalars['Int']['output']>;
   locale?: Maybe<Scalars['String']['output']>;
   localizations: Array<Maybe<Mfo>>;
   localizations_connection?: Maybe<MfoRelationResponseCollection>;
   name: Scalars['String']['output'];
+  obtaining_methods: Array<Maybe<ObtainingMethod>>;
+  obtaining_methods_connection?: Maybe<ObtainingMethodRelationResponseCollection>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  term?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type MfoAdditional_FiltersArgs = {
+  filters?: InputMaybe<AdditionalFilterFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type MfoAdditional_Filters_ConnectionArgs = {
+  filters?: InputMaybe<AdditionalFilterFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
@@ -613,6 +720,20 @@ export type MfoLocalizations_ConnectionArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+
+export type MfoObtaining_MethodsArgs = {
+  filters?: InputMaybe<ObtainingMethodFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type MfoObtaining_Methods_ConnectionArgs = {
+  filters?: InputMaybe<ObtainingMethodFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type MfoEntityResponseCollection = {
   __typename?: 'MfoEntityResponseCollection';
   nodes: Array<Mfo>;
@@ -620,22 +741,34 @@ export type MfoEntityResponseCollection = {
 };
 
 export type MfoFiltersInput = {
+  Logo?: InputMaybe<ComponentSharedMediaFiltersInput>;
+  additional_filters?: InputMaybe<AdditionalFilterFiltersInput>;
+  amount?: InputMaybe<IntFilterInput>;
   and?: InputMaybe<Array<InputMaybe<MfoFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   documentId?: InputMaybe<IdFilterInput>;
+  interestRate?: InputMaybe<IntFilterInput>;
   locale?: InputMaybe<StringFilterInput>;
   localizations?: InputMaybe<MfoFiltersInput>;
   name?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<MfoFiltersInput>;
+  obtaining_methods?: InputMaybe<ObtainingMethodFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<MfoFiltersInput>>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
+  term?: InputMaybe<IntFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
 export type MfoInput = {
+  Logo?: InputMaybe<ComponentSharedMediaInput>;
+  additional_filters?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  amount?: InputMaybe<Scalars['Int']['input']>;
+  interestRate?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  obtaining_methods?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  term?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type MfoRelationResponseCollection = {
@@ -647,10 +780,12 @@ export type Mutation = {
   __typename?: 'Mutation';
   /** Change user password. Confirm with the current password. */
   changePassword?: Maybe<UsersPermissionsLoginPayload>;
+  createAdditionalFilter?: Maybe<AdditionalFilter>;
   createArticle?: Maybe<Article>;
   createAuthor?: Maybe<Author>;
   createCategory?: Maybe<Category>;
   createMfo?: Maybe<Mfo>;
+  createObtainingMethod?: Maybe<ObtainingMethod>;
   createReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   createReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
   /** Create a new role */
@@ -658,11 +793,13 @@ export type Mutation = {
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   deleteAbout?: Maybe<DeleteMutationResponse>;
+  deleteAdditionalFilter?: Maybe<DeleteMutationResponse>;
   deleteArticle?: Maybe<DeleteMutationResponse>;
   deleteAuthor?: Maybe<DeleteMutationResponse>;
   deleteCategory?: Maybe<DeleteMutationResponse>;
   deleteGlobal?: Maybe<DeleteMutationResponse>;
   deleteMfo?: Maybe<DeleteMutationResponse>;
+  deleteObtainingMethod?: Maybe<DeleteMutationResponse>;
   deleteReviewWorkflowsWorkflow?: Maybe<DeleteMutationResponse>;
   deleteReviewWorkflowsWorkflowStage?: Maybe<DeleteMutationResponse>;
   deleteUploadFile?: Maybe<UploadFile>;
@@ -680,11 +817,13 @@ export type Mutation = {
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   updateAbout?: Maybe<About>;
+  updateAdditionalFilter?: Maybe<AdditionalFilter>;
   updateArticle?: Maybe<Article>;
   updateAuthor?: Maybe<Author>;
   updateCategory?: Maybe<Category>;
   updateGlobal?: Maybe<Global>;
   updateMfo?: Maybe<Mfo>;
+  updateObtainingMethod?: Maybe<ObtainingMethod>;
   updateReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   updateReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
   updateUploadFile: UploadFile;
@@ -699,6 +838,12 @@ export type MutationChangePasswordArgs = {
   currentPassword: Scalars['String']['input'];
   password: Scalars['String']['input'];
   passwordConfirmation: Scalars['String']['input'];
+};
+
+
+export type MutationCreateAdditionalFilterArgs = {
+  data: AdditionalFilterInput;
+  status?: InputMaybe<PublicationStatus>;
 };
 
 
@@ -726,6 +871,12 @@ export type MutationCreateMfoArgs = {
 };
 
 
+export type MutationCreateObtainingMethodArgs = {
+  data: ObtainingMethodInput;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
 export type MutationCreateReviewWorkflowsWorkflowArgs = {
   data: ReviewWorkflowsWorkflowInput;
   status?: InputMaybe<PublicationStatus>;
@@ -748,6 +899,11 @@ export type MutationCreateUsersPermissionsUserArgs = {
 };
 
 
+export type MutationDeleteAdditionalFilterArgs = {
+  documentId: Scalars['ID']['input'];
+};
+
+
 export type MutationDeleteArticleArgs = {
   documentId: Scalars['ID']['input'];
 };
@@ -764,6 +920,11 @@ export type MutationDeleteCategoryArgs = {
 
 
 export type MutationDeleteMfoArgs = {
+  documentId: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteObtainingMethodArgs = {
   documentId: Scalars['ID']['input'];
 };
 
@@ -826,6 +987,13 @@ export type MutationUpdateAboutArgs = {
 };
 
 
+export type MutationUpdateAdditionalFilterArgs = {
+  data: AdditionalFilterInput;
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
 export type MutationUpdateArticleArgs = {
   data: ArticleInput;
   documentId: Scalars['ID']['input'];
@@ -855,6 +1023,13 @@ export type MutationUpdateGlobalArgs = {
 
 export type MutationUpdateMfoArgs = {
   data: MfoInput;
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationUpdateObtainingMethodArgs = {
+  data: ObtainingMethodInput;
   documentId: Scalars['ID']['input'];
   status?: InputMaybe<PublicationStatus>;
 };
@@ -891,6 +1066,80 @@ export type MutationUpdateUsersPermissionsUserArgs = {
   id: Scalars['ID']['input'];
 };
 
+export type ObtainingMethod = {
+  __typename?: 'ObtainingMethod';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  documentId: Scalars['ID']['output'];
+  locale?: Maybe<Scalars['String']['output']>;
+  localizations: Array<Maybe<ObtainingMethod>>;
+  localizations_connection?: Maybe<ObtainingMethodRelationResponseCollection>;
+  mfos: Array<Maybe<Mfo>>;
+  mfos_connection?: Maybe<MfoRelationResponseCollection>;
+  name: Scalars['String']['output'];
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type ObtainingMethodLocalizationsArgs = {
+  filters?: InputMaybe<ObtainingMethodFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ObtainingMethodLocalizations_ConnectionArgs = {
+  filters?: InputMaybe<ObtainingMethodFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ObtainingMethodMfosArgs = {
+  filters?: InputMaybe<MfoFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ObtainingMethodMfos_ConnectionArgs = {
+  filters?: InputMaybe<MfoFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ObtainingMethodEntityResponseCollection = {
+  __typename?: 'ObtainingMethodEntityResponseCollection';
+  nodes: Array<ObtainingMethod>;
+  pageInfo: Pagination;
+};
+
+export type ObtainingMethodFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ObtainingMethodFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  documentId?: InputMaybe<IdFilterInput>;
+  locale?: InputMaybe<StringFilterInput>;
+  localizations?: InputMaybe<ObtainingMethodFiltersInput>;
+  mfos?: InputMaybe<MfoFiltersInput>;
+  name?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ObtainingMethodFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ObtainingMethodFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ObtainingMethodInput = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  mfos?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type ObtainingMethodRelationResponseCollection = {
+  __typename?: 'ObtainingMethodRelationResponseCollection';
+  nodes: Array<ObtainingMethod>;
+};
+
 export type Pagination = {
   __typename?: 'Pagination';
   page: Scalars['Int']['output'];
@@ -914,6 +1163,9 @@ export enum PublicationStatus {
 export type Query = {
   __typename?: 'Query';
   about?: Maybe<About>;
+  additionalFilter?: Maybe<AdditionalFilter>;
+  additionalFilters: Array<Maybe<AdditionalFilter>>;
+  additionalFilters_connection?: Maybe<AdditionalFilterEntityResponseCollection>;
   article?: Maybe<Article>;
   articles: Array<Maybe<Article>>;
   articles_connection?: Maybe<ArticleEntityResponseCollection>;
@@ -931,6 +1183,9 @@ export type Query = {
   mfo?: Maybe<Mfo>;
   mfos: Array<Maybe<Mfo>>;
   mfos_connection?: Maybe<MfoEntityResponseCollection>;
+  obtainingMethod?: Maybe<ObtainingMethod>;
+  obtainingMethods: Array<Maybe<ObtainingMethod>>;
+  obtainingMethods_connection?: Maybe<ObtainingMethodEntityResponseCollection>;
   reviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   reviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
   reviewWorkflowsWorkflowStages: Array<Maybe<ReviewWorkflowsWorkflowStage>>;
@@ -950,6 +1205,28 @@ export type Query = {
 
 
 export type QueryAboutArgs = {
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryAdditionalFilterArgs = {
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryAdditionalFiltersArgs = {
+  filters?: InputMaybe<AdditionalFilterFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryAdditionalFilters_ConnectionArgs = {
+  filters?: InputMaybe<AdditionalFilterFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   status?: InputMaybe<PublicationStatus>;
 };
 
@@ -1063,6 +1340,28 @@ export type QueryMfosArgs = {
 
 export type QueryMfos_ConnectionArgs = {
   filters?: InputMaybe<MfoFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryObtainingMethodArgs = {
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryObtainingMethodsArgs = {
+  filters?: InputMaybe<ObtainingMethodFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryObtainingMethods_ConnectionArgs = {
+  filters?: InputMaybe<ObtainingMethodFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   status?: InputMaybe<PublicationStatus>;
@@ -1702,10 +2001,22 @@ export type UsersPermissionsUserRelationResponseCollection = {
   nodes: Array<UsersPermissionsUser>;
 };
 
+export type ObtainingMethodsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ObtainingMethodsQuery = { __typename?: 'Query', obtainingMethods: Array<{ __typename?: 'ObtainingMethod', documentId: string, name: string } | null> };
+
+export type AdditionalFiltersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AdditionalFiltersQuery = { __typename?: 'Query', additionalFilters: Array<{ __typename?: 'AdditionalFilter', documentId: string, name: string } | null> };
+
 export type MfosQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type MfosQuery = { __typename?: 'Query', mfos: Array<{ __typename?: 'Mfo', documentId: string, name: string } | null> };
 
 
+export const ObtainingMethodsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ObtainingMethods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"obtainingMethods"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"name:asc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<ObtainingMethodsQuery, ObtainingMethodsQueryVariables>;
+export const AdditionalFiltersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AdditionalFilters"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"additionalFilters"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"name:asc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<AdditionalFiltersQuery, AdditionalFiltersQueryVariables>;
 export const MfosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Mfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<MfosQuery, MfosQueryVariables>;

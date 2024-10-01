@@ -20,34 +20,39 @@ import { t } from "@/lib/i18n/t";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
 import styles from './filters.module.scss';
+import { useQuery } from "@tanstack/react-query";
+import { AdditionalFiltersQuery, MfosQuery, ObtainingMethod, ObtainingMethodsQuery } from "@/app/_queries/gql/graphql";
+import { getAdditionalFilters, getObtainingMethods } from "@/app/_queries/dict";
 
 type SortingMethod = 'default' | 'amount' | 'term' | 'interestRate';
 
-const fieldError = t([ "fields", "errors", "error" ]);
+const fieldError = t("fields", "errors", "error");
 const biggerThatZeroInputSchema = z.coerce.number({ message: fieldError }).min(0).optional();
 
 const FiltersStateObject = z.object({
   amount: biggerThatZeroInputSchema,
   term: biggerThatZeroInputSchema,
-  obtainingMethod: z.enum([ 'any', 'card', 'cash' ]).optional(),
-  additional: z.object({
-    firstFree: z.boolean().optional(),
-    momentDecision: z.boolean().optional(),
-    withoutIncomeCertificate: z.boolean().optional(),
-  }),
+  obtainingMethod: z.string(),
+  additional: z.record(z.boolean()),
 })
 type FiltersPageState = {
   amount: string;
   term: string;
   obtainingMethod: string;
-  additional: {
-    firstFree: boolean;
-    momentDecision: boolean;
-    withoutIncomeCertificate: boolean;
-  }
+  additional: { [k: string]: boolean }
 }
 
 export default function Filters() {
+  const obtainingMethodsResult = useQuery<ObtainingMethodsQuery>({
+    queryKey: [ 'obtainingMethods' ],
+    queryFn: getObtainingMethods
+  })
+
+  const additionalFiltersResult = useQuery<AdditionalFiltersQuery>({
+    queryKey: [ 'additionalFilters' ],
+    queryFn: getAdditionalFilters
+  })
+
   const [ sortingMethod, setSortingMethod ] = useState<SortingMethod>('default');
 
   const [ filtersVisible, setFiltersVisible ] = useState<boolean>(false);
@@ -55,11 +60,10 @@ export default function Filters() {
     amount: "",
     term: "",
     obtainingMethod: "any",
-    additional: {
-      firstFree: false,
-      momentDecision: false,
-      withoutIncomeCertificate: false,
-    }
+    additional: additionalFiltersResult?.data?.additionalFilters.reduce((acc: { [k: string]: boolean }, obj) => {
+      obj?.documentId !== undefined && (acc[obj?.documentId] = false);
+      return acc;
+    }, {}) ?? {}
   });
 
   const [ errorsPage, setErrorsPage ] =
@@ -117,7 +121,8 @@ export default function Filters() {
           </SelectContent>
         </Select>
 
-        <Button className="bg-project-primary" onClick={() => setFiltersVisible(!filtersVisible)}>Показать фильтры</Button>
+        <Button className="bg-project-primary" onClick={() => setFiltersVisible(!filtersVisible)}>Показать
+          фильтры</Button>
       </div>
 
       <div
@@ -144,7 +149,7 @@ export default function Filters() {
         <div className="flex flex-col">
           <Label className="mb-1.5">Способ получения</Label>
           <Select value={filtersPageState.obtainingMethod}
-                  onValueChange={(value: Exclude<FiltersPageState['obtainingMethod'], undefined>) => setFiltersPageState(prev => ({
+                  onValueChange={value => setFiltersPageState(prev => ({
                     ...prev,
                     obtainingMethod: value
                   }))}>
@@ -153,9 +158,10 @@ export default function Filters() {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="any">Любой</SelectItem>
-                <SelectItem value="card">На карту</SelectItem>
-                <SelectItem value="cash">Наличными</SelectItem>
+                <SelectItem value="any">{t("filters", "obtainingMethods", "any")}</SelectItem>
+                {obtainingMethodsResult.data?.obtainingMethods.filter(om => om !== null).map(om => (
+                  <SelectItem key={om.documentId} value={om.documentId}>{om.name}</SelectItem>
+                ))}
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -170,22 +176,24 @@ export default function Filters() {
               </div>
             </PopoverTrigger>
             <PopoverContent className="flex flex-col gap-2">
-              {(Object.entries(filtersPageState.additional) as [keyof FiltersPageState['additional'], FiltersPageState['additional'][keyof FiltersPageState['additional']]][]).map(([ p, v ]) => (
-                <Label key={p} className="flex items-center space-x-2 text-sm p-2 rounded hover:bg-project-accent">
-                  <Checkbox
-                    checked={v}
-                    id={p}
-                    onCheckedChange={checked => {
-                      setFiltersPageState(prev => ({
-                        ...prev,
-                        additional: {
-                          ...prev.additional,
-                          [p]: checked === true
-                        }
-                      }));
-                    }}
-                  />
-                  <p>{t([ "filters", "additional", p ])}</p>
+              {additionalFiltersResult?.data?.additionalFilters.map(f => (
+                f !== null &&
+                <Label key={f.documentId}
+                       className="flex items-center space-x-2 text-sm p-2 rounded hover:bg-project-accent">
+                    <Checkbox
+                        checked={filtersPageState.additional[f.documentId]}
+                        id={f.documentId}
+                        onCheckedChange={checked => {
+                          setFiltersPageState(prev => ({
+                            ...prev,
+                            additional: {
+                              ...prev.additional,
+                              [f.documentId]: checked === true
+                            }
+                          }));
+                        }}
+                    />
+                    <p>{f.name}</p>
                 </Label>
               ))}
             </PopoverContent>

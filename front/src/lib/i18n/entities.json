@@ -7,22 +7,6 @@
       }
     }
   },
-  "filters": {
-    "additional": {
-      "firstFree": {
-        "en": "First load free",
-        "ru": "Первый займ бесплатно"
-      },
-      "momentDecision": {
-        "en": "Moment decision",
-        "ru": "Моментальное решение"
-      },
-      "withoutIncomeCertificate": {
-        "en": "Without certificate of income",
-        "ru": "Без справки о доходах"
-      }
-    }
-  },
 
   "sex": {
     "male": {

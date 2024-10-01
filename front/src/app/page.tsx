@@ -3,6 +3,7 @@ import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query
 import { Separator } from "@/components/ui/separator";
 import { getMfos } from "@/app/_queries/mfo";
 import Filters from "@/app/_components/filters";
+import { getAdditionalFilters, getObtainingMethods } from "@/app/_queries/dict";
 
 function getSpecialOfferCount() {
   return Math.round(Math.random() * 4) + 3;
@@ -15,6 +16,16 @@ export default async function Home() {
   await queryClient.prefetchQuery({
     queryKey: [ 'mfos' ],
     queryFn: getMfos
+  })
+
+  await queryClient.prefetchQuery({
+    queryKey: [ 'obtainingMethods' ],
+    queryFn: getObtainingMethods
+  })
+
+  await queryClient.prefetchQuery({
+    queryKey: [ 'additionalFilters' ],
+    queryFn: getAdditionalFilters
   })
 
   return (
@@ -33,7 +44,9 @@ export default async function Home() {
       <Separator className="mx-auto container"/>
 
       <section className="container px-10 py-6 mx-auto flex flex-col gap-y-10">
-        <Filters/>
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <Filters/>
+        </HydrationBoundary>
 
         <div>
           <section className="mt-10">
