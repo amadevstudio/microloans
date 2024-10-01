@@ -6461,7 +6461,19 @@
             "deprecationReason": null
           },
           {
-            "name": "amount",
+            "name": "amount_from",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "amount_to",
             "description": null,
             "args": [],
             "type": {
@@ -6501,12 +6513,24 @@
             "deprecationReason": null
           },
           {
-            "name": "interestRate",
+            "name": "interest_free_term",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "interest_rate",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -6781,7 +6805,19 @@
             "deprecationReason": null
           },
           {
-            "name": "term",
+            "name": "term_from",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "term_to",
             "description": null,
             "args": [],
             "type": {
@@ -6894,7 +6930,19 @@
             "deprecationReason": null
           },
           {
-            "name": "amount",
+            "name": "amount_from",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "IntFilterInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "amount_to",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -6946,11 +6994,23 @@
             "deprecationReason": null
           },
           {
-            "name": "interestRate",
+            "name": "interest_free_term",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "IntFilterInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "interest_rate",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "FloatFilterInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -7046,7 +7106,19 @@
             "deprecationReason": null
           },
           {
-            "name": "term",
+            "name": "term_from",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "IntFilterInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "term_to",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -7110,7 +7182,7 @@
             "deprecationReason": null
           },
           {
-            "name": "amount",
+            "name": "amount_from",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -7122,11 +7194,35 @@
             "deprecationReason": null
           },
           {
-            "name": "interestRate",
+            "name": "amount_to",
             "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "interest_free_term",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "interest_rate",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -7186,7 +7282,19 @@
             "deprecationReason": null
           },
           {
-            "name": "term",
+            "name": "term_from",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "term_to",
             "description": null,
             "type": {
               "kind": "SCALAR",

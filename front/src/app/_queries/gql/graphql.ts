@@ -677,10 +677,12 @@ export type Mfo = {
   Logo?: Maybe<ComponentSharedMedia>;
   additional_filters: Array<Maybe<AdditionalFilter>>;
   additional_filters_connection?: Maybe<AdditionalFilterRelationResponseCollection>;
-  amount?: Maybe<Scalars['Int']['output']>;
+  amount_from?: Maybe<Scalars['Int']['output']>;
+  amount_to?: Maybe<Scalars['Int']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   documentId: Scalars['ID']['output'];
-  interestRate?: Maybe<Scalars['Int']['output']>;
+  interest_free_term?: Maybe<Scalars['Int']['output']>;
+  interest_rate?: Maybe<Scalars['Float']['output']>;
   locale?: Maybe<Scalars['String']['output']>;
   localizations: Array<Maybe<Mfo>>;
   localizations_connection?: Maybe<MfoRelationResponseCollection>;
@@ -688,7 +690,8 @@ export type Mfo = {
   obtaining_methods: Array<Maybe<ObtainingMethod>>;
   obtaining_methods_connection?: Maybe<ObtainingMethodRelationResponseCollection>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  term?: Maybe<Scalars['Int']['output']>;
+  term_from?: Maybe<Scalars['Int']['output']>;
+  term_to?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -743,11 +746,13 @@ export type MfoEntityResponseCollection = {
 export type MfoFiltersInput = {
   Logo?: InputMaybe<ComponentSharedMediaFiltersInput>;
   additional_filters?: InputMaybe<AdditionalFilterFiltersInput>;
-  amount?: InputMaybe<IntFilterInput>;
+  amount_from?: InputMaybe<IntFilterInput>;
+  amount_to?: InputMaybe<IntFilterInput>;
   and?: InputMaybe<Array<InputMaybe<MfoFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   documentId?: InputMaybe<IdFilterInput>;
-  interestRate?: InputMaybe<IntFilterInput>;
+  interest_free_term?: InputMaybe<IntFilterInput>;
+  interest_rate?: InputMaybe<FloatFilterInput>;
   locale?: InputMaybe<StringFilterInput>;
   localizations?: InputMaybe<MfoFiltersInput>;
   name?: InputMaybe<StringFilterInput>;
@@ -755,20 +760,24 @@ export type MfoFiltersInput = {
   obtaining_methods?: InputMaybe<ObtainingMethodFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<MfoFiltersInput>>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
-  term?: InputMaybe<IntFilterInput>;
+  term_from?: InputMaybe<IntFilterInput>;
+  term_to?: InputMaybe<IntFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
 export type MfoInput = {
   Logo?: InputMaybe<ComponentSharedMediaInput>;
   additional_filters?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  amount?: InputMaybe<Scalars['Int']['input']>;
-  interestRate?: InputMaybe<Scalars['Int']['input']>;
+  amount_from?: InputMaybe<Scalars['Int']['input']>;
+  amount_to?: InputMaybe<Scalars['Int']['input']>;
+  interest_free_term?: InputMaybe<Scalars['Int']['input']>;
+  interest_rate?: InputMaybe<Scalars['Float']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   obtaining_methods?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
-  term?: InputMaybe<Scalars['Int']['input']>;
+  term_from?: InputMaybe<Scalars['Int']['input']>;
+  term_to?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type MfoRelationResponseCollection = {
@@ -2014,9 +2023,9 @@ export type AdditionalFiltersQuery = { __typename?: 'Query', additionalFilters: 
 export type MfosQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MfosQuery = { __typename?: 'Query', mfos: Array<{ __typename?: 'Mfo', documentId: string, name: string } | null> };
+export type MfosQuery = { __typename?: 'Query', mfos: Array<{ __typename?: 'Mfo', documentId: string, name: string, amount_from?: number | null, amount_to?: number | null, term_from?: number | null, term_to?: number | null, interest_rate?: number | null, interest_free_term?: number | null, additional_filters: Array<{ __typename?: 'AdditionalFilter', documentId: string, name: string } | null>, obtaining_methods: Array<{ __typename?: 'ObtainingMethod', documentId: string, name: string } | null> } | null> };
 
 
 export const ObtainingMethodsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ObtainingMethods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"obtainingMethods"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"name:asc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<ObtainingMethodsQuery, ObtainingMethodsQueryVariables>;
 export const AdditionalFiltersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AdditionalFilters"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"additionalFilters"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"name:asc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<AdditionalFiltersQuery, AdditionalFiltersQueryVariables>;
-export const MfosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Mfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<MfosQuery, MfosQueryVariables>;
+export const MfosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Mfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"amount_from"}},{"kind":"Field","name":{"kind":"Name","value":"amount_to"}},{"kind":"Field","name":{"kind":"Name","value":"term_from"}},{"kind":"Field","name":{"kind":"Name","value":"term_to"}},{"kind":"Field","name":{"kind":"Name","value":"interest_rate"}},{"kind":"Field","name":{"kind":"Name","value":"interest_free_term"}},{"kind":"Field","name":{"kind":"Name","value":"additional_filters"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"obtaining_methods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<MfosQuery, MfosQueryVariables>;
