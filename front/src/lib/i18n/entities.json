@@ -7,6 +7,14 @@
       }
     }
   },
+  "filters": {
+    "obtainingMethods": {
+      "any": {
+        "en": "Any",
+        "ru": "Любой"
+      }
+    }
+  },
 
   "sex": {
     "male": {

@@ -21,7 +21,7 @@ import { z } from "zod";
 import { cn } from "@/lib/utils";
 import styles from './filters.module.scss';
 import { useQuery } from "@tanstack/react-query";
-import { AdditionalFiltersQuery, MfosQuery, ObtainingMethod, ObtainingMethodsQuery } from "@/app/_queries/gql/graphql";
+import { AdditionalFiltersQuery, ObtainingMethodsQuery } from "@/app/_queries/gql/graphql";
 import { getAdditionalFilters, getObtainingMethods } from "@/app/_queries/dict";
 
 type SortingMethod = 'default' | 'amount' | 'term' | 'interestRate';

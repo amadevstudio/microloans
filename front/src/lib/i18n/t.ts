@@ -21,7 +21,7 @@ type NumeralDict = Record<string, NumeralAll>;
 
 const entitiesDict: Record<string, Dict | NumeralDict> = entities;
 
-export function t(codes: string[]): string {
+export function t(...codes: string[]): string {
   try {
     let entityMap: Dict | string = entitiesDict as Dict;
 
