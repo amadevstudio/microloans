@@ -687,9 +687,27 @@ export interface ApiMfoMfo extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     Logo: Schema.Attribute.Component<'shared.media', false>;
-    amount: Schema.Attribute.Integer;
-    term: Schema.Attribute.Integer;
-    interestRate: Schema.Attribute.Integer;
+    amount_from: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    term_from: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    interest_rate: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
     obtaining_methods: Schema.Attribute.Relation<
       'manyToMany',
       'api::obtaining-method.obtaining-method'
@@ -698,6 +716,27 @@ export interface ApiMfoMfo extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::additional-filter.additional-filter'
     >;
+    amount_to: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    term_to: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    interest_free_term: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

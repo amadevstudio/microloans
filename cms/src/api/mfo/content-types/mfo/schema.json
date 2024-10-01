@@ -22,14 +22,17 @@
       "repeatable": false,
       "component": "shared.media"
     },
-    "amount": {
-      "type": "integer"
+    "amount_from": {
+      "type": "integer",
+      "min": 0
     },
-    "term": {
-      "type": "integer"
+    "term_from": {
+      "type": "integer",
+      "min": 0
     },
-    "interestRate": {
-      "type": "integer"
+    "interest_rate": {
+      "type": "decimal",
+      "min": 0
     },
     "obtaining_methods": {
       "type": "relation",
@@ -42,6 +45,18 @@
       "relation": "manyToMany",
       "target": "api::additional-filter.additional-filter",
       "inversedBy": "mfos"
+    },
+    "amount_to": {
+      "type": "integer",
+      "min": 0
+    },
+    "term_to": {
+      "type": "integer",
+      "min": 0
+    },
+    "interest_free_term": {
+      "type": "integer",
+      "min": 0
     }
   }
 }
