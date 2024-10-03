@@ -23,6 +23,7 @@ import styles from './filters.module.scss';
 import { useQuery } from "@tanstack/react-query";
 import { AdditionalFiltersQuery, ObtainingMethodsQuery } from "@/app/_queries/gql/graphql";
 import { getAdditionalFilters, getObtainingMethods } from "@/app/_queries/dict";
+import { Filter } from "lucide-react";
 
 type SortingMethod = 'default' | 'amount' | 'term' | 'interestRate';
 
@@ -102,110 +103,118 @@ export default function Filters() {
   ];
 
   return (
-    <div>
-      <div className="mb-4 flex gap-5 flex-wrap">
-        <Select value={sortingMethod} onValueChange={(value) => setSortingMethod(value as SortingMethod)}>
-          <SelectTrigger className="w-[180px]">
-            <Image width="20" height="20" alt="Сортировка"
-                   src="/icons/svg/sort.svg"/>
-            {sortingMethod === "default" ? <p>Сортировка</p> : <SelectValue placeholder="Сортировка"></SelectValue>}
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Сортировка</SelectLabel>
-              <SelectItem value="default">по умолчанию</SelectItem>
-              <SelectItem value="amount">по сумме</SelectItem>
-              <SelectItem value="term">по сроку</SelectItem>
-              <SelectItem value="interestRate">по ставке</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+    <section className="space-y-6">
+      <div className="flex flex-col space-y-4">
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-4">
+          <h2 className="text-2xl md:text-3xl font-semibold">Все Микрозаймы</h2>
+          <div className="flex flex-wrap items-center gap-2">
+            <Select value={sortingMethod} onValueChange={(value) => setSortingMethod(value as SortingMethod)}>
+              <SelectTrigger className="w-[180px]">
+                <Image width="16" height="16" alt="Сортировка"
+                       src="/icons/svg/sort.svg"/>
+                {sortingMethod === "default" ? <p>Сортировка</p> :
+                  <SelectValue placeholder="Сортировка"></SelectValue>}
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Сортировка</SelectLabel>
+                  <SelectItem value="default">по умолчанию</SelectItem>
+                  <SelectItem value="amount">по сумме</SelectItem>
+                  <SelectItem value="term">по сроку</SelectItem>
+                  <SelectItem value="interestRate">по ставке</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
 
-        <Button className="bg-project-primary" onClick={() => setFiltersVisible(!filtersVisible)}>Показать
-          фильтры</Button>
-      </div>
-
-      <div
-        className={cn(
-          "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-4 "
-          + "rounded-2xl border-2 p-8 pb-0 "
-          + "bg-gradient-to-br from-[#fbfbfb] to-white shadow-md"
-          + "transition duration-200",
-          styles.filtersGrid,
-          !filtersVisible && "h-0 overflow-hidden p-0"
-        )}>
-        {plainFields.map(field => (
-          <div key={field.key} className="flex flex-col min-h-6">
-            <Label htmlFor={field.key} className="mb-1.5">{field.header}</Label>
-            <Input id={field.key}
-                   className={cn("w-full", errorsPage[field.key] && "text-red-500")} type="text"
-                   placeholder={field.placeholder} value={filtersPageState[field.key]}
-                   onChange={event => setFiltersPageState(prev => ({ ...prev, [field.key]: event.target.value }))}
-                   onBlur={validateState}/>
-            <span className="text-red-500">{errorsPage[field.key]}</span>
+            <Button onClick={() => setFiltersVisible(!filtersVisible)}>
+              <Filter className="h-4 w-4"/>
+              <p className="ml-4 hidden sm:block">Показать фильтры</p>
+            </Button>
           </div>
-        ))}
+        </div>
 
-        <div className="flex flex-col">
-          <Label className="mb-1.5">Способ получения</Label>
-          <Select value={filtersPageState.obtainingMethod}
-                  onValueChange={value => setFiltersPageState(prev => ({
-                    ...prev,
-                    obtainingMethod: value
-                  }))}>
-            <SelectTrigger className="">
-              <SelectValue placeholder="Выберите"></SelectValue>
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="any">{t("filters", "obtainingMethods", "any")}</SelectItem>
-                {obtainingMethodsResult.data?.obtainingMethods.filter(om => om !== null).map(om => (
-                  <SelectItem key={om.documentId} value={om.documentId}>{om.name}</SelectItem>
+        <div
+          className={cn(
+            "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-4 "
+            + "rounded-2xl border-2 p-8 pb-0 "
+            + "bg-gradient-to-br from-[#fbfbfb] to-white shadow-md"
+            + "transition duration-200",
+            styles.filtersGrid,
+            !filtersVisible && "h-0 overflow-hidden p-0"
+          )}>
+          {plainFields.map(field => (
+            <div key={field.key} className="flex flex-col min-h-6">
+              <Label htmlFor={field.key} className="mb-1.5">{field.header}</Label>
+              <Input id={field.key}
+                     className={cn("w-full", errorsPage[field.key] && "text-red-500")} type="text"
+                     placeholder={field.placeholder} value={filtersPageState[field.key]}
+                     onChange={event => setFiltersPageState(prev => ({ ...prev, [field.key]: event.target.value }))}
+                     onBlur={validateState}/>
+              <span className="text-red-500">{errorsPage[field.key]}</span>
+            </div>
+          ))}
+
+          <div className="flex flex-col">
+            <Label className="mb-1.5">Способ получения</Label>
+            <Select value={filtersPageState.obtainingMethod}
+                    onValueChange={value => setFiltersPageState(prev => ({
+                      ...prev,
+                      obtainingMethod: value
+                    }))}>
+              <SelectTrigger className="">
+                <SelectValue placeholder="Выберите"></SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="any">{t("filters", "obtainingMethods", "any")}</SelectItem>
+                  {obtainingMethodsResult.data?.obtainingMethods.filter(om => om !== null).map(om => (
+                    <SelectItem key={om.documentId} value={om.documentId}>{om.name}</SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div>
+            <Popover>
+              <PopoverTrigger asChild>
+                <div className="flex flex-col">
+                  <Label className="mb-1.5">Дополнительные условия</Label>
+                  <Button variant="outline">Выберите</Button>
+                </div>
+              </PopoverTrigger>
+              <PopoverContent className="flex flex-col gap-2">
+                {additionalFiltersResult?.data?.additionalFilters.map(f => (
+                  f !== null &&
+                  <Label key={f.documentId}
+                         className="flex items-center space-x-2 text-sm p-2 rounded hover:bg-project-accent">
+                      <Checkbox
+                          checked={filtersPageState.additional[f.documentId]}
+                          id={f.documentId}
+                          onCheckedChange={checked => {
+                            setFiltersPageState(prev => ({
+                              ...prev,
+                              additional: {
+                                ...prev.additional,
+                                [f.documentId]: checked === true
+                              }
+                            }));
+                          }}
+                      />
+                      <p>{f.name}</p>
+                  </Label>
                 ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
+              </PopoverContent>
+            </Popover>
+          </div>
 
-        <div>
-          <Popover>
-            <PopoverTrigger asChild>
-              <div className="flex flex-col">
-                <Label className="mb-1.5">Дополнительные условия</Label>
-                <Button variant="outline">Выберите</Button>
-              </div>
-            </PopoverTrigger>
-            <PopoverContent className="flex flex-col gap-2">
-              {additionalFiltersResult?.data?.additionalFilters.map(f => (
-                f !== null &&
-                <Label key={f.documentId}
-                       className="flex items-center space-x-2 text-sm p-2 rounded hover:bg-project-accent">
-                    <Checkbox
-                        checked={filtersPageState.additional[f.documentId]}
-                        id={f.documentId}
-                        onCheckedChange={checked => {
-                          setFiltersPageState(prev => ({
-                            ...prev,
-                            additional: {
-                              ...prev.additional,
-                              [f.documentId]: checked === true
-                            }
-                          }));
-                        }}
-                    />
-                    <p>{f.name}</p>
-                </Label>
-              ))}
-            </PopoverContent>
-          </Popover>
-        </div>
-
-        <div>
-          <Button type="submit" className="w-full mt-[1.25rem] self-end bg-project-primary" onClick={applyFilters}>
-            Показать
-          </Button>
+          <div>
+            <Button type="submit" className="w-full mt-[1.25rem] self-end bg-project-primary" onClick={applyFilters}>
+              Показать
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }

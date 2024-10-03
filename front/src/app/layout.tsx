@@ -3,6 +3,9 @@ import "./globals.css";
 import React from "react";
 import { Provider } from "@/app/_utils/provider";
 import localFont from "next/font/local";
+import Header from "@/app/_components/header";
+import Footer from "@/app/_components/footer";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,7 +24,13 @@ export default function RootLayout({
     <html lang="en">
     <body className={mainFont.className}>
     <Provider>
-      {children}
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <Header/>
+        <main className="container mx-auto px-4 py-8">
+          {children}
+        </main>
+        <Footer/>
+      </ThemeProvider>
     </Provider>
     </body>
     </html>

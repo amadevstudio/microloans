@@ -15,6 +15,27 @@
       }
     }
   },
+  "mfo": {
+    "card": {
+      "interest": {
+        "freeTerm": {
+          "singular": {
+            "ru": "день",
+            "en": "day"
+          },
+          "few": {
+            "ru": "дня"
+          },
+          "many": {
+            "ru": "дней"
+          },
+          "unite": {
+            "en": "days"
+          }
+        }
+      }
+    }
+  },
 
   "sex": {
     "male": {

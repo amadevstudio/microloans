@@ -35,33 +35,28 @@ export default async function Home() {
   })
 
   return (
-    <main>
-      <header className="px-10 py-6 container mx-auto">
-        <h1 className="text-3xl font-bold text-project-primary">Микрозаймы</h1>
-        <p className="mt-2">Небольшие займы для больших идей</p>
-      </header>
-
-      <Separator className="mx-auto container"/>
+    <div className="space-y-12">
+      <section className="text-center">
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">
+          Найдите Идеальный Микрозайм
+        </h1>
+        <p className="text-lg md:text-xl text-muted-foreground">
+          Сравните предложения от ведущих финансовых организаций и получите
+          лучшие условия для ваших потребностей.
+        </p>
+      </section>
 
       <HydrationBoundary state={dehydrate(queryClient)}>
         <SpecialOffer specialOfferCount={getSpecialOfferCount()}/>
       </HydrationBoundary>
 
-      <Separator className="mx-auto container"/>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <Filters/>
+      </HydrationBoundary>
 
-      <section className="container px-10 py-6 mx-auto flex flex-col gap-y-10">
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <Filters/>
-        </HydrationBoundary>
-
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <MfoList/>
-        </HydrationBoundary>
-      </section>
-
-      <footer className="bg-blue-600 text-white p-6 mt-10">
-        <p className="text-center">© 2023 Microloans Inc. All rights reserved.</p>
-      </footer>
-    </main>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <MfoList/>
+      </HydrationBoundary>
+    </div>
   )
 }
