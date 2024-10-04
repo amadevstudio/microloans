@@ -56,7 +56,7 @@ const LoanCard = ({ mfo }: {
             ))}
           </div>
         </div>
-        <Button className="bg-project-primary w-full mt-4">Подать заявку</Button>
+        <Button className="w-full mt-4">Подать заявку</Button>
       </CardContent>
     </Card>
   );

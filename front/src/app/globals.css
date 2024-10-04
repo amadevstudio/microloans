@@ -2,37 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --project-color-primary: #007BFF; /* Синий */
-  --project-color-secondary: #28A745; /* Зеленый */
-  --project-color-background: #F8F9FA; /* Светло-серый */
-  --project-color-text: #343A40; /* Темно-серый */
-  --project-color-accent: #FF8C00; /* Оранжевый */
-  --project-color-link: #0056b3; /* Темно-синий */
-}
+/*:root {*/
+/*  --project-color-primary: #007BFF; !* Синий *!*/
+/*  --project-color-secondary: #28A745; !* Зеленый *!*/
+/*  --project-color-background: #F8F9FA; !* Светло-серый *!*/
+/*  --project-color-text: #343A40; !* Темно-серый *!*/
+/*  --project-color-accent: #FF8C00; !* Оранжевый *!*/
+/*  --project-color-link: #0056b3; !* Темно-синий *!*/
+/*}*/
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --project-color-text: #F8F9FA; /* Светло-серый */
-    --project-color-background: #1c1b22; /* Темно-серый */
-  }
-}
+/*@media (prefers-color-scheme: dark) {*/
+/*  :root {*/
+/*    --project-color-text: #F8F9FA; !* Светло-серый *!*/
+/*    --project-color-background: #1c1b22; !* Темно-серый *!*/
+/*  }*/
+/*}*/
 
-body {
-  color: var(--project-color-text);
-  background: var(--project-color-background);
+/*body {*/
+/*  color: var(--project-color-text);*/
+/*  background: var(--project-color-background);*/
 
-  font-family: 'Open Sans', sans-serif;
-}
+/*  font-family: 'Open Sans', sans-serif;*/
+/*}*/
 
 /*h1, h2 {*/
 /*  font-family: 'Roboto', sans-serif;*/
 /*}*/
 
-a {
-  text-decoration: none;
-  color: var(--project-color-link);
-}
+/*a {*/
+/*  text-decoration: none;*/
+/*  color: var(--project-color-link);*/
+/*}*/
 
 @layer utilities {
   .text-balance {
@@ -43,7 +43,9 @@ a {
 @layer base {
   :root {
     --background: 0 0% 100%;
+    /*--background: #007BFF;*/
     --foreground: 0 0% 3.9%;
+    /*--foreground: #343A40;*/
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;

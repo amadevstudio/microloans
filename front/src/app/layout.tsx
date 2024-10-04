@@ -6,6 +6,7 @@ import localFont from "next/font/local";
 import Header from "@/app/_components/header";
 import Footer from "@/app/_components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-    <body className={mainFont.className}>
+    <html lang="ru" suppressHydrationWarning>
+    <body className={cn(mainFont.className, "bg-background text-foreground")}>
     <Provider>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <Header/>
