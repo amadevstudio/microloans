@@ -19,6 +19,11 @@ const config: Config = {
           foreground: 'hsl(var(--secondary-foreground))'
         },
         background: 'hsl(var(--background))',
+        backgroundImage: {
+          'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+          'gradient-conic':
+            'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        },
         text: 'var(--color-text)',
         accent: {
           DEFAULT: 'hsl(var(--accent))',

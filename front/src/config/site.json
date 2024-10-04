@@ -1,0 +1,16 @@
+{
+  "name": "Микрозаймы",
+  "motivation": "Небольшие займы для больших идей",
+  "description": "Сравните и найдите лучшие микрозаймы от ведущих финансовых организаций",
+  "title": "Найдите Идеальный Микрозайм за 5 Минут!",
+  "contacts": {
+    "email": "support@microzaimfinder.ru",
+    "phone": "+7 (800) 123-45-67",
+    "address": "ул. Финансовая, 123, Москва, 123456"
+  },
+  "socialMedia": {
+    "facebook": "https://facebook.com/microzaimfinder",
+    "twitter": "https://twitter.com/microzaimfinder",
+    "instagram": "https://instagram.com/microzaimfinder"
+  }
+}

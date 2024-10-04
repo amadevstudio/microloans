@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { MoonIcon, SunIcon, MenuIcon } from 'lucide-react'
@@ -13,36 +13,85 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import siteConfig from '@/config/site.json'
 
 export default function Header() {
   const { theme, setTheme } = useTheme()
   const pathname = usePathname()
   const [ isOpen, setIsOpen ] = useState(false)
+  const [ scrolled, setScrolled ] = useState(false)
+  const [ lastScrollY, setLastScrollY ] = useState(0)
+  const [ hideHeader, setHideHeader ] = useState(false)
+  const [ innerHeight, setInnerHeight ] = useState(0)
+
+  useEffect(() => {
+    setInnerHeight(window.innerHeight)
+    const handleResize = () => setInnerHeight(window.innerHeight)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+
+      if (currentScrollY > 50) {
+        setScrolled(true)
+      } else {
+        setScrolled(false)
+      }
+
+      if (currentScrollY > lastScrollY && currentScrollY > 300) {
+        setHideHeader(true)
+      } else {
+        setHideHeader(false)
+      }
+
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [ lastScrollY ])
+
+  function headerShouldBeHidden() {
+    return hideHeader && innerHeight < 900;
+  }
 
   const NavItems = () => (
     <>
-      <Link href="/" className={`hover:underline ${pathname === '/' ? 'font-bold' : ''}`}
+      <Link href="/"
+            className={`hover:text-primary transition-colors ${pathname === '/' ? 'font-bold text-primary' : ''}`}
             onClick={() => setIsOpen(false)}>Главная</Link>
-      <Link href="/about" className={`hover:underline ${pathname === '/about' ? 'font-bold' : ''}`}
+      <Link href="/about"
+            className={`hover:text-primary transition-colors ${pathname === '/about' ? 'font-bold text-primary' : ''}`}
             onClick={() => setIsOpen(false)}>О нас</Link>
-      <Link href="/contact" className={`hover:underline ${pathname === '/contact' ? 'font-bold' : ''}`}
+      <Link href="/contact"
+            className={`hover:text-primary transition-colors ${pathname === '/contact' ? 'font-bold text-primary' : ''}`}
             onClick={() => setIsOpen(false)}>Контакты</Link>
     </>
   )
 
   return (
-    // <header className="border-b">
-    <header className="container mx-auto px-4 py-4">
-      <div className="flex flex-wrap justify-between items-center">
-        <Link href="/">
-          <h1 className="text-3xl font-bold text-project-primary">Микрозаймы</h1>
+    <header
+      className={`border-b sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50 transition-all duration-300 ${
+        scrolled ? 'py-2' : 'py-4'
+      } ${
+        headerShouldBeHidden() ? '-translate-y-full' : 'translate-y-0'
+      }`}>
+      <div className="container mx-auto px-4 flex justify-between items-center">
+        <Link href="/" className="flex flex-col">
+          <span
+            className={`font-bold text-primary transition-all duration-300 ${scrolled ? 'text-xl' : 'text-2xl'}`}>{siteConfig.name}</span>
+          <span className={`text-muted-foreground transition-all duration-300 ${scrolled ? 'text-xs' : 'text-sm'}`}>Небольшие займы для больших идей</span>
         </Link>
-        <nav className="hidden md:flex space-x-4 items-center">
+        <nav className="hidden md:flex space-x-6 items-center">
           <NavItems/>
           <Button
-            variant="ghost"
-            size="icon"
+            variant="outline"
+            size="sm"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className="ml-4"
           >
             <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"/>
             <MoonIcon
@@ -79,7 +128,6 @@ export default function Header() {
           </Sheet>
         </div>
       </div>
-      <p>Небольшие займы для больших идей</p>
     </header>
   )
 }
