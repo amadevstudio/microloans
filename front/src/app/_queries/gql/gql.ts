@@ -16,6 +16,7 @@ const documents = {
     "\n    query ObtainingMethods {\n        obtainingMethods(sort: \"name:asc\") {\n            documentId\n            name\n        },\n    }\n": types.ObtainingMethodsDocument,
     "\n    query AdditionalFilters {\n        additionalFilters(sort: \"name:asc\") {\n            documentId\n            name\n        }\n    }\n": types.AdditionalFiltersDocument,
     "\n    query Mfos {\n        mfos {\n            documentId\n            name\n            amount_from\n            amount_to\n            term_from\n            term_to\n            interest_rate\n            interest_free_term\n            additional_filters {\n                documentId\n                name\n            }\n            obtaining_methods {\n                documentId\n                name\n            }\n        }\n    }\n": types.MfosDocument,
+    "\n    query WebsiteInfo {\n        websiteInfo {\n            name\n            motto\n            bannerTitle\n            bannerText\n        }\n    }\n": types.WebsiteInfoDocument,
 };
 
 /**
@@ -44,6 +45,10 @@ export function graphql(source: "\n    query AdditionalFilters {\n        additi
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n    query Mfos {\n        mfos {\n            documentId\n            name\n            amount_from\n            amount_to\n            term_from\n            term_to\n            interest_rate\n            interest_free_term\n            additional_filters {\n                documentId\n                name\n            }\n            obtaining_methods {\n                documentId\n                name\n            }\n        }\n    }\n"): (typeof documents)["\n    query Mfos {\n        mfos {\n            documentId\n            name\n            amount_from\n            amount_to\n            term_from\n            term_to\n            interest_rate\n            interest_free_term\n            additional_filters {\n                documentId\n                name\n            }\n            obtaining_methods {\n                documentId\n                name\n            }\n        }\n    }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    query WebsiteInfo {\n        websiteInfo {\n            name\n            motto\n            bannerTitle\n            bannerText\n        }\n    }\n"): (typeof documents)["\n    query WebsiteInfo {\n        websiteInfo {\n            name\n            motto\n            bannerTitle\n            bannerText\n        }\n    }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import React from "react";
-import { Provider } from "@/app/_utils/provider";
+import { ProjectQueryClientProvider } from "@/app/_utils/projectQueryClientProvider";
 import localFont from "next/font/local";
-import Header from "@/app/_components/header";
-import Footer from "@/app/_components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
+import MainStructure from "@/app/_components/mainStructure";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,22 +16,20 @@ const mainFont = localFont(
   { src: './_fonts/Montserrat/Montserrat-VariableFont_wght.ttf', style: 'normal' })
 
 export default function RootLayout({
-                                     children,
-                                   }: Readonly<{
+                                           children,
+                                         }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="ru" suppressHydrationWarning>
     <body className={cn(mainFont.className, "bg-background text-foreground")}>
-    <Provider>
+    <ProjectQueryClientProvider>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <Header/>
-        <main className="container mx-auto px-4 py-8">
+        <MainStructure>
           {children}
-        </main>
-        <Footer/>
+        </MainStructure>
       </ThemeProvider>
-    </Provider>
+    </ProjectQueryClientProvider>
     </body>
     </html>
   );

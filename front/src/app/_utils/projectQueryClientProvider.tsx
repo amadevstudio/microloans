@@ -3,6 +3,7 @@
 import React from "react"
 import { isServer, QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+import env from "@/app/_lib/env";
 
 function makeQueryClient() {
   return new QueryClient({
@@ -10,7 +11,7 @@ function makeQueryClient() {
       queries: {
         // With SSR, we usually want to set some default staleTime
         // above 0 to avoid refetching immediately on the client
-        staleTime: 60 * 1000,
+        staleTime: env.NEXT_PUBLIC_CMS_URL === 'http://127.0.0.1:1337/graphql' ? 5 * 1000 : 60 * 1000,
       },
     },
   })
@@ -32,7 +33,7 @@ function getQueryClient() {
   }
 }
 
-function Provider({ children }: any) {
+function ProjectQueryClientProvider({ children }: any) {
   // NOTE: Avoid useState when initializing the query client if you don't
   //       have a suspense boundary between this and the code that may
   //       suspend because React will throw away the client on the initial
@@ -53,4 +54,4 @@ function Provider({ children }: any) {
   )
 }
 
-export { Provider }
+export { ProjectQueryClientProvider }

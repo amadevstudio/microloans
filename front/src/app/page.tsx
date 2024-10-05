@@ -7,6 +7,7 @@ import MfoList from "@/app/_components/mfoList";
 import FeatureSection from "@/app/_components/featureSection";
 import FAQSection from "@/app/_components/faqSection";
 import BannerSection from "@/app/_components/bannerSection";
+import { getWebsiteInfo } from "@/app/_queries/websiteInfo";
 
 function getSpecialOfferCount() {
   return Math.round(Math.random() * 4) + 3;
@@ -36,6 +37,11 @@ export default async function Home() {
     queryFn: getMfos
   })
 
+  await queryClient.prefetchQuery({
+    queryKey: [ 'websiteInfo' ],
+    queryFn: getWebsiteInfo
+  })
+
   return (
     <div className="space-y-12">
       <BannerSection/>
@@ -44,7 +50,7 @@ export default async function Home() {
         <SpecialOfferSection specialOfferCount={getSpecialOfferCount()}/>
       </HydrationBoundary>
 
-      <div id="filters">
+      <div id="filtersSection">
         <HydrationBoundary state={dehydrate(queryClient)}>
           <FiltersSection/>
         </HydrationBoundary>
@@ -54,7 +60,7 @@ export default async function Home() {
         <MfoList/>
       </HydrationBoundary>
 
-      <div id="why-choose-us">
+      <div id="featuresSection">
         <FeatureSection/>
       </div>
 

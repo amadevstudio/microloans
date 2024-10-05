@@ -137,7 +137,7 @@ export default function FiltersSection() {
           className={cn(
             "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-4 "
             + "rounded-2xl border-2 p-8 pb-0 "
-            + "bg-gradient-to-br from-primary/10 to-background shadow-md"
+            + "bg-gradient-to-br from-primary/5 to-background shadow-md"
             + "transition duration-200",
             styles.filtersGrid,
             !filtersVisible && "h-0 overflow-hidden p-0"

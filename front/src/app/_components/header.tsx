@@ -13,9 +13,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import siteConfig from '@/config/site.json'
+import { WebsiteInfoQuery } from "@/app/_queries/gql/graphql";
 
-export default function Header() {
+export default function Header({ websiteInfo }: { websiteInfo: WebsiteInfoQuery['websiteInfo'] }) {
   const { theme, setTheme } = useTheme()
   const pathname = usePathname()
   const [ isOpen, setIsOpen ] = useState(false)
@@ -82,8 +82,9 @@ export default function Header() {
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="/" className="flex flex-col">
           <span
-            className={`font-bold text-primary transition-all duration-300 ${scrolled ? 'text-xl' : 'text-2xl'}`}>{siteConfig.name}</span>
-          <span className={`text-muted-foreground transition-all duration-300 ${scrolled ? 'text-xs' : 'text-sm'}`}>{siteConfig.motivation}</span>
+            className={`font-bold text-primary transition-all duration-300 ${scrolled ? 'text-xl' : 'text-2xl'}`}>{websiteInfo?.name}</span>
+          <span
+            className={`text-muted-foreground transition-all duration-300 ${scrolled ? 'text-xs' : 'text-sm'}`}>{websiteInfo?.motto}</span>
         </Link>
         <nav className="hidden md:flex space-x-6 items-center">
           <NavItems/>
