@@ -43,7 +43,7 @@ type FiltersPageState = {
   additional: { [k: string]: boolean }
 }
 
-export default function Filters() {
+export default function FiltersSection() {
   const obtainingMethodsResult = useQuery<ObtainingMethodsQuery>({
     queryKey: [ 'obtainingMethods' ],
     queryFn: getObtainingMethods
@@ -91,7 +91,7 @@ export default function Filters() {
   function applyFilters() {
     if (!validateState()) return;
 
-    alert("Filters was updated!")
+    alert("FiltersSection was updated!")
   }
 
   type PlainKeys<T> = {
@@ -137,7 +137,7 @@ export default function Filters() {
           className={cn(
             "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-4 "
             + "rounded-2xl border-2 p-8 pb-0 "
-            + "bg-gradient-to-br from-[#fbfbfb] to-white shadow-md"
+            + "bg-gradient-to-br from-primary/10 to-background shadow-md"
             + "transition duration-200",
             styles.filtersGrid,
             !filtersVisible && "h-0 overflow-hidden p-0"
@@ -209,7 +209,7 @@ export default function Filters() {
           </div>
 
           <div>
-            <Button type="submit" className="w-full mt-[1.25rem] self-end bg-project-primary" onClick={applyFilters}>
+            <Button type="submit" className="w-full mt-[1.25rem] self-end" onClick={applyFilters}>
               Показать
             </Button>
           </div>

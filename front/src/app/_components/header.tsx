@@ -83,7 +83,7 @@ export default function Header() {
         <Link href="/" className="flex flex-col">
           <span
             className={`font-bold text-primary transition-all duration-300 ${scrolled ? 'text-xl' : 'text-2xl'}`}>{siteConfig.name}</span>
-          <span className={`text-muted-foreground transition-all duration-300 ${scrolled ? 'text-xs' : 'text-sm'}`}>Небольшие займы для больших идей</span>
+          <span className={`text-muted-foreground transition-all duration-300 ${scrolled ? 'text-xs' : 'text-sm'}`}>{siteConfig.motivation}</span>
         </Link>
         <nav className="hidden md:flex space-x-6 items-center">
           <NavItems/>

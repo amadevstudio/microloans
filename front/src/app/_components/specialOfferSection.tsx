@@ -7,7 +7,7 @@ import { getMfos } from "@/app/_queries/mfo";
 import { MfosQuery } from "@/app/_queries/gql/graphql";
 import MfoCard from "@/app/_components/mfoCard";
 
-export default function SpecialOffer({ specialOfferCount }: { specialOfferCount: number }) {
+export default function SpecialOfferSection({ specialOfferCount }: { specialOfferCount: number }) {
   const { data } = useQuery<MfosQuery>({
     queryKey: [ 'mfos' ],
     // queryFn: async () => await cmsGraphQLRequest(mfosQueryDocument)
@@ -24,8 +24,7 @@ export default function SpecialOffer({ specialOfferCount }: { specialOfferCount:
 
   return (
     <section>
-      <h2 className="text-2xl font-bold"><span className="text-project-accent">Специальные</span> предложения
-        ({specialOfferCount})</h2>
+      <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-primary">Специальные предложения ({specialOfferCount})</h2>
       <div className="px-10 py-6">
         <Carousel
           opts={{
