@@ -1,0 +1,27 @@
+{
+  "kind": "singleType",
+  "collectionName": "website_infos",
+  "info": {
+    "singularName": "website-info",
+    "pluralName": "website-infos",
+    "displayName": "Website Info"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "motto": {
+      "type": "string"
+    },
+    "bannerTitle": {
+      "type": "string"
+    },
+    "bannerText": {
+      "type": "string"
+    }
+  }
+}

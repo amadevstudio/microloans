@@ -781,6 +781,36 @@ export interface ApiObtainingMethodObtainingMethod
   };
 }
 
+export interface ApiWebsiteInfoWebsiteInfo extends Struct.SingleTypeSchema {
+  collectionName: 'website_infos';
+  info: {
+    singularName: 'website-info';
+    pluralName: 'website-infos';
+    displayName: 'Website Info';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Schema.Attribute.String;
+    motto: Schema.Attribute.String;
+    bannerTitle: Schema.Attribute.String;
+    bannerText: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::website-info.website-info'
+    >;
+  };
+}
+
 export interface AdminPermission extends Struct.CollectionTypeSchema {
   collectionName: 'admin_permissions';
   info: {
@@ -1164,6 +1194,7 @@ declare module '@strapi/strapi' {
       'api::global.global': ApiGlobalGlobal;
       'api::mfo.mfo': ApiMfoMfo;
       'api::obtaining-method.obtaining-method': ApiObtainingMethodObtainingMethod;
+      'api::website-info.website-info': ApiWebsiteInfoWebsiteInfo;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;
