@@ -5,17 +5,29 @@ import { Button } from "@/components/ui/button";
 import { tn } from "@/lib/i18n/t";
 import { Badge } from "@/components/ui/badge";
 
-const LoanCard = ({ mfo }: {
+// Simple hash function to convert string to number
+const hashCode = (str: string) => {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32-bit integer
+  }
+  return Math.abs(hash);
+};
+
+export default function MfoCard({ mfo }: {
   mfo: Exclude<MfosQuery['mfos'][0], null>
-}) => {
-  const icons = [ Zap, Feather, Rocket, Target, Bolt ];
-  const RandomIconComponent = icons[Math.floor(Math.random() * icons.length)];
+}) {
+  const icons = [Zap, Feather, Rocket, Target, Bolt];
+  const iconIndex = hashCode(mfo.documentId) % icons.length;
+  const SelectedIcon = icons[iconIndex];
 
   return (
     <Card className="h-full">
       <CardHeader>
         <div className="flex items-center space-x-4">
-          {<RandomIconComponent className="h-8 w-8 text-primary"/>}
+          <SelectedIcon className="h-8 w-8 text-primary"/>
           {/*{[Zap, Feather, Rocket, Target, Bolt][Math.round(Math.random() * 5)]}*/}
           <div>
             <CardTitle className="text-primary text-base truncate">{mfo.name}</CardTitle>
@@ -64,5 +76,3 @@ const LoanCard = ({ mfo }: {
     </Card>
   );
 };
-
-export default LoanCard;

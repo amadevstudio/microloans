@@ -23,7 +23,7 @@ import styles from './filters.module.scss';
 import { useQuery } from "@tanstack/react-query";
 import { AdditionalFiltersQuery, ObtainingMethodsQuery } from "@/app/_queries/gql/graphql";
 import { getAdditionalFilters, getObtainingMethods } from "@/app/_queries/dict";
-import { Filter } from "lucide-react";
+import { ChevronDown, ChevronUp, Filter } from "lucide-react";
 
 type SortingMethod = 'default' | 'amount' | 'term' | 'interestRate';
 
@@ -55,7 +55,7 @@ export default function FiltersSection() {
   })
 
   const [ sortingMethod, setSortingMethod ] = useState<SortingMethod>('default');
-
+  const [ sortOrder, setSortOrder ] = useState<'asc' | 'desc'>('asc');
   const [ filtersVisible, setFiltersVisible ] = useState<boolean>(false);
   const [ filtersPageState, setFiltersPageState ] = useState<FiltersPageState>({
     amount: "",
@@ -110,7 +110,7 @@ export default function FiltersSection() {
           <div className="flex flex-wrap items-center gap-2">
             <Select value={sortingMethod} onValueChange={(value) => setSortingMethod(value as SortingMethod)}>
               <SelectTrigger className="w-[180px]">
-                <Image width="16" height="16" alt="Сортировка"
+                <Image width="16" height="16" alt="Сортировка" className="text-primary dark:invert"
                        src="/icons/svg/sort.svg"/>
                 {sortingMethod === "default" ? <p>Сортировка</p> :
                   <SelectValue placeholder="Сортировка"></SelectValue>}
@@ -125,6 +125,14 @@ export default function FiltersSection() {
                 </SelectGroup>
               </SelectContent>
             </Select>
+
+            <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+          >
+            {sortOrder === 'asc' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+          </Button>
 
             <Button onClick={() => setFiltersVisible(!filtersVisible)}>
               <Filter className="h-4 w-4"/>

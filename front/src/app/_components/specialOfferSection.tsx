@@ -34,8 +34,8 @@ export default function SpecialOfferSection({ specialOfferCount }: { specialOffe
           className="w-full"
         >
           <CarouselContent>
-            {specialOfferMfos.slice(0, specialOfferCount).map((mfo, index) => (
-              <CarouselItem key={index} className="lg:basis-1/2 xl:basis-1/3 2xl::basis-1/4">
+            {specialOfferMfos.slice(0, specialOfferCount).filter(mfo => mfo !== null).map((mfo, index) => (
+              <CarouselItem key={`${mfo.documentId}-${index}`} className="lg:basis-1/2 xl:basis-1/3 2xl::basis-1/4">
                 <div className="p-1">
                   <>{mfo !== null && <MfoCard key={mfo.documentId} mfo={mfo}/>}</>
                 </div>

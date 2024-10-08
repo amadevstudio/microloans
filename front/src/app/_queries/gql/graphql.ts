@@ -24,15 +24,12 @@ export type Scalars = {
 
 export type About = {
   __typename?: 'About';
-  bannerDescription?: Maybe<Scalars['String']['output']>;
-  bannerTitle?: Maybe<Scalars['String']['output']>;
   blocks?: Maybe<Array<Maybe<AboutBlocksDynamicZone>>>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   documentId: Scalars['ID']['output'];
   locale?: Maybe<Scalars['String']['output']>;
   localizations: Array<Maybe<About>>;
   localizations_connection?: Maybe<AboutRelationResponseCollection>;
-  motto?: Maybe<Scalars['String']['output']>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -41,11 +38,8 @@ export type About = {
 export type AboutBlocksDynamicZone = ComponentSharedMedia | ComponentSharedQuote | ComponentSharedRichText | ComponentSharedSlider | Error;
 
 export type AboutInput = {
-  bannerDescription?: InputMaybe<Scalars['String']['input']>;
-  bannerTitle?: InputMaybe<Scalars['String']['input']>;
   blocks?: InputMaybe<Array<Scalars['AboutBlocksDynamicZoneInput']['input']>>;
   locale?: InputMaybe<Scalars['String']['input']>;
-  motto?: InputMaybe<Scalars['String']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
