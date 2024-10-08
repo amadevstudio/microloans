@@ -787,6 +787,7 @@ export interface ApiWebsiteInfoWebsiteInfo extends Struct.SingleTypeSchema {
     singularName: 'website-info';
     pluralName: 'website-infos';
     displayName: 'Website Info';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -796,6 +797,12 @@ export interface ApiWebsiteInfoWebsiteInfo extends Struct.SingleTypeSchema {
     motto: Schema.Attribute.String;
     bannerTitle: Schema.Attribute.String;
     bannerText: Schema.Attribute.String;
+    whyChooseUsClockTitle: Schema.Attribute.String;
+    whyChooseUsClockText: Schema.Attribute.Text;
+    whyChooseUsThumbsUpTitle: Schema.Attribute.String;
+    whyChooseUsThumbsUpText: Schema.Attribute.Text;
+    whyChooseUsZapTitle: Schema.Attribute.String;
+    whyChooseUsZapText: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

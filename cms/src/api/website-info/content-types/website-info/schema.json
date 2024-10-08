@@ -4,7 +4,8 @@
   "info": {
     "singularName": "website-info",
     "pluralName": "website-infos",
-    "displayName": "Website Info"
+    "displayName": "Website Info",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -22,6 +23,24 @@
     },
     "bannerText": {
       "type": "string"
+    },
+    "whyChooseUsClockTitle": {
+      "type": "string"
+    },
+    "whyChooseUsClockText": {
+      "type": "text"
+    },
+    "whyChooseUsThumbsUpTitle": {
+      "type": "string"
+    },
+    "whyChooseUsThumbsUpText": {
+      "type": "text"
+    },
+    "whyChooseUsZapTitle": {
+      "type": "string"
+    },
+    "whyChooseUsZapText": {
+      "type": "text"
     }
   }
 }

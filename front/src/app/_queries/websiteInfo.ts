@@ -8,6 +8,12 @@ const websiteInfoQueryDocument = graphql(`
             motto
             bannerTitle
             bannerText
+            whyChooseUsClockTitle
+            whyChooseUsClockText
+            whyChooseUsThumbsUpTitle
+            whyChooseUsThumbsUpText
+            whyChooseUsZapTitle
+            whyChooseUsZapText
         }
     }
 `)

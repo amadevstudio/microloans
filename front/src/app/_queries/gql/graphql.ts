@@ -2037,6 +2037,12 @@ export type WebsiteInfo = {
   name?: Maybe<Scalars['String']['output']>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  whyChooseUsClockText?: Maybe<Scalars['String']['output']>;
+  whyChooseUsClockTitle?: Maybe<Scalars['String']['output']>;
+  whyChooseUsThumbsUpText?: Maybe<Scalars['String']['output']>;
+  whyChooseUsThumbsUpTitle?: Maybe<Scalars['String']['output']>;
+  whyChooseUsZapText?: Maybe<Scalars['String']['output']>;
+  whyChooseUsZapTitle?: Maybe<Scalars['String']['output']>;
 };
 
 export type WebsiteInfoInput = {
@@ -2046,6 +2052,12 @@ export type WebsiteInfoInput = {
   motto?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  whyChooseUsClockText?: InputMaybe<Scalars['String']['input']>;
+  whyChooseUsClockTitle?: InputMaybe<Scalars['String']['input']>;
+  whyChooseUsThumbsUpText?: InputMaybe<Scalars['String']['input']>;
+  whyChooseUsThumbsUpTitle?: InputMaybe<Scalars['String']['input']>;
+  whyChooseUsZapText?: InputMaybe<Scalars['String']['input']>;
+  whyChooseUsZapTitle?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type WebsiteInfoRelationResponseCollection = {
@@ -2071,10 +2083,10 @@ export type MfosQuery = { __typename?: 'Query', mfos: Array<{ __typename?: 'Mfo'
 export type WebsiteInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type WebsiteInfoQuery = { __typename?: 'Query', websiteInfo?: { __typename?: 'WebsiteInfo', name?: string | null, motto?: string | null, bannerTitle?: string | null, bannerText?: string | null } | null };
+export type WebsiteInfoQuery = { __typename?: 'Query', websiteInfo?: { __typename?: 'WebsiteInfo', name?: string | null, motto?: string | null, bannerTitle?: string | null, bannerText?: string | null, whyChooseUsClockTitle?: string | null, whyChooseUsClockText?: string | null, whyChooseUsThumbsUpTitle?: string | null, whyChooseUsThumbsUpText?: string | null, whyChooseUsZapTitle?: string | null, whyChooseUsZapText?: string | null } | null };
 
 
 export const ObtainingMethodsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ObtainingMethods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"obtainingMethods"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"name:asc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<ObtainingMethodsQuery, ObtainingMethodsQueryVariables>;
 export const AdditionalFiltersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AdditionalFilters"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"additionalFilters"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"name:asc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<AdditionalFiltersQuery, AdditionalFiltersQueryVariables>;
 export const MfosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Mfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"amount_from"}},{"kind":"Field","name":{"kind":"Name","value":"amount_to"}},{"kind":"Field","name":{"kind":"Name","value":"term_from"}},{"kind":"Field","name":{"kind":"Name","value":"term_to"}},{"kind":"Field","name":{"kind":"Name","value":"interest_rate"}},{"kind":"Field","name":{"kind":"Name","value":"interest_free_term"}},{"kind":"Field","name":{"kind":"Name","value":"additional_filters"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"obtaining_methods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<MfosQuery, MfosQueryVariables>;
-export const WebsiteInfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"WebsiteInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"websiteInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"motto"}},{"kind":"Field","name":{"kind":"Name","value":"bannerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"bannerText"}}]}}]}}]} as unknown as DocumentNode<WebsiteInfoQuery, WebsiteInfoQueryVariables>;
+export const WebsiteInfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"WebsiteInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"websiteInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"motto"}},{"kind":"Field","name":{"kind":"Name","value":"bannerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"bannerText"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsClockTitle"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsClockText"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsThumbsUpTitle"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsThumbsUpText"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsZapTitle"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsZapText"}}]}}]}}]} as unknown as DocumentNode<WebsiteInfoQuery, WebsiteInfoQueryVariables>;
