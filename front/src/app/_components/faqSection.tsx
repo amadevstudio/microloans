@@ -17,7 +17,6 @@ export default function FAQSection() {
   });
 
   const websiteInfo = data?.websiteInfo;
-  console.log(websiteInfo?.faq);
 
   return (
     <section className="py-12">

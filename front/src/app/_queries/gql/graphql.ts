@@ -532,13 +532,16 @@ export type GenericMorph = About | AdditionalFilter | Article | Author | Categor
 
 export type Global = {
   __typename?: 'Global';
+  contacts?: Maybe<Scalars['JSON']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   defaultSeo?: Maybe<ComponentSharedSeo>;
   documentId: Scalars['ID']['output'];
   favicon?: Maybe<UploadFile>;
+  legalDescription?: Maybe<Scalars['String']['output']>;
   locale?: Maybe<Scalars['String']['output']>;
   localizations: Array<Maybe<Global>>;
   localizations_connection?: Maybe<GlobalRelationResponseCollection>;
+  motto?: Maybe<Scalars['String']['output']>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   siteDescription: Scalars['String']['output'];
   siteName: Scalars['String']['output'];
@@ -546,9 +549,12 @@ export type Global = {
 };
 
 export type GlobalInput = {
+  contacts?: InputMaybe<Scalars['JSON']['input']>;
   defaultSeo?: InputMaybe<ComponentSharedSeoInput>;
   favicon?: InputMaybe<Scalars['ID']['input']>;
+  legalDescription?: InputMaybe<Scalars['String']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
+  motto?: InputMaybe<Scalars['String']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   siteDescription?: InputMaybe<Scalars['String']['input']>;
   siteName?: InputMaybe<Scalars['String']['input']>;
@@ -2048,8 +2054,6 @@ export type WebsiteInfo = {
   locale?: Maybe<Scalars['String']['output']>;
   localizations: Array<Maybe<WebsiteInfo>>;
   localizations_connection?: Maybe<WebsiteInfoRelationResponseCollection>;
-  motto?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   whyChooseUsClockText?: Maybe<Scalars['String']['output']>;
@@ -2072,8 +2076,6 @@ export type WebsiteInfoInput = {
   bannerTitle?: InputMaybe<Scalars['String']['input']>;
   faq?: InputMaybe<Array<InputMaybe<ComponentSharedQuoteInput>>>;
   locale?: InputMaybe<Scalars['String']['input']>;
-  motto?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   whyChooseUsClockText?: InputMaybe<Scalars['String']['input']>;
   whyChooseUsClockTitle?: InputMaybe<Scalars['String']['input']>;
@@ -2103,13 +2105,19 @@ export type MfosQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type MfosQuery = { __typename?: 'Query', mfos: Array<{ __typename?: 'Mfo', documentId: string, name: string, amount_from?: number | null, amount_to?: number | null, term_from?: number | null, term_to?: number | null, interest_rate?: number | null, interest_free_term?: number | null, additional_filters: Array<{ __typename?: 'AdditionalFilter', documentId: string, name: string } | null>, obtaining_methods: Array<{ __typename?: 'ObtainingMethod', documentId: string, name: string } | null> } | null> };
 
+export type GlobalQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GlobalQuery = { __typename?: 'Query', global?: { __typename?: 'Global', siteName: string, motto?: string | null, siteDescription: string, contacts?: any | null, legalDescription?: string | null } | null };
+
 export type WebsiteInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type WebsiteInfoQuery = { __typename?: 'Query', websiteInfo?: { __typename?: 'WebsiteInfo', name?: string | null, motto?: string | null, bannerTitle?: string | null, bannerText?: string | null, whyChooseUsClockTitle?: string | null, whyChooseUsClockText?: string | null, whyChooseUsThumbsUpTitle?: string | null, whyChooseUsThumbsUpText?: string | null, whyChooseUsZapTitle?: string | null, whyChooseUsZapText?: string | null, faq?: Array<{ __typename?: 'ComponentSharedQuote', title?: string | null, body?: string | null } | null> | null } | null };
+export type WebsiteInfoQuery = { __typename?: 'Query', websiteInfo?: { __typename?: 'WebsiteInfo', bannerTitle?: string | null, bannerText?: string | null, whyChooseUsClockTitle?: string | null, whyChooseUsClockText?: string | null, whyChooseUsThumbsUpTitle?: string | null, whyChooseUsThumbsUpText?: string | null, whyChooseUsZapTitle?: string | null, whyChooseUsZapText?: string | null, faq?: Array<{ __typename?: 'ComponentSharedQuote', title?: string | null, body?: string | null } | null> | null } | null };
 
 
 export const ObtainingMethodsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ObtainingMethods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"obtainingMethods"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"name:asc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<ObtainingMethodsQuery, ObtainingMethodsQueryVariables>;
 export const AdditionalFiltersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AdditionalFilters"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"additionalFilters"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"name:asc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<AdditionalFiltersQuery, AdditionalFiltersQueryVariables>;
 export const MfosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Mfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"amount_from"}},{"kind":"Field","name":{"kind":"Name","value":"amount_to"}},{"kind":"Field","name":{"kind":"Name","value":"term_from"}},{"kind":"Field","name":{"kind":"Name","value":"term_to"}},{"kind":"Field","name":{"kind":"Name","value":"interest_rate"}},{"kind":"Field","name":{"kind":"Name","value":"interest_free_term"}},{"kind":"Field","name":{"kind":"Name","value":"additional_filters"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"obtaining_methods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<MfosQuery, MfosQueryVariables>;
-export const WebsiteInfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"WebsiteInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"websiteInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"motto"}},{"kind":"Field","name":{"kind":"Name","value":"bannerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"bannerText"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsClockTitle"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsClockText"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsThumbsUpTitle"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsThumbsUpText"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsZapTitle"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsZapText"}},{"kind":"Field","name":{"kind":"Name","value":"faq"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"}}]}}]}}]}}]} as unknown as DocumentNode<WebsiteInfoQuery, WebsiteInfoQueryVariables>;
+export const GlobalDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Global"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"global"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"siteName"}},{"kind":"Field","name":{"kind":"Name","value":"motto"}},{"kind":"Field","name":{"kind":"Name","value":"siteDescription"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"}},{"kind":"Field","name":{"kind":"Name","value":"legalDescription"}}]}}]}}]} as unknown as DocumentNode<GlobalQuery, GlobalQueryVariables>;
+export const WebsiteInfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"WebsiteInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"websiteInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"bannerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"bannerText"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsClockTitle"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsClockText"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsThumbsUpTitle"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsThumbsUpText"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsZapTitle"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsZapText"}},{"kind":"Field","name":{"kind":"Name","value":"faq"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"}}]}}]}}]}}]} as unknown as DocumentNode<WebsiteInfoQuery, WebsiteInfoQueryVariables>;

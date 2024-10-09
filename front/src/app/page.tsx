@@ -1,5 +1,9 @@
 import SpecialOfferSection from "@/app/_components/specialOfferSection";
-import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
 import { getMfos, getSpecialOfferMfos } from "@/app/_queries/mfo";
 import FiltersSection from "@/app/_components/filtersSection";
 import { getAdditionalFilters, getObtainingMethods } from "@/app/_queries/dict";
@@ -14,61 +18,62 @@ function getSpecialOfferCount() {
 }
 
 export default async function Home() {
-
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: [ 'specialOfferMfos' ],
-    queryFn: getSpecialOfferMfos
-  })
+    queryKey: ["specialOfferMfos"],
+    queryFn: getSpecialOfferMfos,
+  });
 
   await queryClient.prefetchQuery({
-    queryKey: [ 'obtainingMethods' ],
-    queryFn: getObtainingMethods
-  })
+    queryKey: ["obtainingMethods"],
+    queryFn: getObtainingMethods,
+  });
 
   await queryClient.prefetchQuery({
-    queryKey: [ 'additionalFilters' ],
-    queryFn: getAdditionalFilters
-  })
+    queryKey: ["additionalFilters"],
+    queryFn: getAdditionalFilters,
+  });
 
   await queryClient.prefetchQuery({
-    queryKey: [ 'mfos' ],
-    queryFn: getMfos
-  })
+    queryKey: ["mfos"],
+    queryFn: getMfos,
+  });
 
   await queryClient.prefetchQuery({
-    queryKey: [ 'websiteInfo' ],
-    queryFn: getWebsiteInfo
-  })
+    queryKey: ["websiteInfo"],
+    queryFn: getWebsiteInfo,
+  });
 
   return (
     <div className="space-y-12">
-      <BannerSection/>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <BannerSection />
+      </HydrationBoundary>
 
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <SpecialOfferSection specialOfferCount={getSpecialOfferCount()}/>
+        <SpecialOfferSection specialOfferCount={getSpecialOfferCount()} />
       </HydrationBoundary>
 
       <div id="filtersSection">
         <HydrationBoundary state={dehydrate(queryClient)}>
-          <FiltersSection/>
+          <FiltersSection />
         </HydrationBoundary>
       </div>
 
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <MfoList/>
+        <MfoList />
       </HydrationBoundary>
 
       <div id="featuresSection">
-        <FeatureSection/>
+        <FeatureSection />
       </div>
 
       {/*<TestimonialSection/>*/}
 
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <FAQSection/>
+        <FAQSection />
       </HydrationBoundary>
     </div>
-  )
+  );
 }
