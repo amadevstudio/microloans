@@ -66,7 +66,9 @@ export default async function Home() {
 
       {/*<TestimonialSection/>*/}
 
-      <FAQSection/>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <FAQSection/>
+      </HydrationBoundary>
     </div>
   )
 }

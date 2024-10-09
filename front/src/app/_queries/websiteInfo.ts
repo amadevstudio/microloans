@@ -14,6 +14,10 @@ const websiteInfoQueryDocument = graphql(`
             whyChooseUsThumbsUpText
             whyChooseUsZapTitle
             whyChooseUsZapText
+            faq {
+                title
+                body
+            }
         }
     }
 `)
