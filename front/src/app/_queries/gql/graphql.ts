@@ -532,7 +532,7 @@ export type GenericMorph = About | AdditionalFilter | Article | Author | Categor
 
 export type Global = {
   __typename?: 'Global';
-  contacts?: Maybe<Scalars['JSON']['output']>;
+  contacts?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   defaultSeo?: Maybe<ComponentSharedSeo>;
   documentId: Scalars['ID']['output'];
@@ -549,7 +549,7 @@ export type Global = {
 };
 
 export type GlobalInput = {
-  contacts?: InputMaybe<Scalars['JSON']['input']>;
+  contacts?: InputMaybe<Scalars['String']['input']>;
   defaultSeo?: InputMaybe<ComponentSharedSeoInput>;
   favicon?: InputMaybe<Scalars['ID']['input']>;
   legalDescription?: InputMaybe<Scalars['String']['input']>;
@@ -2108,7 +2108,7 @@ export type MfosQuery = { __typename?: 'Query', mfos: Array<{ __typename?: 'Mfo'
 export type GlobalQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GlobalQuery = { __typename?: 'Query', global?: { __typename?: 'Global', siteName: string, motto?: string | null, siteDescription: string, contacts?: any | null, legalDescription?: string | null } | null };
+export type GlobalQuery = { __typename?: 'Query', global?: { __typename?: 'Global', siteName: string, motto?: string | null, siteDescription: string, contacts?: string | null, legalDescription?: string | null } | null };
 
 export type WebsiteInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
