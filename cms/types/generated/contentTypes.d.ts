@@ -659,6 +659,9 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     favicon: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
     siteDescription: Schema.Attribute.Text & Schema.Attribute.Required;
     defaultSeo: Schema.Attribute.Component<'shared.seo', false>;
+    motto: Schema.Attribute.String;
+    legalDescription: Schema.Attribute.RichText;
+    contacts: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -786,15 +789,13 @@ export interface ApiWebsiteInfoWebsiteInfo extends Struct.SingleTypeSchema {
   info: {
     singularName: 'website-info';
     pluralName: 'website-infos';
-    displayName: 'Website Info';
+    displayName: 'Landing Page';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    name: Schema.Attribute.String;
-    motto: Schema.Attribute.String;
     bannerTitle: Schema.Attribute.String;
     bannerText: Schema.Attribute.String;
     whyChooseUsClockTitle: Schema.Attribute.String;

@@ -20,7 +20,11 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images", "files", "videos"]
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
     },
     "siteDescription": {
       "type": "text",
@@ -30,6 +34,15 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.seo"
+    },
+    "motto": {
+      "type": "string"
+    },
+    "legalDescription": {
+      "type": "richtext"
+    },
+    "contacts": {
+      "type": "richtext"
     }
   }
 }

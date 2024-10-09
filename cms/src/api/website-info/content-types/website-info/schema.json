@@ -4,7 +4,7 @@
   "info": {
     "singularName": "website-info",
     "pluralName": "website-infos",
-    "displayName": "Website Info",
+    "displayName": "Landing Page",
     "description": ""
   },
   "options": {
@@ -12,12 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
-      "type": "string"
-    },
-    "motto": {
-      "type": "string"
-    },
     "bannerTitle": {
       "type": "string"
     },
