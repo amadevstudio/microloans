@@ -803,6 +803,7 @@ export interface ApiWebsiteInfoWebsiteInfo extends Struct.SingleTypeSchema {
     whyChooseUsThumbsUpText: Schema.Attribute.Text;
     whyChooseUsZapTitle: Schema.Attribute.String;
     whyChooseUsZapText: Schema.Attribute.Text;
+    faq: Schema.Attribute.Component<'shared.quote', true>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

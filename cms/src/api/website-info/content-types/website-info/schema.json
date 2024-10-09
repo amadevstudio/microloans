@@ -41,6 +41,11 @@
     },
     "whyChooseUsZapText": {
       "type": "text"
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.quote"
     }
   }
 }
