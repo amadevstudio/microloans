@@ -1,7 +1,6 @@
-'use client'
+"use client"
 
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 import { getMfos } from "@/app/_queries/mfo";
 import { MfosQuery } from "@/app/_queries/gql/graphql";

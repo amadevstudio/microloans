@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { Clock, ThumbsUp, Zap } from 'lucide-react'
 import { WebsiteInfoQuery } from '@/app/_queries/gql/graphql'
