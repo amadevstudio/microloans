@@ -1,0 +1,61 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main  # or your default branch name
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js for Next.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '21.1.0'
+
+    - name: Install Next.js dependencies
+      run: npm ci
+
+    - name: Build Next.js project
+      run: npm run build
+
+    - name: Setup Node.js for Strapi
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.9.0'
+
+    - name: Install Strapi dependencies
+      run: |
+        cd strapi  # Adjust this path if your Strapi project is in a different directory
+        npm ci
+
+    - name: Build Strapi project
+      run: |
+        cd strapi  # Adjust this path if your Strapi project is in a different directory
+        npm run build
+
+    - name: Deploy to server
+      env:
+        SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+        SERVER_USER: ${{ secrets.SERVER_USER }}
+        SERVER_HOST: ${{ secrets.SERVER_HOST }}
+        NEXTJS_PATH: ${{ secrets.NEXTJS_PATH }}
+        STRAPI_PATH: ${{ secrets.STRAPI_PATH }}
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SERVER_SSH_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H $SERVER_HOST >> ~/.ssh/known_hosts
+        
+        # Deploy Next.js
+        rsync -avz --delete .next $SERVER_USER@$SERVER_HOST:$NEXTJS_PATH
+        ssh $SERVER_USER@$SERVER_HOST "cd $NEXTJS_PATH && npm install --production && pm2 stop nextjs-app && pm2 start nextjs-app"
+        
+        # Deploy Strapi
+        rsync -avz --delete strapi/.cache strapi/build strapi/config strapi/database strapi/public strapi/src strapi/package.json strapi/package-lock.json $SERVER_USER@$SERVER_HOST:$STRAPI_PATH
+        ssh $SERVER_USER@$SERVER_HOST "cd $STRAPI_PATH && npm install --production && pm2 stop strapi-app && pm2 start strapi-app"
