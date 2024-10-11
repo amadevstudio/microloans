@@ -6,6 +6,7 @@ import localFont from "next/font/local";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 import MainStructure from "@/app/_components/mainStructure";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,6 +29,7 @@ export default function RootLayout({
         <MainStructure>
           {children}
         </MainStructure>
+        <Toaster />
       </ThemeProvider>
     </ProjectQueryClientProvider>
     </body>
