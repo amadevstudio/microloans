@@ -39,7 +39,7 @@ export default function TestimonialSection() {
                   <p className="font-semibold dark:text-gray-100">{testimonial.name}</p>
                 </div>
               </div>
-              <p className="text-gray-600 dark:text-gray-300 italic">"{testimonial.testimonial}"</p>
+              <p className="text-gray-600 dark:text-gray-300 italic">&quot;{testimonial.testimonial}&quot;</p>
             </CardContent>
           </Card>
         ))}
