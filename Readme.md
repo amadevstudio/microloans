@@ -50,7 +50,7 @@ ssh-keygen # Generate ssh keys on your PC
 
 ### On server
 
-```
+```bash
 myUser = "user-name"
 useradd -s /bin/bash -d /home/$myUser -m -G sudo $myUser # Create your user
 sudo passwd $myUser
@@ -70,6 +70,9 @@ sudo vim /etc/ssh/sshd_config # Set PasswordAuthentication no
 # ssh to server with your user
 sudo su
 curl -sSL https://dokploy.com/install.sh | sh
+
+sudo usermod -aG docker $myUser
+# Re-enter console
 ```
 
 From your PC:
