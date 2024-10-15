@@ -5,8 +5,8 @@ services:
       dockerfile: Dev.Dockerfile
     container_name: strapi_app
     restart: on-failure
-    env_file:
-      - .env
+    # env_file:
+    #   - .env
     environment:
       NODE_ENV: development
     volumes:
@@ -38,7 +38,7 @@ services:
     command: postgres -c listen_addresses='*'
     restart: on-failure
     env_file:
-      - .env
+      - ./cms/.env
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
@@ -47,7 +47,7 @@ services:
       POSTGRES_PORT: ${DATABASE_PORT}
       ALLOW_IP_RANGE: 0.0.0.0/0
     volumes:
-      - ../database/postgresql/data:/var/lib/postgresql/data
+      - ./database/postgresql/data:/var/lib/postgresql/data
     networks:
       - data-db-network
     ports:
