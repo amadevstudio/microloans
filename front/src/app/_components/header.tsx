@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { MenuIcon, MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import {
   Sheet,
   SheetContent,
@@ -91,17 +92,25 @@ export default function Header({ global }: { global: GlobalQuery["global"] }) {
       } ${headerShouldBeHidden() ? "-translate-y-full" : "translate-y-0"}`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <Link href="/" className="flex flex-col">
-          <span
-            className={`font-bold text-primary transition-all duration-300 ${scrolled ? "text-xl" : "text-2xl"}`}
-          >
-            {global?.siteName}
-          </span>
-          <span
-            className={`text-muted-foreground transition-all duration-300 ${scrolled ? "text-xs" : "text-sm"}`}
-          >
-            {global?.motto}
-          </span>
+        <Link href="/" className="flex items-center space-x-4">
+          <Image
+            src="/images/cash.monster.round.svg"
+            alt={global?.siteName ?? ""}
+            width={40}
+            height={40}
+          />
+          <div className="flex flex-col">
+            <span
+              className={`font-bold text-primary transition-all duration-300 ${scrolled ? "text-xl" : "text-2xl"}`}
+            >
+              {global?.siteName}
+            </span>
+            <span
+              className={`text-muted-foreground transition-all duration-300 ${scrolled ? "text-xs" : "text-sm"}`}
+            >
+              {global?.motto}
+            </span>
+          </div>
         </Link>
         <nav className="hidden md:flex space-x-6 items-center">
           <NavItems />

@@ -4,6 +4,7 @@ import BannerClientBindings from "@/app/_components/bannerClientBindings";
 import { useQuery } from "@tanstack/react-query";
 import { WebsiteInfoQuery } from "@/app/_queries/gql/graphql";
 import { getWebsiteInfo } from "@/app/_queries/websiteInfo";
+import Image from "next/image";
 
 export default function BannerSection() {
   const { data } = useQuery<WebsiteInfoQuery>({
@@ -13,7 +14,15 @@ export default function BannerSection() {
   const websiteInfo = data?.websiteInfo;
 
   return (
-    <section className="text-center py-12 px-4 gradient-bg text-white rounded-lg">
+    <section className="text-center py-12 px-4 gradient-bg text-white rounded-lg relative overflow-hidden">
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
+        <Image
+          src="/images/cash.monster.svg"
+          alt="Background Logo"
+          layout="fill"
+          objectFit="cover"
+        />
+      </div>
       <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
         {websiteInfo?.bannerTitle}
       </h1>
