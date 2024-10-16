@@ -6,14 +6,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { getWebsiteInfo } from "@/app/_queries/websiteInfo";
+import { getLandingPage } from "@/app/_queries/websiteInfo";
 import { useQuery } from "@tanstack/react-query";
 import { WebsiteInfoQuery } from "@/app/_queries/gql/graphql";
 
 export default function FAQSection() {
   const { data } = useQuery<WebsiteInfoQuery>({
     queryKey: ["websiteInfo"],
-    queryFn: getWebsiteInfo,
+    queryFn: getLandingPage,
   });
 
   const websiteInfo = data?.websiteInfo;

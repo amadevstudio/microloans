@@ -11,7 +11,7 @@ import MfoList from "@/app/_components/mfoList";
 import FeatureSection from "@/app/_components/featureSection";
 import FAQSection from "@/app/_components/faqSection";
 import BannerSection from "@/app/_components/bannerSection";
-import { getWebsiteInfo } from "@/app/_queries/websiteInfo";
+import { getLandingPage } from "@/app/_queries/websiteInfo";
 
 function getSpecialOfferCount() {
   return Math.round(Math.random() * 4) + 3;
@@ -42,7 +42,7 @@ export default async function Home() {
 
   await queryClient.prefetchQuery({
     queryKey: ["websiteInfo"],
-    queryFn: getWebsiteInfo,
+    queryFn: getLandingPage,
   });
 
   return (

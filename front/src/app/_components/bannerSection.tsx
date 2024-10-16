@@ -3,13 +3,13 @@
 import BannerClientBindings from "@/app/_components/bannerClientBindings";
 import { useQuery } from "@tanstack/react-query";
 import { WebsiteInfoQuery } from "@/app/_queries/gql/graphql";
-import { getWebsiteInfo } from "@/app/_queries/websiteInfo";
+import { getLandingPage } from "@/app/_queries/websiteInfo";
 import Image from "next/image";
 
 export default function BannerSection() {
   const { data } = useQuery<WebsiteInfoQuery>({
     queryKey: ["websiteInfo"],
-    queryFn: getWebsiteInfo,
+    queryFn: getLandingPage,
   });
   const websiteInfo = data?.websiteInfo;
 

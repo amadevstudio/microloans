@@ -17,7 +17,7 @@ export async function getGlobal() {
   return await cmsGraphQLRequest(globalQueryDocument);
 }
 
-const websiteInfoQueryDocument = graphql(`
+const landingPageQueryDocument = graphql(`
   query WebsiteInfo {
     websiteInfo {
       bannerTitle
@@ -36,6 +36,6 @@ const websiteInfoQueryDocument = graphql(`
   }
 `);
 
-export async function getWebsiteInfo() {
-  return await cmsGraphQLRequest(websiteInfoQueryDocument);
+export async function getLandingPage() {
+  return await cmsGraphQLRequest(landingPageQueryDocument);
 }
