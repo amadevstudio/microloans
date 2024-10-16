@@ -7,7 +7,7 @@ export default createEnv({
    * Will throw if you access these variables on the client.
    */
   server: {
-    NODE_ENV: z.enum([ 'development', 'production' ]),
+    NODE_ENV: z.enum(["development", "production"]),
 
     TELEGRAM_BOT_TOKEN: z.string().min(1),
     TELEGRAM_CHAT_ID: z.string().min(1),
@@ -21,6 +21,8 @@ export default createEnv({
    * 💡 You'll get type errors if these are not prefixed with NEXT_PUBLIC_.
    */
   client: {
+    NEXT_PUBLIC_NODE_ENV: z.enum(["development", "production"]),
+
     NEXT_PUBLIC_CMS_URL: z.string().url().min(1),
     NEXT_PUBLIC_CMS_TOKEN: z.string().min(1),
   },
@@ -38,6 +40,8 @@ export default createEnv({
 
     CMS_URL: process.env.CMS_URL,
     CMS_TOKEN: process.env.CMS_TOKEN,
+
+    NEXT_PUBLIC_NODE_ENV: process.env.NEXT_PUBLIC_NODE_ENV,
 
     NEXT_PUBLIC_CMS_URL: process.env.NEXT_PUBLIC_CMS_URL,
     NEXT_PUBLIC_CMS_TOKEN: process.env.NEXT_PUBLIC_CMS_TOKEN,
