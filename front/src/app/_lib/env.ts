@@ -9,6 +9,8 @@ export default createEnv({
   server: {
     NODE_ENV: z.enum(["development", "production"]),
 
+    URL: z.string().url().min(1),
+
     TELEGRAM_BOT_TOKEN: z.string().min(1),
     TELEGRAM_CHAT_ID: z.string().min(1),
 
@@ -23,6 +25,8 @@ export default createEnv({
   client: {
     NEXT_PUBLIC_NODE_ENV: z.enum(["development", "production"]),
 
+    NEXT_PUBLIC_URL: z.string().url().min(1),
+
     NEXT_PUBLIC_CMS_URL: z.string().url().min(1),
     NEXT_PUBLIC_CMS_TOKEN: z.string().min(1),
   },
@@ -35,6 +39,8 @@ export default createEnv({
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
 
+    URL: process.env.URL,
+
     TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
     TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID,
 
@@ -42,6 +48,8 @@ export default createEnv({
     CMS_TOKEN: process.env.CMS_TOKEN,
 
     NEXT_PUBLIC_NODE_ENV: process.env.NEXT_PUBLIC_NODE_ENV,
+
+    NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
 
     NEXT_PUBLIC_CMS_URL: process.env.NEXT_PUBLIC_CMS_URL,
     NEXT_PUBLIC_CMS_TOKEN: process.env.NEXT_PUBLIC_CMS_TOKEN,

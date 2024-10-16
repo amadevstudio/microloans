@@ -8,15 +8,13 @@ import { cn } from "@/lib/utils";
 import MainStructure from "@/app/_components/mainStructure";
 import { Toaster } from "@/components/ui/toaster";
 import { getGlobal } from "@/app/_queries/websiteInfo";
+import env from "@/app/_lib/env";
 
 const { global: global } = await getGlobal();
 
 export const metadata: Metadata = {
   title: global?.siteName ?? "Микрозаймы",
   description: global?.siteDescription ?? "",
-  keywords:
-    "микрозаймы, микрокредиты, быстрые займы, финансовое сравнение, лучшие ставки по займам",
-
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -29,21 +27,60 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
   appleWebApp: { title: global?.siteName ?? "Микрозаймы" },
 
+  keywords: [
+    "микрозаймы",
+    "быстрые займы",
+    "онлайн кредиты",
+    "микрокредиты",
+    "финансовые услуги",
+    "срочные займы",
+    "займы без отказа",
+    "кредиты онлайн",
+    "мгновенные займы",
+    "займы на карту",
+    "финансовое сравнение",
+    "лучшие ставки по займам",
+  ],
+  authors: [{ name: `${global?.siteName ?? "Микрозаймы"} Team` }],
+  creator: global?.siteName ?? "Микрозаймы",
+  publisher: global?.siteName ?? "Микрозаймы",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+
   openGraph: {
+    type: "website",
     title: global?.motto ?? global?.siteName ?? "Микрозаймы",
     description: global?.siteDescription ?? "",
-    url: "https://cash.monster",
+    url: `${env.NEXT_PUBLIC_URL}`,
     siteName: global?.siteName ?? "Микрозаймы",
     images: [
       {
-        url: "https://cash.monster/images/cash.monster.webp",
+        url: `${env.NEXT_PUBLIC_URL}/images/cash.monster.square.jpg`,
         width: 1024,
         height: 1024,
         alt: global?.siteName,
       },
     ],
     locale: "ru_RU",
-    type: "website",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+
+  alternates: {
+    canonical: "https://cash.monster.wrkt.ru",
   },
 };
 
