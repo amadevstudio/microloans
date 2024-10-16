@@ -14,17 +14,19 @@ export default async function MainStructure({
 }>) {
   const queryClient = new QueryClient();
 
-  const global = await queryClient.fetchQuery({
+  const { global: global } = await queryClient.fetchQuery({
     queryKey: ["global"],
     queryFn: getGlobal,
-    // staleTime: 1000 * 60 * 60,
+    staleTime: 1000 * 60 * 60,
   });
+
+  // const { global: global } = await getGlobal();
 
   return (
     <>
-      <Header global={global.global} />
+      <Header global={global} />
       <main className="container mx-auto px-4 py-8">{children}</main>
-      <Footer global={global.global} />
+      <Footer global={global} />
     </>
   );
 }
