@@ -48,8 +48,18 @@ export const metadata: Metadata = {
 };
 
 const mainFont = localFont({
-  src: "./_fonts/Montserrat/Montserrat-VariableFont_wght.ttf",
-  style: "normal",
+  src: [
+    {
+      path: "./_fonts/Montserrat/static/Montserrat-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./_fonts/Montserrat/static/Montserrat-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
 });
 
 export default function RootLayout({
