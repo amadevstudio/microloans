@@ -17,7 +17,7 @@ import {
 import { GlobalQuery } from "@/app/_queries/gql/graphql";
 
 export default function Header({ global }: { global: GlobalQuery["global"] }) {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, systemTheme, resolvedTheme } = useTheme();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -57,6 +57,17 @@ export default function Header({ global }: { global: GlobalQuery["global"] }) {
 
   function headerShouldBeHidden() {
     return hideHeader && innerHeight < 900;
+  }
+
+  // Set system theme if it's equal to newly selected
+  function toggleTheme() {
+    setTheme(
+      resolvedTheme === systemTheme
+        ? resolvedTheme === "dark"
+          ? "light"
+          : "dark"
+        : "system",
+    );
   }
 
   const NavItems = () => (
@@ -117,7 +128,7 @@ export default function Header({ global }: { global: GlobalQuery["global"] }) {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onClick={toggleTheme}
             className="ml-4"
           >
             <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
@@ -129,7 +140,7 @@ export default function Header({ global }: { global: GlobalQuery["global"] }) {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onClick={toggleTheme}
             className="mr-2"
           >
             <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
