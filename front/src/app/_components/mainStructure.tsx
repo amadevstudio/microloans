@@ -4,9 +4,6 @@ import React from "react";
 import { QueryClient } from "@tanstack/react-query";
 import { getGlobal } from "@/app/_queries/websiteInfo";
 
-// Revalidate every hour
-export const revalidate = 3600;
-
 export default async function MainStructure({
   children,
 }: Readonly<{
@@ -17,7 +14,7 @@ export default async function MainStructure({
   const { global: global } = await queryClient.fetchQuery({
     queryKey: ["global"],
     queryFn: getGlobal,
-    staleTime: 1000 * 60 * 60,
+    staleTime: 0,
   });
 
   // const { global: global } = await getGlobal();
