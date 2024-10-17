@@ -5,10 +5,11 @@ import { ProjectQueryClientProvider } from "@/app/_utils/projectQueryClientProvi
 import localFont from "next/font/local";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
-import MainStructure from "@/app/_components/mainStructure";
 import { Toaster } from "@/components/ui/toaster";
 import { getGlobal } from "@/app/_queries/websiteInfo";
 import env from "@/app/_lib/env";
+import Header from "@/app/_components/header";
+import Footer from "@/app/_components/footer";
 
 const { global: global } = await getGlobal();
 
@@ -109,7 +110,9 @@ export default function RootLayout({
       <body className={cn(mainFont.className, "bg-background text-foreground")}>
         <ProjectQueryClientProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <MainStructure>{children}</MainStructure>
+            <Header global={global} />
+            <main className="container mx-auto px-4 py-8">{children}</main>
+            <Footer global={global} />
             <Toaster />
           </ThemeProvider>
         </ProjectQueryClientProvider>
