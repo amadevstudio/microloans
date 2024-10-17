@@ -19,7 +19,7 @@ export default function BannerSection() {
         <Image
           src="/images/cash.monster.svg"
           alt="Background Logo"
-          layout="fill"
+          fill
           objectFit="cover"
         />
       </div>
