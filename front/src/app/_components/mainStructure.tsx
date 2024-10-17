@@ -1,7 +1,6 @@
 import Header from "@/app/_components/header";
 import Footer from "@/app/_components/footer";
 import React from "react";
-import { QueryClient } from "@tanstack/react-query";
 import { getGlobal } from "@/app/_queries/websiteInfo";
 
 export default async function MainStructure({
@@ -9,15 +8,7 @@ export default async function MainStructure({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const queryClient = new QueryClient();
-
-  const { global: global } = await queryClient.fetchQuery({
-    queryKey: ["global"],
-    queryFn: getGlobal,
-    staleTime: 0,
-  });
-
-  // const { global: global } = await getGlobal();
+  const { global: global } = await getGlobal();
 
   return (
     <>
