@@ -20,7 +20,7 @@ export default function BannerSection() {
           src="/images/cash.monster.svg"
           alt="Background Logo"
           fill
-          objectFit="cover"
+          style={{ objectFit: "cover" }}
         />
       </div>
       <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
