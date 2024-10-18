@@ -1,8 +1,10 @@
 import { getGlobal } from "@/app/_queries/websiteInfo";
 
-const { global: global } = await getGlobal();
+export const revalidate = 60;
 
-export default function About() {
+export default async function About() {
+  const { global: global } = await getGlobal();
+
   return (
     <div className="space-y-6 max-w-3xl mx-auto">
       <h1 className="text-3xl md:text-4xl font-bold">О {global?.siteName}</h1>

@@ -13,14 +13,7 @@ import { getGlobal } from "@/app/_queries/websiteInfo";
 
 export const revalidate = 60;
 
-async function getGlobalRevalidated() {
-  const { global: global } = await getGlobal();
-  return {
-    global,
-    revalidate: 60, // revalidate minutely
-  };
-}
-const { global: global } = await getGlobalRevalidated();
+const { global: global } = await getGlobal();
 
 export const metadata: Metadata = {
   title: global?.siteName ?? "Микрозаймы",
@@ -109,11 +102,13 @@ const mainFont = localFont({
   ],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { global: global } = await getGlobal();
+
   return (
     <html lang="ru" suppressHydrationWarning>
       <body className={cn(mainFont.className, "bg-background text-foreground")}>
