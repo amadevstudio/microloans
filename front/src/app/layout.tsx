@@ -13,7 +13,14 @@ import { getGlobal } from "@/app/_queries/websiteInfo";
 
 export const revalidate = 60;
 
-const { global: global } = await getGlobal();
+async function getGlobalRevalidated() {
+  const { global: global } = await getGlobal();
+  return {
+    global,
+    revalidate: 60, // revalidate minutely
+  };
+}
+const { global: global } = await getGlobalRevalidated();
 
 export const metadata: Metadata = {
   title: global?.siteName ?? "Микрозаймы",
