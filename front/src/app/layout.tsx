@@ -70,6 +70,13 @@ export const metadata: Metadata = {
     locale: "ru_RU",
   },
 
+  twitter: {
+    card: "summary_large_image",
+    site: global?.siteName,
+    description: global?.siteDescription ?? "",
+    images: `${env.NEXT_PUBLIC_URL}/images/cash.monster.square.jpg`,
+  },
+
   robots: {
     index: true,
     follow: true,
