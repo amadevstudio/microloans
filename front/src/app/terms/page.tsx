@@ -1,5 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import siteConfig from "@/config/site.json";
+import { getGlobal } from "@/app/_queries/websiteInfo";
+
+const { global: global } = await getGlobal();
 
 export default function TermsOfService() {
   return (
@@ -7,7 +9,7 @@ export default function TermsOfService() {
       <h1 className="text-3xl font-bold mb-6">Условия использования</h1>
       <Card>
         <CardHeader>
-          <CardTitle>Добро пожаловать на {siteConfig.name}</CardTitle>
+          <CardTitle>Добро пожаловать на {global?.siteName}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <p>
@@ -29,7 +31,7 @@ export default function TermsOfService() {
           </p>
           <h2 className="text-xl font-semibold">3. Ответственность</h2>
           <p>
-            {siteConfig.name} не несет ответственности за любые убытки,
+            {global?.siteName} не несет ответственности за любые убытки,
             возникшие в результате использования информации с нашего сайта.
             Решение о получении микрозайма принимается вами самостоятельно.
           </p>

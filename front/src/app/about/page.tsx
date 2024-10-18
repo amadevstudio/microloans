@@ -1,11 +1,13 @@
-import siteConfig from "@/config/site.json";
+import { getGlobal } from "@/app/_queries/websiteInfo";
+
+const { global: global } = await getGlobal();
 
 export default function About() {
   return (
     <div className="space-y-6 max-w-3xl mx-auto">
-      <h1 className="text-3xl md:text-4xl font-bold">О {siteConfig.name}</h1>
+      <h1 className="text-3xl md:text-4xl font-bold">О {global?.siteName}</h1>
       <p className="text-lg md:text-xl">
-        {siteConfig.name} - это ваша надежная платформа для сравнения и поиска
+        {global?.siteName} - это ваша надежная платформа для сравнения и поиска
         лучших микрозаймов от ведущих финансовых организаций. Мы стремимся
         помочь вам принимать информированные решения о ваших финансовых
         потребностях.
@@ -30,8 +32,8 @@ export default function About() {
       <p>
         Независимо от того, ищете ли вы краткосрочный займ для покрытия
         непредвиденных расходов или долгосрочный микрозайм для финансирования
-        небольшого бизнес-проекта, {siteConfig.name} поможет вам найти идеальное
-        решение для ваших потребностей.
+        небольшого бизнес-проекта, {global?.siteName} поможет вам найти
+        идеальное решение для ваших потребностей.
       </p>
     </div>
   );

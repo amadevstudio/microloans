@@ -1,5 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import siteConfig from "@/config/site.json";
+import { getGlobal } from "@/app/_queries/websiteInfo";
+
+const { global: global } = await getGlobal();
 
 export default function PrivacyPolicy() {
   return (
@@ -7,7 +9,7 @@ export default function PrivacyPolicy() {
       <h1 className="text-3xl font-bold mb-6">Политика конфиденциальности</h1>
       <Card>
         <CardHeader>
-          <CardTitle>Защита ваших данных на {siteConfig.name}</CardTitle>
+          <CardTitle>Защита ваших данных на {global?.siteName}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <p>

@@ -1,14 +1,20 @@
-"use client"
+"use client";
 
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
-import { useToast } from "@/hooks/use-toast"
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
 import {
   Form,
   FormControl,
@@ -16,8 +22,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import siteConfig from '@/config/site.json'
+} from "@/components/ui/form";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -29,11 +34,11 @@ const formSchema = z.object({
   message: z.string().min(10, {
     message: "Сообщение должно содержать не менее 10 символов",
   }),
-})
+});
 
 export default function Contact() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const { toast } = useToast()
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,39 +46,45 @@ export default function Contact() {
       email: "",
       message: "",
     },
-  })
+  });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsSubmitting(true)
+    setIsSubmitting(true);
     try {
-      const response = await fetch('/api/send-feedback', {
-        method: 'POST',
+      const response = await fetch("/api/send-feedback", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Произошла ошибка при отправке сообщения')
+        throw new Error(
+          data.error || "Произошла ошибка при отправке сообщения",
+        );
       }
 
       toast({
         title: "Успешно!",
-        description: "Ваше сообщение отправлено. Мы свяжемся с вами в ближайшее время.",
-      })
+        description:
+          "Ваше сообщение отправлено. Мы свяжемся с вами в ближайшее время.",
+      });
 
-      form.reset()
+      form.reset();
     } catch (error) {
       toast({
         title: "Ошибка",
-        description: error instanceof Error ? error.message : "Не удалось отправить сообщение. Пожалуйста, попробуйте позже.",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Не удалось отправить сообщение. Пожалуйста, попробуйте позже.",
         variant: "destructive",
-      })
+      });
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
   }
 
@@ -81,7 +92,8 @@ export default function Contact() {
     <div className="max-w-2xl mx-auto space-y-6 px-4">
       <h1 className="text-3xl md:text-4xl font-bold">Свяжитесь с нами</h1>
       <p className="text-lg md:text-xl">
-        У вас есть вопросы или отзывы? Мы будем рады услышать вас. Заполните форму ниже, и мы свяжемся с вами в ближайшее время.
+        У вас есть вопросы или отзывы? Мы будем рады услышать вас. Заполните
+        форму ниже, и мы свяжемся с вами в ближайшее время.
       </p>
       <Card>
         <CardHeader>
@@ -131,20 +143,20 @@ export default function Contact() {
                 )}
               />
               <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? 'Отправка...' : 'Отправить сообщение'}
+                {isSubmitting ? "Отправка..." : "Отправить сообщение"}
               </Button>
             </form>
           </Form>
         </CardContent>
       </Card>
-      <div className="mt-8">
-        <h2 className="text-2xl font-semibold mb-4">Другие способы связаться с нами</h2>
-        <div className="space-y-2">
-          <p><strong>Email:</strong> {siteConfig.contacts.email}</p>
-          <p><strong>Телефон:</strong> {siteConfig.contacts.phone}</p>
-          <p><strong>Адрес:</strong> {siteConfig.contacts.address}</p>
-        </div>
-      </div>
+      {/*<div className="mt-8">*/}
+      {/*  <h2 className="text-2xl font-semibold mb-4">Другие способы связаться с нами</h2>*/}
+      {/*  <div className="space-y-2">*/}
+      {/*    <p><strong>Email:</strong> {siteConfig.contacts.email}</p>*/}
+      {/*    <p><strong>Телефон:</strong> {siteConfig.contacts.phone}</p>*/}
+      {/*    <p><strong>Адрес:</strong> {siteConfig.contacts.address}</p>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
     </div>
-  )
+  );
 }
