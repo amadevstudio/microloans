@@ -6,10 +6,12 @@ import localFont from "next/font/local";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
-import { getGlobal } from "@/app/_queries/websiteInfo";
 import env from "@/app/_lib/env";
 import Header from "@/app/_components/header";
 import Footer from "@/app/_components/footer";
+import { getGlobal } from "@/app/_queries/websiteInfo";
+
+export const revalidate = 60;
 
 const { global: global } = await getGlobal();
 
