@@ -8,7 +8,9 @@ export default async function PrivacyPolicy() {
 
   return (
     <div className="max-w-3xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">Политика конфиденциальности</h1>
+      <h1 className="text-2xl font-bold mb-6 break-words">
+        Политика конфиденциальности
+      </h1>
       <Card>
         <CardHeader>
           <CardTitle>Защита ваших данных на {global?.siteName}</CardTitle>
