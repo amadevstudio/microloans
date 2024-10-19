@@ -428,13 +428,15 @@ export type ComponentSharedRichText = {
 export type ComponentSharedSeo = {
   __typename?: 'ComponentSharedSeo';
   id: Scalars['ID']['output'];
-  metaDescription: Scalars['String']['output'];
-  metaTitle: Scalars['String']['output'];
+  keywords?: Maybe<Scalars['JSON']['output']>;
+  metaDescription?: Maybe<Scalars['String']['output']>;
+  metaTitle?: Maybe<Scalars['String']['output']>;
   shareImage?: Maybe<UploadFile>;
 };
 
 export type ComponentSharedSeoInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
+  keywords?: InputMaybe<Scalars['JSON']['input']>;
   metaDescription?: InputMaybe<Scalars['String']['input']>;
   metaTitle?: InputMaybe<Scalars['String']['input']>;
   shareImage?: InputMaybe<Scalars['ID']['input']>;
@@ -536,7 +538,6 @@ export type Global = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   defaultSeo?: Maybe<ComponentSharedSeo>;
   documentId: Scalars['ID']['output'];
-  favicon?: Maybe<UploadFile>;
   legalDescription?: Maybe<Scalars['String']['output']>;
   locale?: Maybe<Scalars['String']['output']>;
   localizations: Array<Maybe<Global>>;
@@ -551,7 +552,6 @@ export type Global = {
 export type GlobalInput = {
   contacts?: InputMaybe<Scalars['String']['input']>;
   defaultSeo?: InputMaybe<ComponentSharedSeoInput>;
-  favicon?: InputMaybe<Scalars['ID']['input']>;
   legalDescription?: InputMaybe<Scalars['String']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
   motto?: InputMaybe<Scalars['String']['input']>;
@@ -2108,7 +2108,7 @@ export type MfosQuery = { __typename?: 'Query', mfos: Array<{ __typename?: 'Mfo'
 export type GlobalQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GlobalQuery = { __typename?: 'Query', global?: { __typename?: 'Global', siteName: string, motto?: string | null, siteDescription: string, contacts?: string | null, legalDescription?: string | null } | null };
+export type GlobalQuery = { __typename?: 'Query', global?: { __typename?: 'Global', siteName: string, motto?: string | null, siteDescription: string, contacts?: string | null, legalDescription?: string | null, defaultSeo?: { __typename?: 'ComponentSharedSeo', metaTitle?: string | null, metaDescription?: string | null, keywords?: any | null, shareImage?: { __typename?: 'UploadFile', url: string } | null } | null } | null };
 
 export type WebsiteInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2119,5 +2119,5 @@ export type WebsiteInfoQuery = { __typename?: 'Query', websiteInfo?: { __typenam
 export const ObtainingMethodsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ObtainingMethods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"obtainingMethods"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"name:asc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<ObtainingMethodsQuery, ObtainingMethodsQueryVariables>;
 export const AdditionalFiltersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AdditionalFilters"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"additionalFilters"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"name:asc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<AdditionalFiltersQuery, AdditionalFiltersQueryVariables>;
 export const MfosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Mfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"amount_from"}},{"kind":"Field","name":{"kind":"Name","value":"amount_to"}},{"kind":"Field","name":{"kind":"Name","value":"term_from"}},{"kind":"Field","name":{"kind":"Name","value":"term_to"}},{"kind":"Field","name":{"kind":"Name","value":"interest_rate"}},{"kind":"Field","name":{"kind":"Name","value":"interest_free_term"}},{"kind":"Field","name":{"kind":"Name","value":"additional_filters"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"obtaining_methods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<MfosQuery, MfosQueryVariables>;
-export const GlobalDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Global"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"global"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"siteName"}},{"kind":"Field","name":{"kind":"Name","value":"motto"}},{"kind":"Field","name":{"kind":"Name","value":"siteDescription"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"}},{"kind":"Field","name":{"kind":"Name","value":"legalDescription"}}]}}]}}]} as unknown as DocumentNode<GlobalQuery, GlobalQueryVariables>;
+export const GlobalDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Global"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"global"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"siteName"}},{"kind":"Field","name":{"kind":"Name","value":"motto"}},{"kind":"Field","name":{"kind":"Name","value":"siteDescription"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"}},{"kind":"Field","name":{"kind":"Name","value":"legalDescription"}},{"kind":"Field","name":{"kind":"Name","value":"defaultSeo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"metaTitle"}},{"kind":"Field","name":{"kind":"Name","value":"metaDescription"}},{"kind":"Field","name":{"kind":"Name","value":"shareImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}}]}}]}}]}}]} as unknown as DocumentNode<GlobalQuery, GlobalQueryVariables>;
 export const WebsiteInfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"WebsiteInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"websiteInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"bannerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"bannerText"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsClockTitle"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsClockText"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsThumbsUpTitle"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsThumbsUpText"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsZapTitle"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsZapText"}},{"kind":"Field","name":{"kind":"Name","value":"faq"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"}}]}}]}}]}}]} as unknown as DocumentNode<WebsiteInfoQuery, WebsiteInfoQueryVariables>;

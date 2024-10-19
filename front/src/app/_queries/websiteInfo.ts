@@ -9,6 +9,15 @@ const globalQueryDocument = graphql(`
       siteDescription
       contacts
       legalDescription
+
+      defaultSeo {
+        metaTitle
+        metaDescription
+        shareImage {
+          url
+        }
+        keywords
+      }
     }
   }
 `);

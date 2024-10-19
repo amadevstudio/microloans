@@ -17,8 +17,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const { global: global } = await getGlobal();
 
   return {
-    title: global?.siteName ?? "Микрозаймы",
-    description: global?.siteDescription ?? "",
+    title: global?.defaultSeo?.metaTitle ?? global?.siteName ?? "Микрозаймы",
+    description:
+      global?.defaultSeo?.metaDescription ?? global?.siteDescription ?? "",
     icons: {
       icon: [
         { url: "/favicon.ico", sizes: "any" },
@@ -31,21 +32,26 @@ export async function generateMetadata(): Promise<Metadata> {
     manifest: "/site.webmanifest",
     appleWebApp: { title: global?.siteName ?? "Микрозаймы" },
 
-    keywords: [
-      "микрозаймы",
-      "быстрые займы",
-      "онлайн кредиты",
-      "микрокредиты",
-      "финансовые услуги",
-      "срочные займы",
-      "займы без отказа",
-      "кредиты онлайн",
-      "мгновенные займы",
-      "займы на карту",
-      "финансовое сравнение",
-      "лучшие ставки по займам",
-    ],
-    authors: [{ name: `${global?.siteName ?? "Микрозаймы"} Team` }],
+    keywords:
+      global?.defaultSeo?.keywords &&
+      Array.isArray(global.defaultSeo.keywords) &&
+      global.defaultSeo.keywords.length > 0
+        ? global.defaultSeo.keywords
+        : [
+            "микрозаймы",
+            "быстрые займы",
+            "онлайн кредиты",
+            "микрокредиты",
+            "финансовые услуги",
+            "срочные займы",
+            "займы без отказа",
+            "кредиты онлайн",
+            "мгновенные займы",
+            "займы на карту",
+            "финансовое сравнение",
+            "лучшие ставки по займам",
+          ],
+    authors: [{ name: `${global?.siteName ?? "Микрозаймы"}` }],
     creator: global?.siteName ?? "Микрозаймы",
     publisher: global?.siteName ?? "Микрозаймы",
     formatDetection: {
@@ -56,26 +62,43 @@ export async function generateMetadata(): Promise<Metadata> {
 
     openGraph: {
       type: "website",
-      title: global?.motto ?? global?.siteName ?? "Микрозаймы",
-      description: global?.siteDescription ?? "",
+      siteName:
+        global?.defaultSeo?.metaTitle ?? global?.siteName ?? "Микрозаймы",
+      title: global?.motto
+        ? " – " + global.motto
+        : (global?.defaultSeo?.metaTitle ?? global?.siteName ?? "Микрозаймы"),
+      description:
+        global?.defaultSeo?.metaDescription ?? global?.siteDescription ?? "",
       url: `${env.NEXT_PUBLIC_URL}`,
-      siteName: global?.siteName ?? "Микрозаймы",
       images: [
-        {
-          url: `${env.NEXT_PUBLIC_URL}/images/monster.square.jpg`,
-          width: 1024,
-          height: 1024,
-          alt: global?.siteName,
-        },
+        ...(global?.defaultSeo?.shareImage?.url
+          ? [global?.defaultSeo.shareImage.url]
+          : []),
+        ...[
+          {
+            url: `${env.NEXT_PUBLIC_URL}/images/monster.square.jpg`,
+            width: 1024,
+            height: 1024,
+            alt: global?.siteName,
+          },
+        ],
       ],
       locale: "ru_RU",
     },
 
     twitter: {
       card: "summary_large_image",
-      site: global?.siteName,
-      description: global?.siteDescription ?? "",
-      images: `${env.NEXT_PUBLIC_URL}/images/monster.square.jpg`,
+      site: global?.defaultSeo?.metaTitle ?? global?.siteName ?? "Микрозаймы",
+      creator: global?.siteName ?? "Микрозаймы",
+      description:
+        global?.defaultSeo?.metaDescription ?? global?.siteDescription ?? "",
+      title: global?.defaultSeo?.metaTitle ?? global?.siteName ?? "Микрозаймы",
+      images: [
+        ...(global?.defaultSeo?.shareImage?.url
+          ? [global?.defaultSeo.shareImage.url]
+          : []),
+        ...[`${env.NEXT_PUBLIC_URL}/images/monster.square.jpg`],
+      ],
     },
 
     robots: {
