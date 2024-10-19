@@ -17,7 +17,7 @@ export default function BannerSection() {
     <section className="text-center py-12 px-4 gradient-bg text-white rounded-lg relative overflow-hidden">
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <Image
-          src="/images/cash.monster.svg"
+          src="/images/monster.svg"
           alt="Background Logo"
           fill
           style={{ objectFit: "cover" }}

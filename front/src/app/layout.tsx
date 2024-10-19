@@ -62,7 +62,7 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: global?.siteName ?? "Микрозаймы",
       images: [
         {
-          url: `${env.NEXT_PUBLIC_URL}/images/cash.monster.square.jpg`,
+          url: `${env.NEXT_PUBLIC_URL}/images/monster.square.jpg`,
           width: 1024,
           height: 1024,
           alt: global?.siteName,
@@ -75,7 +75,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       site: global?.siteName,
       description: global?.siteDescription ?? "",
-      images: `${env.NEXT_PUBLIC_URL}/images/cash.monster.square.jpg`,
+      images: `${env.NEXT_PUBLIC_URL}/images/monster.square.jpg`,
     },
 
     robots: {

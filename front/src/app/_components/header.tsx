@@ -105,7 +105,7 @@ export default function Header({ global }: { global: GlobalQuery["global"] }) {
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="/" className="flex items-center space-x-4">
           <Image
-            src="/images/cash.monster.round.svg"
+            src="/images/monster.round.svg"
             alt={global?.siteName ?? ""}
             width={40}
             height={40}
