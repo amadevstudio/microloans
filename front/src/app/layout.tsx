@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import React from "react";
 import { ProjectQueryClientProvider } from "@/app/_utils/projectQueryClientProvider";
@@ -10,89 +9,92 @@ import env from "@/app/_lib/env";
 import Header from "@/app/_components/header";
 import Footer from "@/app/_components/footer";
 import { getGlobal } from "@/app/_queries/websiteInfo";
+import { Metadata } from "next";
 
 export const revalidate = 60;
 
-const { global: global } = await getGlobal();
+export async function generateMetadata(): Promise<Metadata> {
+  const { global: global } = await getGlobal();
 
-export const metadata: Metadata = {
-  title: global?.siteName ?? "Микрозаймы",
-  description: global?.siteDescription ?? "",
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
-    ],
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
-  manifest: "/site.webmanifest",
-  appleWebApp: { title: global?.siteName ?? "Микрозаймы" },
-
-  keywords: [
-    "микрозаймы",
-    "быстрые займы",
-    "онлайн кредиты",
-    "микрокредиты",
-    "финансовые услуги",
-    "срочные займы",
-    "займы без отказа",
-    "кредиты онлайн",
-    "мгновенные займы",
-    "займы на карту",
-    "финансовое сравнение",
-    "лучшие ставки по займам",
-  ],
-  authors: [{ name: `${global?.siteName ?? "Микрозаймы"} Team` }],
-  creator: global?.siteName ?? "Микрозаймы",
-  publisher: global?.siteName ?? "Микрозаймы",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-
-  openGraph: {
-    type: "website",
-    title: global?.motto ?? global?.siteName ?? "Микрозаймы",
+  return {
+    title: global?.siteName ?? "Микрозаймы",
     description: global?.siteDescription ?? "",
-    url: `${env.NEXT_PUBLIC_URL}`,
-    siteName: global?.siteName ?? "Микрозаймы",
-    images: [
-      {
-        url: `${env.NEXT_PUBLIC_URL}/images/cash.monster.square.jpg`,
-        width: 1024,
-        height: 1024,
-        alt: global?.siteName,
-      },
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/favicon.svg", type: "image/svg+xml" },
+        { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+      ],
+      shortcut: "/favicon.ico",
+      apple: "/apple-touch-icon.png",
+    },
+    manifest: "/site.webmanifest",
+    appleWebApp: { title: global?.siteName ?? "Микрозаймы" },
+
+    keywords: [
+      "микрозаймы",
+      "быстрые займы",
+      "онлайн кредиты",
+      "микрокредиты",
+      "финансовые услуги",
+      "срочные займы",
+      "займы без отказа",
+      "кредиты онлайн",
+      "мгновенные займы",
+      "займы на карту",
+      "финансовое сравнение",
+      "лучшие ставки по займам",
     ],
-    locale: "ru_RU",
-  },
+    authors: [{ name: `${global?.siteName ?? "Микрозаймы"} Team` }],
+    creator: global?.siteName ?? "Микрозаймы",
+    publisher: global?.siteName ?? "Микрозаймы",
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
 
-  twitter: {
-    card: "summary_large_image",
-    site: global?.siteName,
-    description: global?.siteDescription ?? "",
-    images: `${env.NEXT_PUBLIC_URL}/images/cash.monster.square.jpg`,
-  },
+    openGraph: {
+      type: "website",
+      title: global?.motto ?? global?.siteName ?? "Микрозаймы",
+      description: global?.siteDescription ?? "",
+      url: `${env.NEXT_PUBLIC_URL}`,
+      siteName: global?.siteName ?? "Микрозаймы",
+      images: [
+        {
+          url: `${env.NEXT_PUBLIC_URL}/images/cash.monster.square.jpg`,
+          width: 1024,
+          height: 1024,
+          alt: global?.siteName,
+        },
+      ],
+      locale: "ru_RU",
+    },
 
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+    twitter: {
+      card: "summary_large_image",
+      site: global?.siteName,
+      description: global?.siteDescription ?? "",
+      images: `${env.NEXT_PUBLIC_URL}/images/cash.monster.square.jpg`,
+    },
+
+    robots: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
-  },
 
-  alternates: {
-    canonical: "https://cash.monster.wrkt.ru",
-  },
-};
+    alternates: {
+      canonical: "https://cash.monster.wrkt.ru",
+    },
+  };
+}
 
 const mainFont = localFont({
   src: [
