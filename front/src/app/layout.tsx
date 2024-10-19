@@ -91,7 +91,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
 
     alternates: {
-      canonical: "https://cash.monster.wrkt.ru",
+      canonical: env.NEXT_PUBLIC_URL,
     },
   };
 }
