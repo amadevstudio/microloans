@@ -1,29 +1,37 @@
-"use client"
+"use client";
 
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { useQuery } from "@tanstack/react-query";
 import { getMfos } from "@/app/_queries/mfo";
 import { MfosQuery } from "@/app/_queries/gql/graphql";
 import MfoCard from "@/app/_components/mfoCard";
+import React from "react";
 
-export default function SpecialOfferSection({ specialOfferCount }: { specialOfferCount: number }) {
+export default function SpecialOfferSection() {
   const { data } = useQuery<MfosQuery>({
-    queryKey: [ 'mfos' ],
+    queryKey: ["mfos"],
     // queryFn: async () => await cmsGraphQLRequest(mfosQueryDocument)
-    queryFn: getMfos
-  })
+    queryFn: getMfos,
+  });
 
   const mfos = data?.mfos;
   if (mfos === undefined || mfos.length === 0) {
-    return <></>
+    return <></>;
   }
 
-
-  const specialOfferMfos: Exclude<typeof mfos, undefined> = Array(specialOfferCount).fill(mfos[0]);
+  const specialOfferMfos: Exclude<typeof mfos, undefined> = mfos;
 
   return (
     <section>
-      <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-primary">Специальные предложения ({specialOfferCount})</h2>
+      <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-primary">
+        Специальные предложения ({specialOfferMfos.length})
+      </h2>
       <div className="px-10 py-6">
         <Carousel
           opts={{
@@ -33,18 +41,23 @@ export default function SpecialOfferSection({ specialOfferCount }: { specialOffe
           className="w-full"
         >
           <CarouselContent>
-            {specialOfferMfos.slice(0, specialOfferCount).filter(mfo => mfo !== null).map((mfo, index) => (
-              <CarouselItem key={`${mfo.documentId}-${index}`} className="lg:basis-1/2 xl:basis-1/3 2xl::basis-1/4">
-                <div className="p-1">
-                  <>{mfo !== null && <MfoCard key={mfo.documentId} mfo={mfo}/>}</>
-                </div>
-              </CarouselItem>
-            ))}
+            {specialOfferMfos
+              .filter((mfo) => mfo !== null)
+              .map((mfo, index) => (
+                <CarouselItem
+                  key={`${mfo.documentId}-${index}`}
+                  className="lg:basis-1/2 xl:basis-1/3 2xl::basis-1/4"
+                >
+                  <div className="p-1">
+                    <>{<MfoCard key={mfo.documentId} mfo={mfo} />}</>
+                  </div>
+                </CarouselItem>
+              ))}
           </CarouselContent>
-          <CarouselPrevious/>
-          <CarouselNext/>
+          <CarouselPrevious />
+          <CarouselNext />
         </Carousel>
       </div>
     </section>
-  )
+  );
 }

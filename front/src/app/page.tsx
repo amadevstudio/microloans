@@ -13,10 +13,6 @@ import FAQSection from "@/app/_components/faqSection";
 import BannerSection from "@/app/_components/bannerSection";
 import { getLandingPage } from "@/app/_queries/websiteInfo";
 
-function getSpecialOfferCount() {
-  return Math.round(Math.random() * 4) + 3;
-}
-
 export default async function Home() {
   const queryClient = new QueryClient();
 
@@ -52,7 +48,7 @@ export default async function Home() {
       </HydrationBoundary>
 
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <SpecialOfferSection specialOfferCount={getSpecialOfferCount()} />
+        <SpecialOfferSection />
       </HydrationBoundary>
 
       <div id="filtersSection">

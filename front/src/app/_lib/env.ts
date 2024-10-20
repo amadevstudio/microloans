@@ -27,6 +27,7 @@ export default createEnv({
 
     NEXT_PUBLIC_URL: z.string().url().min(1),
 
+    NEXT_PUBLIC_CMS_BASE_URL: z.string().url().min(1),
     NEXT_PUBLIC_CMS_URL: z.string().url().min(1),
     NEXT_PUBLIC_CMS_TOKEN: z.string().min(1),
   },
@@ -51,6 +52,7 @@ export default createEnv({
 
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
 
+    NEXT_PUBLIC_CMS_BASE_URL: process.env.NEXT_PUBLIC_CMS_BASE_URL,
     NEXT_PUBLIC_CMS_URL: process.env.NEXT_PUBLIC_CMS_URL,
     NEXT_PUBLIC_CMS_TOKEN: process.env.NEXT_PUBLIC_CMS_TOKEN,
   },
