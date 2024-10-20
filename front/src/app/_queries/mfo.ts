@@ -14,6 +14,7 @@ const mfosQueryDocument = graphql(/* GraphQL */ `
       interest_free_term
       partner_link
       rich_description
+      full_credit_price_to
 
       Logo {
         file {

@@ -145,6 +145,59 @@ function SubmitApplication({ partnerLink }: { partnerLink: string }) {
   );
 }
 
+function freePeriod(mfo: Exclude<MfosQuery["mfos"][0], null>) {
+  const forNew =
+    mfo?.additional_filters.find((af) => af?.code === "firstFree") !==
+    undefined;
+
+  const forAll =
+    mfo?.additional_filters.find((af) => af?.code === "freePeriod") !==
+    undefined;
+
+  if (forNew && !forAll) {
+    return "new";
+  }
+}
+
+function InterestFreeTerm({
+  mfo,
+}: {
+  mfo: Exclude<MfosQuery["mfos"][0], null>;
+}) {
+  return (
+    <>
+      {mfo.interest_free_term && (
+        <div>
+          • {mfo.interest_free_term}{" "}
+          {tn(mfo.interest_free_term, "mfo", "card", "interest", "freeTerm")}{" "}
+          бесплатно
+          {freePeriod(mfo) === "new" ? " для новых клиентов" : ""}
+        </div>
+      )}
+    </>
+  );
+}
+
+function FullCreditPrice({
+  mfo,
+}: {
+  mfo: Exclude<MfosQuery["mfos"][0], null>;
+}) {
+  return (
+    <>
+      {(mfo.interest_rate || mfo.interest_rate === 0) && (
+        <div>
+          • ПСК {freePeriod(mfo) !== undefined ? "0-" : ""}
+          {mfo.full_credit_price_to
+            ? mfo.full_credit_price_to
+            : Math.round(mfo.interest_rate * 365 * 1000) / 1000}
+          %
+        </div>
+      )}
+    </>
+  );
+}
+
 function MfoContent({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
   return (
     <>
@@ -164,29 +217,14 @@ function MfoContent({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
             </span>
           </div>
         )}
-        {mfo.interest_free_term && (
+        {mfo.interest_rate && (
           <div>
             <div className="flex items-center">
               <Percent className="mr-2 h-3.5 w-3.5 text-orange-500 flex-shrink-0" />
               <span className="truncate">{mfo.interest_rate}% в день</span>
             </div>
-            <div>
-              <span>
-                ({mfo.interest_free_term}{" "}
-                {tn(
-                  mfo.interest_free_term,
-                  "mfo",
-                  "card",
-                  "interest",
-                  "freeTerm",
-                )}{" "}
-                без процентов
-                {mfo?.additional_filters.find((af) => af?.code === "firstFree")
-                  ? " для новых клиентов"
-                  : ""}
-                )
-              </span>
-            </div>
+            <InterestFreeTerm mfo={mfo} />
+            <FullCreditPrice mfo={mfo} />
           </div>
         )}
         <div className="flex flex-wrap gap-2">
