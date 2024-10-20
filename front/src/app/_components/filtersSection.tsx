@@ -102,7 +102,6 @@ function sort(
 export default function FiltersSection() {
   const { allMfos, filteredAndSortedMfos, setMfosList } =
     useContext(MfosContext);
-  const [filteredMfos, setFilteredMfos] = useState(allMfos);
 
   const obtainingMethodsResult = useQuery<ObtainingMethodsQuery>({
     queryKey: ["obtainingMethods"],
@@ -214,8 +213,6 @@ export default function FiltersSection() {
         additionalForMfos[mfo.documentId].includes(af),
       ),
     );
-
-    setFilteredMfos(result);
 
     // Sort
     result = sort(
@@ -420,7 +417,7 @@ export default function FiltersSection() {
             <Button
               type="submit"
               className="w-full mt-[1.25rem] self-end"
-              onClick={applyFilters}
+              onClick={() => applyFilters()}
             >
               Показать
             </Button>
