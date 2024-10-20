@@ -102,7 +102,7 @@ export default function MfoCard({
 function Header({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
   return (
     <div className="flex flex-col items-center space-y-4">
-      <div className="w-full sm:w-1/2">
+      <div className="w-full">
         <AspectRatio ratio={16 / 9}>
           {mfo.Logo?.file?.url ? (
             <Image
@@ -228,18 +228,17 @@ function MfoContent({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
           </div>
         )}
         <div className="flex flex-wrap gap-2">
-          {mfo.obtaining_methods.map((obtainingMethod) =>
-            obtainingMethod == null ? (
-              <></>
-            ) : (
-              <Badge
-                key={obtainingMethod.documentId}
-                variant="secondary"
-                className="bg-primary/10 text-primary text-xs truncate max-w-full"
-              >
-                {obtainingMethod.name}
-              </Badge>
-            ),
+          {mfo.obtaining_methods.map(
+            (obtainingMethod) =>
+              obtainingMethod !== null && (
+                <Badge
+                  key={obtainingMethod.documentId}
+                  variant="secondary"
+                  className="bg-primary/10 text-primary text-xs truncate max-w-full"
+                >
+                  {obtainingMethod.name}
+                </Badge>
+              ),
           )}
         </div>
         <div className="flex flex-wrap gap-2">
