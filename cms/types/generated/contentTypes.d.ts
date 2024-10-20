@@ -744,6 +744,7 @@ export interface ApiMfoMfo extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     rich_description: Schema.Attribute.RichText;
+    full_credit_price_to: Schema.Attribute.Decimal;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

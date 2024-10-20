@@ -65,6 +65,9 @@
     },
     "rich_description": {
       "type": "richtext"
+    },
+    "full_credit_price_to": {
+      "type": "decimal"
     }
   }
 }
