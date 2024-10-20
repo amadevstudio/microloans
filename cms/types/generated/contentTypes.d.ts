@@ -530,6 +530,7 @@ export interface ApiAdditionalFilterAdditionalFilter
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     mfos: Schema.Attribute.Relation<'manyToMany', 'api::mfo.mfo'>;
+    code: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -739,6 +740,10 @@ export interface ApiMfoMfo extends Struct.CollectionTypeSchema {
         },
         number
       >;
+    partner_link: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    rich_description: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

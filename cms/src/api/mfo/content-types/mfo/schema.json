@@ -57,6 +57,14 @@
     "interest_free_term": {
       "type": "integer",
       "min": 0
+    },
+    "partner_link": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "rich_description": {
+      "type": "richtext"
     }
   }
 }

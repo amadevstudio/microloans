@@ -23,6 +23,10 @@
       "relation": "manyToMany",
       "target": "api::mfo.mfo",
       "mappedBy": "additional_filters"
+    },
+    "code": {
+      "type": "string",
+      "required": true
     }
   }
 }
