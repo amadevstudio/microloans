@@ -19,7 +19,7 @@ const nextConfig = {
       // Prod from-user query
       {
         protocol: 'https',
-        hostname: process.env.URL,
+        hostname: process.env.NEXT_PUBLIC_CMS_BASE_URL,
         pathname: '/uploads/**',
       }
     ],
