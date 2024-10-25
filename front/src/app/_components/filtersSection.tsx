@@ -33,6 +33,7 @@ import {
 import { getAdditionalFilters, getObtainingMethods } from "@/app/_queries/dict";
 import { ChevronDown, ChevronUp, Filter } from "lucide-react";
 import MfosContext from "@/app/_components/mfosContext";
+import { scrollToId } from "@/lib/utils/frontend/scrollTo";
 
 type SortingMethod = "default" | "amount" | "term" | "interestRate";
 
@@ -100,8 +101,13 @@ function sort(
 }
 
 export default function FiltersSection() {
-  const { allMfos, filteredAndSortedMfos, setMfosList } =
-    useContext(MfosContext);
+  const {
+    allMfos,
+    filteredAndSortedMfos,
+    setMfosList,
+    filtersVisible,
+    setFiltersVisible,
+  } = useContext(MfosContext);
 
   const obtainingMethodsResult = useQuery<ObtainingMethodsQuery>({
     queryKey: ["obtainingMethods"],
@@ -115,7 +121,6 @@ export default function FiltersSection() {
 
   const [sortingMethod, setSortingMethod] = useState<SortingMethod>("default");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
-  const [filtersVisible, setFiltersVisible] = useState<boolean>(false);
   const [filtersPageState, setFiltersPageState] = useState<FiltersPageState>({
     amount: "",
     term: "",
@@ -222,6 +227,8 @@ export default function FiltersSection() {
     );
 
     setMfosList(result);
+
+    scrollToId("mfosListSection");
   }
 
   function setSortingMethodAndSort(newSortingMethod: SortingMethod) {

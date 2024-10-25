@@ -7,4 +7,12 @@ export default createContext<{
   setMfosList: (
     filteredAndSortedMfos: Exclude<MfosQuery["mfos"][0], null>[],
   ) => void;
-}>({ allMfos: [], filteredAndSortedMfos: [], setMfosList: () => {} });
+  filtersVisible: boolean;
+  setFiltersVisible: (filterVisible: boolean) => void;
+}>({
+  allMfos: [],
+  filteredAndSortedMfos: [],
+  setMfosList: () => {},
+  filtersVisible: false,
+  setFiltersVisible: () => {},
+});

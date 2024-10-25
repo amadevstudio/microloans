@@ -8,7 +8,7 @@ export default function MfoList() {
   const { filteredAndSortedMfos } = useContext(MfosContext);
 
   return (
-    <section className="space-y-2">
+    <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 mt-4">
         {filteredAndSortedMfos.map((mfo, index) => (
           <MfoCard key={`mfo.documentId-${index}`} mfo={mfo} />
@@ -19,6 +19,6 @@ export default function MfoList() {
         отличаться от действительности. Уточняйте актуальные тарифы на сайте, по
         телефонам, в отделениях интересующего МФО.
       </p>
-    </section>
+    </>
   );
 }
