@@ -51,7 +51,7 @@ export default function MfoCard({
               <DialogTrigger className="w-full">
                 <Header mfo={mfo} />
               </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px] max-h-[100vh] sm:max-h-[80vh] overflow-y-auto">
+              <DialogContent className="sm:max-w-[425px] max-h-[100vh] sm:max-h-[80vh] py-16 overflow-y-auto">
                 <DialogHeader>
                   <div className="mt-4 mb-2">
                     <AspectRatio ratio={16 / 9}>
