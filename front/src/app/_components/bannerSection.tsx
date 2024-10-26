@@ -15,7 +15,7 @@ export default function BannerSection() {
 
   return (
     <section className="text-center py-12 px-4 gradient-bg text-white rounded-lg relative overflow-hidden">
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
+      <div className="absolute inset-0 opacity-5 pointer-events-none hidden md:block">
         <Image
           src="/images/monster.svg"
           alt="Background Logo"
