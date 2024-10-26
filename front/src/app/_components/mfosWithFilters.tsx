@@ -12,7 +12,7 @@ import { scrollToId } from "@/lib/utils/frontend/scrollTo";
 import { Button } from "@/components/ui/button";
 
 export default function MfosWithFilters() {
-  const [filtersVisible, setFiltersVisible] = useState<boolean>(false);
+  const [filtersVisible, setFiltersVisible] = useState<boolean>(true);
 
   const mfosResponse = useQuery<MfosQuery>({
     queryKey: ["mfos"],
