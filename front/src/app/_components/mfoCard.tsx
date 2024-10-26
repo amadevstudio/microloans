@@ -118,16 +118,14 @@ function Header({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
       </div>
       {mfo.rich_description ? (
         <div className="cursor-help">
-          <CardTitle className="text-primary text-base truncate flex gap-2">
-            {mfo.name} <Info className="w-4" />
+          <CardTitle className="text-primary text-base">
+            {mfo.name} <Info className="w-4 inline-block" />
           </CardTitle>
           <CardDescription>Предложение микрозайма (реклама)</CardDescription>
         </div>
       ) : (
         <div>
-          <CardTitle className="text-primary text-base truncate">
-            {mfo.name}
-          </CardTitle>
+          <CardTitle className="text-primary text-base">{mfo.name}</CardTitle>
           <CardDescription>Предложение микрозайма (реклама)</CardDescription>
         </div>
       )}
