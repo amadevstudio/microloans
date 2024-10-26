@@ -238,7 +238,7 @@ function MfoContent({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
                 <Badge
                   key={obtainingMethod.documentId}
                   variant="secondary"
-                  className="bg-primary/10 text-primary text-xs truncate max-w-full"
+                  className="bg-primary/5 text-primary text-xs truncate max-w-full"
                 >
                   {obtainingMethod.name}
                 </Badge>

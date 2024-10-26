@@ -270,11 +270,11 @@ export default function FiltersSection() {
                 setSortingMethodAndSort(value as SortingMethod)
               }
             >
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-[180px]" aria-label="Сортировка">
                 <Image
                   width="16"
                   height="16"
-                  alt="Сортировка"
+                  alt="Выбор метода сортировки"
                   className="text-primary dark:invert"
                   src="/icons/svg/sort.svg"
                 />
@@ -301,6 +301,7 @@ export default function FiltersSection() {
               onClick={() =>
                 setSortOrderAndSort(sortOrder === "asc" ? "desc" : "asc")
               }
+              aria-label="Направление сортировки"
             >
               {sortOrder === "asc" ? (
                 <ChevronUp className="h-4 w-4" />
@@ -353,7 +354,9 @@ export default function FiltersSection() {
           ))}
 
           <div className="flex flex-col">
-            <Label className="mb-1.5">Способ получения</Label>
+            <Label className="mb-1.5" aria-label="Способ получения">
+              Способ получения
+            </Label>
             <Select
               value={filtersPageState.obtainingMethod}
               onValueChange={(value) =>
