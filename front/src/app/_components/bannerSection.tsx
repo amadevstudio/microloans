@@ -21,6 +21,7 @@ export default function BannerSection() {
           alt="Background Logo"
           fill
           style={{ objectFit: "cover" }}
+          loading="eager"
         />
       </div>
       <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
