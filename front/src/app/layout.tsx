@@ -2,7 +2,6 @@ import "./globals.css";
 import React from "react";
 import { ProjectQueryClientProvider } from "@/app/_utils/projectQueryClientProvider";
 import { ThemeProvider } from "@/components/theme-provider";
-import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import env from "@/app/_lib/env";
 import Header from "@/app/_components/header";
@@ -138,20 +137,6 @@ export async function generateMetadata(): Promise<Metadata> {
 //   subsets: ["latin", "cyrillic"],
 //   display: "swap",
 // });
-const mainFont = {
-  src: [
-    {
-      fontFamily: "Arial, Helvetica, sans-serif", // Системные шрифты
-      fontWeight: "400",
-      fontStyle: "normal",
-    },
-    {
-      fontFamily: "Arial, Helvetica, sans-serif",
-      fontWeight: "700",
-      fontStyle: "normal",
-    },
-  ],
-};
 
 export default async function RootLayout({
   children,
@@ -162,7 +147,7 @@ export default async function RootLayout({
 
   return (
     <html lang="ru" suppressHydrationWarning>
-      <body className={cn(mainFont.className, "bg-background text-foreground")}>
+      <body className="bg-background text-foreground">
         <ProjectQueryClientProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Header global={global} />
