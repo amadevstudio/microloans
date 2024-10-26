@@ -130,6 +130,7 @@ export default function Header({ global }: { global: GlobalQuery["global"] }) {
             size="sm"
             onClick={toggleTheme}
             className="ml-4"
+            aria-label="Переключить тему"
           >
             <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
             <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -142,6 +143,7 @@ export default function Header({ global }: { global: GlobalQuery["global"] }) {
             size="icon"
             onClick={toggleTheme}
             className="mr-2"
+            aria-label="Переключить тему"
           >
             <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
             <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -149,7 +151,7 @@ export default function Header({ global }: { global: GlobalQuery["global"] }) {
           </Button>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" aria-label="Открыть меню">
                 <MenuIcon className="h-[1.2rem] w-[1.2rem]" />
               </Button>
             </SheetTrigger>

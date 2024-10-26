@@ -310,9 +310,12 @@ export default function FiltersSection() {
               )}
             </Button>
 
-            <Button onClick={() => setFiltersVisible(!filtersVisible)}>
+            <Button
+              onClick={() => setFiltersVisible(!filtersVisible)}
+              aria-label="Скрытие фильтров"
+            >
               <Filter className="h-4 w-4" />
-              <p className="ml-4 hidden sm:block">Показать фильтры</p>
+              <p className="ml-4 hidden sm:block">Скрытие фильтров</p>
             </Button>
           </div>
         </div>
@@ -366,7 +369,7 @@ export default function FiltersSection() {
                 }))
               }
             >
-              <SelectTrigger className="">
+              <SelectTrigger aria-label="Выбрать способ получения">
                 <SelectValue placeholder="Выберите"></SelectValue>
               </SelectTrigger>
               <SelectContent>
@@ -388,12 +391,12 @@ export default function FiltersSection() {
 
           <div>
             <Popover>
-              <PopoverTrigger asChild>
-                <div className="flex flex-col">
-                  <Label className="mb-1.5">Дополнительные условия</Label>
+              <div className="flex flex-col">
+                <Label className="mb-1.5">Дополнительные условия</Label>
+                <PopoverTrigger asChild>
                   <Button variant="outline">Выберите</Button>
-                </div>
-              </PopoverTrigger>
+                </PopoverTrigger>
+              </div>
               <PopoverContent className="flex flex-col gap-2">
                 {additionalFiltersResult?.data?.additionalFilters.map(
                   (f) =>
