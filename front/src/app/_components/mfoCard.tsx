@@ -97,6 +97,7 @@ function MfoImage({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
           src={`data:image/svg+xml;utf8,${encodeURIComponent(mfo.Logo?.svg)}`}
           alt={mfo.name}
           fill
+          loading="lazy"
         />
       ) : mfo.Logo?.file?.url ? (
         <Image
@@ -104,6 +105,7 @@ function MfoImage({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
           src={`${env.NEXT_PUBLIC_CMS_BASE_URL}${mfo.Logo?.file?.url}`}
           alt={mfo.name}
           fill
+          loading="lazy"
         />
       ) : (
         <Zap className="w-full h-full" />
