@@ -123,12 +123,16 @@ function Header({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
           <CardTitle className="text-primary text-base">
             {mfo.name} <Info className="w-4 inline-block" />
           </CardTitle>
-          <CardDescription>Предложение микрозайма (реклама)</CardDescription>
+          <CardDescription className="text-xs">
+            Предложение микрозайма (реклама)
+          </CardDescription>
         </div>
       ) : (
         <div>
           <CardTitle className="text-primary text-base">{mfo.name}</CardTitle>
-          <CardDescription>Предложение микрозайма (реклама)</CardDescription>
+          <CardDescription className="text-xs">
+            Предложение микрозайма (реклама)
+          </CardDescription>
         </div>
       )}
     </div>
