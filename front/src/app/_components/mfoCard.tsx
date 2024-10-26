@@ -104,7 +104,14 @@ function Header({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
     <div className="flex flex-col items-center space-y-4">
       <div className="w-full">
         <AspectRatio ratio={16 / 9}>
-          {mfo.Logo?.file?.url ? (
+          {mfo.Logo?.svg ? (
+            <Image
+              className="bg-white p-2 rounded-md object-contain w-full h-full"
+              src={`data:image/svg+xml;utf8,${encodeURIComponent(mfo.Logo?.svg)}`}
+              alt={mfo.name}
+              fill
+            />
+          ) : mfo.Logo?.file?.url ? (
             <Image
               className="bg-white p-2 rounded-md object-contain w-full h-full"
               src={`${env.NEXT_PUBLIC_CMS_BASE_URL}${mfo.Logo?.file?.url}`}

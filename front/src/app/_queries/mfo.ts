@@ -20,6 +20,7 @@ const mfosQueryDocument = graphql(/* GraphQL */ `
         file {
           url
         }
+        svg
       }
       additional_filters {
         documentId
