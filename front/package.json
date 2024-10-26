@@ -10,10 +10,7 @@
     "codegen": "graphql-codegen --config --watch codegen.ts"
   },
   "dependencies": {
-    "@graphql-codegen/cli": "^5.0.2",
-    "@graphql-typed-document-node/core": "^3.2.0",
     "@hookform/resolvers": "^3.9.0",
-    "@parcel/watcher": "^2.4.1",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-aspect-ratio": "^1.1.0",
     "@radix-ui/react-avatar": "^1.1.1",
@@ -49,7 +46,9 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "5.0.2",
+    "@graphql-codegen/cli": "^5.0.2",
+    "@parcel/watcher": "^2.4.1",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@graphql-codegen/client-preset": "4.3.3",
     "@graphql-codegen/introspection": "4.0.3",
     "@types/node": "^20",
