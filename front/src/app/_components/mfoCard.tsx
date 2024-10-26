@@ -54,21 +54,10 @@ export default function MfoCard({
               <DialogContent className="sm:max-w-[425px] max-h-[100vh] sm:max-h-[80vh] py-16 overflow-y-auto">
                 <DialogHeader>
                   <div className="mt-4 mb-2">
-                    <AspectRatio ratio={16 / 9}>
-                      {mfo.Logo?.file?.url ? (
-                        <Image
-                          className="bg-white p-2 rounded-md object-contain w-full h-full"
-                          src={`${env.NEXT_PUBLIC_CMS_BASE_URL}${mfo.Logo?.file?.url}`}
-                          alt={mfo.name}
-                          fill
-                        />
-                      ) : (
-                        <Zap className="w-full h-full" />
-                      )}
-                    </AspectRatio>
+                    <MfoImage mfo={mfo} />
                   </div>
                   <DialogTitle>{mfo.name}</DialogTitle>
-                  <DialogDescription>
+                  <DialogDescription className="text-xs">
                     Предложение микрозайма (реклама)
                   </DialogDescription>
                 </DialogHeader>
@@ -99,29 +88,35 @@ export default function MfoCard({
   );
 }
 
+function MfoImage({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
+  return (
+    <AspectRatio ratio={16 / 9}>
+      {mfo.Logo?.svg ? (
+        <Image
+          className="bg-white p-2 rounded-md object-contain w-full h-full"
+          src={`data:image/svg+xml;utf8,${encodeURIComponent(mfo.Logo?.svg)}`}
+          alt={mfo.name}
+          fill
+        />
+      ) : mfo.Logo?.file?.url ? (
+        <Image
+          className="bg-white p-2 rounded-md object-contain w-full h-full"
+          src={`${env.NEXT_PUBLIC_CMS_BASE_URL}${mfo.Logo?.file?.url}`}
+          alt={mfo.name}
+          fill
+        />
+      ) : (
+        <Zap className="w-full h-full" />
+      )}
+    </AspectRatio>
+  );
+}
+
 function Header({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
   return (
     <div className="flex flex-col items-center space-y-4">
       <div className="w-full">
-        <AspectRatio ratio={16 / 9}>
-          {mfo.Logo?.svg ? (
-            <Image
-              className="bg-white p-2 rounded-md object-contain w-full h-full"
-              src={`data:image/svg+xml;utf8,${encodeURIComponent(mfo.Logo?.svg)}`}
-              alt={mfo.name}
-              fill
-            />
-          ) : mfo.Logo?.file?.url ? (
-            <Image
-              className="bg-white p-2 rounded-md object-contain w-full h-full"
-              src={`${env.NEXT_PUBLIC_CMS_BASE_URL}${mfo.Logo?.file?.url}`}
-              alt={mfo.name}
-              fill
-            />
-          ) : (
-            <Zap className="w-full h-full" />
-          )}
-        </AspectRatio>
+        <MfoImage mfo={mfo} />
       </div>
       {mfo.rich_description ? (
         <div className="cursor-help">
