@@ -1,7 +1,6 @@
 import "./globals.css";
 import React from "react";
 import { ProjectQueryClientProvider } from "@/app/_utils/projectQueryClientProvider";
-import localFont from "next/font/local";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
@@ -10,6 +9,7 @@ import Header from "@/app/_components/header";
 import Footer from "@/app/_components/footer";
 import { getGlobal } from "@/app/_queries/websiteInfo";
 import { Metadata } from "next";
+import { Montserrat } from "next/font/google";
 
 export const revalidate = 60;
 
@@ -119,19 +119,25 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const mainFont = localFont({
-  src: [
-    {
-      path: "./_fonts/Montserrat/static/Montserrat-Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "./_fonts/Montserrat/static/Montserrat-Bold.ttf",
-      weight: "700",
-      style: "normal",
-    },
-  ],
+// const mainFont = localFont({
+//   src: [
+//     {
+//       path: "./_fonts/Montserrat/static/Montserrat-Regular.ttf",
+//       weight: "400",
+//       style: "normal",
+//     },
+//     {
+//       path: "./_fonts/Montserrat/static/Montserrat-Bold.ttf",
+//       weight: "700",
+//       style: "normal",
+//     },
+//   ],
+// });
+const mainFont = Montserrat({
+  weight: ["400", "700"],
+  style: ["normal"],
+  subsets: ["latin", "cyrillic"],
+  display: "swap",
 });
 
 export default async function RootLayout({
