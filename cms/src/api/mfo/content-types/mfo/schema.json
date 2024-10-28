@@ -68,6 +68,10 @@
     },
     "full_credit_price_to": {
       "type": "decimal"
+    },
+    "is_special": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

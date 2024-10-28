@@ -15,6 +15,7 @@ const mfosQueryDocument = graphql(/* GraphQL */ `
       partner_link
       rich_description
       full_credit_price_to
+      is_special
 
       Logo {
         file {
@@ -36,9 +37,12 @@ const mfosQueryDocument = graphql(/* GraphQL */ `
 `);
 
 export async function getSpecialOfferMfos() {
-  return await cmsGraphQLRequest(mfosQueryDocument);
+  const mfos = await cmsGraphQLRequest(mfosQueryDocument);
+  // Filter the results to return only those with is_special set to true
+  return { ...mfos, mfos: mfos.mfos.filter((mfo) => mfo && mfo.is_special) };
 }
 
 export async function getMfos() {
+  // Fetch all MFOS without filtering
   return await cmsGraphQLRequest(mfosQueryDocument);
 }
