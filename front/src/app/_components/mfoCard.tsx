@@ -25,6 +25,7 @@ import Markdown from "@/components/markdown";
 import Image from "next/image";
 import env from "@/app/_lib/env";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { cn } from "@/lib/utils";
 
 // Simple hash function to convert string to number
 const hashCode = (str: string) => {
@@ -116,7 +117,13 @@ function MfoImage({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
 
 function Header({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
   return (
-    <div className="flex flex-col items-center space-y-4" role="button">
+    <div
+      className={cn(
+        "flex flex-col items-center space-y-4",
+        !mfo.rich_description && "cursor-auto",
+      )}
+      role="button"
+    >
       <div className="w-full">
         <MfoImage mfo={mfo} />
       </div>
