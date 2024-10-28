@@ -8,16 +8,16 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useQuery } from "@tanstack/react-query";
-import { getMfos } from "@/app/_queries/mfo";
+import { getSpecialOfferMfos } from "@/app/_queries/mfo";
 import { MfosQuery } from "@/app/_queries/gql/graphql";
 import MfoCard from "@/app/_components/mfoCard";
 import React from "react";
 
 export default function SpecialOfferSection() {
   const { data } = useQuery<MfosQuery>({
-    queryKey: ["mfos"],
+    queryKey: ["specialOfferMfos"],
     // queryFn: async () => await cmsGraphQLRequest(mfosQueryDocument)
-    queryFn: getMfos,
+    queryFn: getSpecialOfferMfos,
   });
 
   const mfos = data?.mfos;
