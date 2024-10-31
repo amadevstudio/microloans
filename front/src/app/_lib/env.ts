@@ -30,6 +30,11 @@ export default createEnv({
     NEXT_PUBLIC_CMS_BASE_URL: z.string().url().min(1),
     NEXT_PUBLIC_CMS_URL: z.string().url().min(1),
     NEXT_PUBLIC_CMS_TOKEN: z.string().min(1),
+
+    NEXT_PUBLIC_YM_TOKEN: z.preprocess(
+      (t) => parseInt(z.string().parse(t), 10),
+      z.number().min(1),
+    ),
   },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
@@ -55,5 +60,7 @@ export default createEnv({
     NEXT_PUBLIC_CMS_BASE_URL: process.env.NEXT_PUBLIC_CMS_BASE_URL,
     NEXT_PUBLIC_CMS_URL: process.env.NEXT_PUBLIC_CMS_URL,
     NEXT_PUBLIC_CMS_TOKEN: process.env.NEXT_PUBLIC_CMS_TOKEN,
+
+    NEXT_PUBLIC_YM_TOKEN: process.env.NEXT_PUBLIC_YM_TOKEN,
   },
 });

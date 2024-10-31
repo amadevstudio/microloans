@@ -8,6 +8,7 @@ import Header from "@/app/_components/header";
 import Footer from "@/app/_components/footer";
 import { getGlobal } from "@/app/_queries/websiteInfo";
 import { Metadata } from "next";
+import YMetrics from "@/app/_components/ymetrics";
 
 export const revalidate = 60;
 
@@ -156,6 +157,7 @@ export default async function RootLayout({
             <Toaster />
           </ThemeProvider>
         </ProjectQueryClientProvider>
+        {env.NODE_ENV === "production" ?? <YMetrics />}
       </body>
     </html>
   );
