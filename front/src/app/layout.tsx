@@ -157,7 +157,7 @@ export default async function RootLayout({
             <Toaster />
           </ThemeProvider>
         </ProjectQueryClientProvider>
-        {env.NODE_ENV === "production" ?? <YMetrics />}
+        {env.NODE_ENV === "production" && <YMetrics />}
       </body>
     </html>
   );
