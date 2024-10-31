@@ -3,7 +3,7 @@ import cmsGraphQLRequest from "@/app/_lib/graphQL/cmsGraphQLFetch";
 
 const mfosQueryDocument = graphql(/* GraphQL */ `
   query Mfos {
-    mfos {
+    mfos(pagination: { limit: 1000 }) {
       documentId
       name
       amount_from
