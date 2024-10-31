@@ -111,10 +111,6 @@ export async function generateMetadata(): Promise<Metadata> {
         "max-snippet": -1,
       },
     },
-
-    alternates: {
-      canonical: env.NEXT_PUBLIC_URL,
-    },
   };
 }
 
