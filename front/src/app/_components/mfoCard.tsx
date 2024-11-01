@@ -38,6 +38,13 @@ const hashCode = (str: string) => {
   return Math.abs(hash);
 };
 
+function checkOneOfPairNumber(
+  a: null | undefined | number,
+  b: null | undefined | number,
+): boolean {
+  return (a !== null && a !== undefined) || (b !== null && b !== undefined);
+}
+
 export default function MfoCard({
   mfo,
 }: {
@@ -212,18 +219,32 @@ function MfoContent({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
   return (
     <>
       <div className="space-y-4 mb-4">
-        <div className="flex items-center">
-          <Banknote className="mr-2 h-4 w-4 text-green-500 flex-shrink-0" />
-          <span className="font-semibold truncate">
-            От {mfo.amount_from} до {mfo.amount_to} ₽
-          </span>
-        </div>
-        {mfo.term_to && (
+        {checkOneOfPairNumber(mfo.amount_from, mfo.amount_to) && (
+          <div className="flex items-center">
+            <Banknote className="mr-2 h-4 w-4 text-green-500 flex-shrink-0" />
+            <span className="font-semibold truncate">
+              {mfo.amount_from
+                ? `От ${mfo.amount_from}` +
+                  (mfo.amount_to ? ` до ${mfo.amount_to}` : "") +
+                  " ₽"
+                : mfo.amount_to && `До ${mfo.amount_to} ₽`}
+            </span>
+          </div>
+        )}
+        {checkOneOfPairNumber(mfo.term_from, mfo.term_to) && (
           <div className="flex items-center">
             <Calendar className="mr-2 h-3.5 w-3.5 text-blue-500 flex-shrink-0" />
             <span className="truncate">
-              От {mfo.term_from} до {mfo.term_to}{" "}
-              {tn(mfo.term_to, "mfo", "card", "interest", "freeTerm")}
+              {mfo.term_from
+                ? `От ${mfo.term_from}` +
+                  (mfo.term_to
+                    ? ` до ${mfo.term_to} ` +
+                      tn(mfo.term_to, "mfo", "card", "interest", "freeTerm")
+                    : " " +
+                      tn(mfo.term_from, "mfo", "card", "interest", "freeTerm"))
+                : mfo.term_to &&
+                  `До ${mfo.term_to} ` +
+                    tn(mfo.term_to, "mfo", "card", "interest", "freeTerm")}
             </span>
           </div>
         )}
