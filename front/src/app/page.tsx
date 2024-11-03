@@ -6,12 +6,18 @@ import {
 } from "@tanstack/react-query";
 import { getMfos, getSpecialOfferMfos } from "@/app/_queries/mfo";
 import { getAdditionalFilters, getObtainingMethods } from "@/app/_queries/dict";
-import FeatureSection from "@/app/_components/featureSection";
-import FAQSection from "@/app/_components/faqSection";
 import BannerSection from "@/app/_components/bannerSection";
 import { getLandingPage } from "@/app/_queries/websiteInfo";
-import MfosWithFilters from "@/app/_components/mfosWithFilters";
 import FinancialLiteracy from "@/app/_components/financialLiteracy";
+import dynamic from "next/dynamic";
+
+const MfosWithFilters = dynamic(
+  () => import("@/app/_components/mfosWithFilters"),
+);
+const FeatureSection = dynamic(
+  () => import("@/app/_components/featureSection"),
+);
+const FAQSection = dynamic(() => import("@/app/_components/faqSection"));
 
 export default async function Home() {
   const queryClient = new QueryClient();
