@@ -11,6 +11,7 @@ import FAQSection from "@/app/_components/faqSection";
 import BannerSection from "@/app/_components/bannerSection";
 import { getLandingPage } from "@/app/_queries/websiteInfo";
 import MfosWithFilters from "@/app/_components/mfosWithFilters";
+import FinancialLiteracy from "@/app/_components/financialLiteracy";
 
 export default async function Home() {
   const queryClient = new QueryClient();
@@ -45,6 +46,8 @@ export default async function Home() {
       <HydrationBoundary state={dehydrate(queryClient)}>
         <BannerSection />
       </HydrationBoundary>
+
+      <FinancialLiteracy />
 
       <HydrationBoundary state={dehydrate(queryClient)}>
         <SpecialOfferSection />
