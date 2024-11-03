@@ -27,15 +27,16 @@ import styles from "./filters.module.scss";
 import { useQuery } from "@tanstack/react-query";
 import {
   AdditionalFiltersQuery,
-  MfosQuery,
   ObtainingMethodsQuery,
 } from "@/app/_queries/gql/graphql";
 import { getAdditionalFilters, getObtainingMethods } from "@/app/_queries/dict";
 import { ChevronDown, ChevronUp, Filter } from "lucide-react";
 import MfosContext from "@/app/_components/mfosContext";
 import { scrollToId } from "@/lib/utils/frontend/scrollTo";
-
-type SortingMethod = "default" | "amount" | "term" | "interestRate";
+import createMfoSorter, {
+  FiltersPageState,
+  SortingMethod,
+} from "@/app/_services/mfoSorter";
 
 const fieldError = t("fields", "errors", "error");
 const biggerThatZeroInputSchema = z.coerce
@@ -49,56 +50,6 @@ const FiltersStateObject = z.object({
   obtainingMethod: z.string(),
   additional: z.record(z.boolean()),
 });
-type FiltersPageState = {
-  amount: string;
-  term: string;
-  obtainingMethod: string;
-  additional: { [k: string]: boolean };
-};
-
-function sort(
-  mfosToSort: Exclude<MfosQuery["mfos"][0], null>[],
-  sortingMethod: SortingMethod,
-  sortOrder: "asc" | "desc",
-) {
-  if (sortingMethod === "default") {
-    return mfosToSort;
-  }
-
-  const sortByMap: {
-    amount: { asc: "amount_from"; desc: "amount_to" };
-    term: { asc: "term_from"; desc: "term_to" };
-    interestRate: { [key in "asc" | "desc"]: "interest_rate" };
-  } = {
-    amount: {
-      asc: "amount_from",
-      desc: "amount_to",
-    },
-    term: {
-      asc: "term_from",
-      desc: "term_to",
-    },
-    interestRate: {
-      asc: "interest_rate",
-      desc: "interest_rate",
-    },
-  };
-
-  const result = [...mfosToSort];
-
-  result.sort((a, b) => {
-    const aParam = a[sortByMap[sortingMethod][sortOrder]];
-    const bParam = b[sortByMap[sortingMethod][sortOrder]];
-    if (!aParam) return sortOrder === "asc" ? 1 : -1;
-    if (!bParam) return sortOrder === "asc" ? -1 : 1;
-
-    if (aParam < bParam) return sortOrder === "asc" ? -1 : 1;
-    if (aParam > bParam) return sortOrder === "asc" ? 1 : -1;
-    return 0;
-  });
-
-  return result;
-}
 
 export default function FiltersSection() {
   const {
@@ -134,6 +85,7 @@ export default function FiltersSection() {
         {},
       ) ?? {},
   });
+  const mfoSorter = createMfoSorter();
 
   const [errorsPage, setErrorsPage] = useState<
     Partial<Record<keyof FiltersPageState, string>>
@@ -166,62 +118,9 @@ export default function FiltersSection() {
   } = {}) {
     if (!validateState()) return;
 
-    let result = [...allMfos];
-
-    // Filter by amount
-    if (
-      filtersPageState.amount !== undefined &&
-      filtersPageState.amount !== ""
-    ) {
-      const amount = Number(filtersPageState.amount);
-      result = result.filter(
-        (mfo) =>
-          (!mfo?.amount_from || mfo.amount_from <= amount) &&
-          (!mfo?.amount_to || mfo.amount_to >= amount),
-      );
-    }
-
-    // Filter by term
-    if (filtersPageState.term !== undefined && filtersPageState.term !== "") {
-      const term = Number(filtersPageState.term);
-      result = result.filter(
-        (mfo) =>
-          (!mfo?.term_from || mfo.term_from <= term) &&
-          (!mfo?.term_to || mfo.term_to >= term),
-      );
-    }
-
-    // Filter by obtaining method
-    if (filtersPageState.obtainingMethod !== "any") {
-      result = result.filter((mfo) =>
-        mfo?.obtaining_methods
-          .map((om) => om?.documentId)
-          .includes(filtersPageState.obtainingMethod),
-      );
-    }
-
-    // Filter by additional filters
-    const additionalForMfos = result.reduce(
-      (acc: { [key in string]: string[] }, item) => {
-        acc[item.documentId] = item.additional_filters
-          .filter((filter) => filter !== null)
-          .map((filter) => filter.documentId);
-        return acc;
-      },
-      {},
-    );
-    const appliedAdditionalFilters = Object.entries(filtersPageState.additional)
-      .filter(([_, value]) => value)
-      .map(([name, _]) => name);
-    result = result.filter((mfo) =>
-      appliedAdditionalFilters.every((af) =>
-        additionalForMfos[mfo.documentId].includes(af),
-      ),
-    );
-
     // Sort
-    result = sort(
-      result,
+    const result = mfoSorter.sort(
+      mfoSorter.filter(filtersPageState, [...allMfos]),
       newSortingMethod ?? sortingMethod,
       newSortOrder ?? sortOrder,
     );
@@ -238,12 +137,16 @@ export default function FiltersSection() {
       return;
     }
 
-    setMfosList(sort(filteredAndSortedMfos, newSortingMethod, sortOrder));
+    setMfosList(
+      mfoSorter.sort(filteredAndSortedMfos, newSortingMethod, sortOrder),
+    );
   }
 
   function setSortOrderAndSort(newSortOrder: typeof sortOrder) {
     setSortOrder(newSortOrder);
-    setMfosList(sort(filteredAndSortedMfos, sortingMethod, newSortOrder));
+    setMfosList(
+      mfoSorter.sort(filteredAndSortedMfos, sortingMethod, newSortOrder),
+    );
   }
 
   type PlainKeys<T> = {
