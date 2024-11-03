@@ -97,7 +97,7 @@ export default function FinancialLiteracy() {
               <BookOpen className="h-8 w-8 text-primary" />
             </div>
             <h2 className="text-2xl font-bold text-primary">
-              Курс "Основы финансовой грамотности"
+              Курс &ldquo;Основы финансовой грамотности&rdquo;
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Инвестируйте в своё финансовое образование! Наш комплексный курс
