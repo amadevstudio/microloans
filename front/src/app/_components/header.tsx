@@ -15,6 +15,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { GlobalQuery } from "@/app/_queries/gql/graphql";
+import { routes } from "@/app/_config/routes";
 
 export default function Header({ global }: { global: GlobalQuery["global"] }) {
   const { theme, setTheme, systemTheme, resolvedTheme } = useTheme();
@@ -73,21 +74,21 @@ export default function Header({ global }: { global: GlobalQuery["global"] }) {
   const NavItems = () => (
     <>
       <Link
-        href="/"
+        href={routes.home}
         className={`hover:text-primary transition-colors ${pathname === "/" ? "font-bold text-primary" : ""}`}
         onClick={() => setIsOpen(false)}
       >
         Главная
       </Link>
       <Link
-        href="/about"
+        href={routes.about}
         className={`hover:text-primary transition-colors ${pathname === "/about" ? "font-bold text-primary" : ""}`}
         onClick={() => setIsOpen(false)}
       >
         О нас
       </Link>
       <Link
-        href="/contact"
+        href={routes.contact}
         className={`hover:text-primary transition-colors ${pathname === "/contact" ? "font-bold text-primary" : ""}`}
         onClick={() => setIsOpen(false)}
       >
@@ -103,7 +104,7 @@ export default function Header({ global }: { global: GlobalQuery["global"] }) {
       } ${headerShouldBeHidden() ? "-translate-y-full" : "translate-y-0"}`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <Link href="/" className="flex items-center space-x-4">
+        <Link href={routes.home} className="flex items-center space-x-4">
           <Image
             src="/images/monster.round.svg"
             alt={global?.siteName ?? ""}

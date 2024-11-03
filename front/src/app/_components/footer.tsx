@@ -1,5 +1,7 @@
 import { GlobalQuery } from "@/app/_queries/gql/graphql";
 import Markdown from "@/components/markdown";
+import Link from "next/link";
+import { routes } from "@/app/_config/routes";
 
 const currentYear = new Date().getFullYear();
 const creationYear = 2024;
@@ -17,24 +19,24 @@ export default function Footer({ global }: { global: GlobalQuery["global"] }) {
             <h3 className="text-lg font-semibold mb-4">Быстрые ссылки</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/about" className="hover:underline">
+                <Link href={routes.about} className="hover:underline">
                   О нас
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/contact" className="hover:underline">
+                <Link href={routes.contact} className="hover:underline">
                   Контакты
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/terms" className="hover:underline">
+                <Link href={routes.terms} className="hover:underline">
                   Условия использования
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/privacy" className="hover:underline">
+                <Link href={routes.privacy} className="hover:underline">
                   Политика конфиденциальности
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
