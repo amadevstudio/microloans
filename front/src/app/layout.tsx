@@ -9,6 +9,8 @@ import Footer from "@/app/_components/footer";
 import { getGlobal } from "@/app/_queries/websiteInfo";
 import { Metadata } from "next";
 import YMetrics from "@/app/_components/ymetrics";
+import { isBot } from "@/lib/utils/isBot";
+import { headers } from "next/headers";
 
 export const revalidate = 60;
 
@@ -142,6 +144,10 @@ export default async function RootLayout({
 }>) {
   const { global: global } = await getGlobal();
 
+  const userAgent = headers().get("user-agent") || "";
+  const isBotUser = isBot(userAgent);
+  const enableAnalytics = process.env.NODE_ENV === "production" && !isBotUser;
+
   return (
     <html lang="ru" suppressHydrationWarning>
       <body className="bg-background text-foreground">
@@ -153,7 +159,7 @@ export default async function RootLayout({
             <Toaster />
           </ThemeProvider>
         </ProjectQueryClientProvider>
-        {env.NODE_ENV === "production" && <YMetrics />}
+        {enableAnalytics && <YMetrics />}
       </body>
     </html>
   );
