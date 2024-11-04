@@ -80,7 +80,10 @@ export default function MfoCard({
                       Закрыть
                     </Button>
                   </DialogClose>
-                  <SubmitApplication partnerLink={mfo.partner_link} />
+                  <SubmitApplication
+                    partnerLink={mfo.partner_link}
+                    mfoId={mfo.documentId}
+                  />
                 </DialogFooter>
               </DialogContent>
             </Dialog>
@@ -152,10 +155,19 @@ function Header({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
   );
 }
 
-function SubmitApplication({ partnerLink }: { partnerLink: string }) {
+function SubmitApplication({
+  partnerLink,
+  mfoId,
+}: {
+  partnerLink: string;
+  mfoId: string;
+}) {
   return (
     <Link href={partnerLink} target="_blank">
-      <Button className="w-full cta-button text-white text-sm">
+      <Button
+        id={`submit-application-button-${mfoId}`}
+        className="w-full cta-button text-white text-sm"
+      >
         Подать заявку
       </Button>
     </Link>
@@ -284,7 +296,10 @@ function MfoContent({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
           )}
         </div>
       </div>
-      <SubmitApplication partnerLink={mfo.partner_link} />
+      <SubmitApplication
+        partnerLink={mfo.partner_link}
+        mfoId={mfo.documentId}
+      />
     </>
   );
 }
