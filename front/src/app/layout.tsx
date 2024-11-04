@@ -8,9 +8,9 @@ import Header from "@/app/_components/header";
 import Footer from "@/app/_components/footer";
 import { getGlobal } from "@/app/_queries/websiteInfo";
 import { Metadata } from "next";
-import YMetrics from "@/app/_components/ymetrics";
 import { isBot } from "@/lib/utils/isBot";
 import { headers } from "next/headers";
+import YMetrics from "@/lib/analytics/ymetrics";
 
 export const revalidate = 60;
 
