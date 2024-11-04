@@ -9,15 +9,15 @@ interface Window {
   ym?: (id: number, method: string, ...args: any[]) => void;
 }
 
-const w = window as unknown as Window;
-
 export default function YMetrics() {
   const pathName = usePathname();
   const searchParams = useSearchParams();
 
+  const w = window as unknown as Window;
+
   useEffect(() => {
     w.ym && w.ym(env.NEXT_PUBLIC_YM_TOKEN, "hit", window.location.href);
-  }, [pathName, searchParams]);
+  }, [pathName, searchParams, w]);
 
   return (
     <>
@@ -45,5 +45,6 @@ export default function YMetrics() {
 }
 
 export function reachGoal(goal: string, ...args: any[]) {
+  const w = window as unknown as Window;
   w.ym && w.ym(env.NEXT_PUBLIC_YM_TOKEN, "reachGoal", goal, ...args);
 }
