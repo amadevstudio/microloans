@@ -26,6 +26,7 @@ import Image from "next/image";
 import env from "@/app/_lib/env";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { cn } from "@/lib/utils";
+import { reachGoal } from "@/lib/analytics/ymetrics";
 
 // Simple hash function to convert string to number
 const hashCode = (str: string) => {
@@ -158,14 +159,23 @@ function Header({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
 function SubmitApplication({
   partnerLink,
   mfoId,
+  potentialIncome,
 }: {
   partnerLink: string;
   mfoId: string;
+  potentialIncome?: number;
 }) {
   return (
     <Link href={partnerLink} target="_blank">
       <Button
-        id={`submit-application-button-${mfoId}`}
+        onClick={() =>
+          reachGoal(
+            `submit-application-button-${mfoId}`,
+            potentialIncome
+              ? { order_price: potentialIncome, currency: "RUB" }
+              : {},
+          )
+        }
         className="w-full cta-button text-white text-sm"
       >
         Подать заявку
