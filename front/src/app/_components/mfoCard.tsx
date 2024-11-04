@@ -65,7 +65,7 @@ export default function MfoCard({
                     <MfoImage mfo={mfo} />
                   </div>
                   <DialogTitle>{mfo.name}</DialogTitle>
-                  <DialogDescription className="text-[0.5rem]">
+                  <DialogDescription className="text-[0.7rem]">
                     Предложение микрозайма от посредника (реклама)
                   </DialogDescription>
                 </DialogHeader>
@@ -144,7 +144,7 @@ function Header({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
             </>
           )}
         </CardTitle>
-        <CardDescription className="text-[0.5rem]">
+        <CardDescription className="text-[0.7rem]">
           Предложение микрозайма от посредника (реклама)
         </CardDescription>
       </div>
