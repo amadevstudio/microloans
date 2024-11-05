@@ -178,7 +178,7 @@ function SubmitApplication({
         }
         className="w-full cta-button text-white text-sm"
       >
-        Подать заявку
+        Открыть предложение
       </Button>
     </Link>
   );
