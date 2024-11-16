@@ -13,11 +13,10 @@ export default function YMetrics() {
   const pathName = usePathname();
   const searchParams = useSearchParams();
 
-  const w = window as unknown as Window;
-
   useEffect(() => {
+    const w = window as unknown as Window;
     w.ym && w.ym(env.NEXT_PUBLIC_YM_TOKEN, "hit", window.location.href);
-  }, [pathName, searchParams, w]);
+  }, [pathName, searchParams]);
 
   return (
     <>
