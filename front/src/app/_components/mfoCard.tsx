@@ -240,7 +240,11 @@ function FullCreditPrice({
 function MfoContent({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
   return (
     <>
-      <div className="space-y-4 mb-4">
+      <SubmitApplication
+        partnerLink={mfo.partner_link}
+        mfoId={mfo.documentId}
+      />
+      <div className="space-y-4 mt-4">
         {checkOneOfPairNumber(mfo.amount_from, mfo.amount_to) && (
           <div className="flex items-center">
             <Banknote className="mr-2 h-4 w-4 text-green-500 flex-shrink-0" />
@@ -306,10 +310,6 @@ function MfoContent({ mfo }: { mfo: Exclude<MfosQuery["mfos"][0], null> }) {
           )}
         </div>
       </div>
-      <SubmitApplication
-        partnerLink={mfo.partner_link}
-        mfoId={mfo.documentId}
-      />
     </>
   );
 }
