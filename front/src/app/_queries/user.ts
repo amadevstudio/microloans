@@ -3,7 +3,7 @@ import cmsGraphQLRequest from "@/app/_lib/graphQL/cmsGraphQLFetch";
 
 const userFeedbacksQueryDocument = graphql(`
   query UserFeedbacks {
-    userFeedbacks(pagination: { limit: 1000 }) {
+    userFeedbacks(pagination: { limit: 1000 }, sort: "priority:desc") {
       user_contact {
         name
         photo {
