@@ -536,7 +536,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = About | AdditionalFilter | Article | Author | Category | ComponentSharedMedia | ComponentSharedQuote | ComponentSharedRichText | ComponentSharedSeo | ComponentSharedSlider | Global | I18NLocale | Mfo | ObtainingMethod | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | WebsiteInfo;
+export type GenericMorph = About | AdditionalFilter | Article | Author | Category | ComponentSharedMedia | ComponentSharedQuote | ComponentSharedRichText | ComponentSharedSeo | ComponentSharedSlider | Global | I18NLocale | Mfo | ObtainingMethod | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UserContact | UserContactType | UserFeedback | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | WebsiteInfo;
 
 export type Global = {
   __typename?: 'Global';
@@ -835,6 +835,9 @@ export type Mutation = {
   createObtainingMethod?: Maybe<ObtainingMethod>;
   createReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   createReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
+  createUserContact?: Maybe<UserContact>;
+  createUserContactType?: Maybe<UserContactType>;
+  createUserFeedback?: Maybe<UserFeedback>;
   /** Create a new role */
   createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>;
   /** Create a new user */
@@ -850,6 +853,9 @@ export type Mutation = {
   deleteReviewWorkflowsWorkflow?: Maybe<DeleteMutationResponse>;
   deleteReviewWorkflowsWorkflowStage?: Maybe<DeleteMutationResponse>;
   deleteUploadFile?: Maybe<UploadFile>;
+  deleteUserContact?: Maybe<DeleteMutationResponse>;
+  deleteUserContactType?: Maybe<DeleteMutationResponse>;
+  deleteUserFeedback?: Maybe<DeleteMutationResponse>;
   /** Delete an existing role */
   deleteUsersPermissionsRole?: Maybe<UsersPermissionsDeleteRolePayload>;
   /** Delete an existing user */
@@ -875,6 +881,9 @@ export type Mutation = {
   updateReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   updateReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
   updateUploadFile: UploadFile;
+  updateUserContact?: Maybe<UserContact>;
+  updateUserContactType?: Maybe<UserContactType>;
+  updateUserFeedback?: Maybe<UserFeedback>;
   /** Update an existing role */
   updateUsersPermissionsRole?: Maybe<UsersPermissionsUpdateRolePayload>;
   /** Update an existing user */
@@ -938,6 +947,24 @@ export type MutationCreateReviewWorkflowsWorkflowStageArgs = {
 };
 
 
+export type MutationCreateUserContactArgs = {
+  data: UserContactInput;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationCreateUserContactTypeArgs = {
+  data: UserContactTypeInput;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationCreateUserFeedbackArgs = {
+  data: UserFeedbackInput;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
 export type MutationCreateUsersPermissionsRoleArgs = {
   data: UsersPermissionsRoleInput;
 };
@@ -990,6 +1017,21 @@ export type MutationDeleteReviewWorkflowsWorkflowStageArgs = {
 
 export type MutationDeleteUploadFileArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteUserContactArgs = {
+  documentId: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteUserContactTypeArgs = {
+  documentId: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteUserFeedbackArgs = {
+  documentId: Scalars['ID']['input'];
 };
 
 
@@ -1101,6 +1143,27 @@ export type MutationUpdateReviewWorkflowsWorkflowStageArgs = {
 export type MutationUpdateUploadFileArgs = {
   id: Scalars['ID']['input'];
   info?: InputMaybe<FileInfoInput>;
+};
+
+
+export type MutationUpdateUserContactArgs = {
+  data: UserContactInput;
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationUpdateUserContactTypeArgs = {
+  data: UserContactTypeInput;
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationUpdateUserFeedbackArgs = {
+  data: UserFeedbackInput;
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
 };
 
 
@@ -1250,6 +1313,15 @@ export type Query = {
   uploadFile?: Maybe<UploadFile>;
   uploadFiles: Array<Maybe<UploadFile>>;
   uploadFiles_connection?: Maybe<UploadFileEntityResponseCollection>;
+  userContact?: Maybe<UserContact>;
+  userContactType?: Maybe<UserContactType>;
+  userContactTypes: Array<Maybe<UserContactType>>;
+  userContactTypes_connection?: Maybe<UserContactTypeEntityResponseCollection>;
+  userContacts: Array<Maybe<UserContact>>;
+  userContacts_connection?: Maybe<UserContactEntityResponseCollection>;
+  userFeedback?: Maybe<UserFeedback>;
+  userFeedbacks: Array<Maybe<UserFeedback>>;
+  userFeedbacks_connection?: Maybe<UserFeedbackEntityResponseCollection>;
   usersPermissionsRole?: Maybe<UsersPermissionsRole>;
   usersPermissionsRoles: Array<Maybe<UsersPermissionsRole>>;
   usersPermissionsRoles_connection?: Maybe<UsersPermissionsRoleEntityResponseCollection>;
@@ -1484,6 +1556,72 @@ export type QueryUploadFilesArgs = {
 
 export type QueryUploadFiles_ConnectionArgs = {
   filters?: InputMaybe<UploadFileFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryUserContactArgs = {
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryUserContactTypeArgs = {
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryUserContactTypesArgs = {
+  filters?: InputMaybe<UserContactTypeFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryUserContactTypes_ConnectionArgs = {
+  filters?: InputMaybe<UserContactTypeFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryUserContactsArgs = {
+  filters?: InputMaybe<UserContactFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryUserContacts_ConnectionArgs = {
+  filters?: InputMaybe<UserContactFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryUserFeedbackArgs = {
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryUserFeedbacksArgs = {
+  filters?: InputMaybe<UserFeedbackFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryUserFeedbacks_ConnectionArgs = {
+  filters?: InputMaybe<UserFeedbackFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   status?: InputMaybe<PublicationStatus>;
@@ -1778,6 +1916,188 @@ export type UploadFileFiltersInput = {
 export type UploadFileRelationResponseCollection = {
   __typename?: 'UploadFileRelationResponseCollection';
   nodes: Array<UploadFile>;
+};
+
+export type UserContact = {
+  __typename?: 'UserContact';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  documentId: Scalars['ID']['output'];
+  locale?: Maybe<Scalars['String']['output']>;
+  localizations: Array<Maybe<UserContact>>;
+  localizations_connection?: Maybe<UserContactRelationResponseCollection>;
+  name: Scalars['String']['output'];
+  photo?: Maybe<UploadFile>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  user_contact_type?: Maybe<UserContactType>;
+  value: Scalars['String']['output'];
+};
+
+
+export type UserContactLocalizationsArgs = {
+  filters?: InputMaybe<UserContactFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type UserContactLocalizations_ConnectionArgs = {
+  filters?: InputMaybe<UserContactFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type UserContactEntityResponseCollection = {
+  __typename?: 'UserContactEntityResponseCollection';
+  nodes: Array<UserContact>;
+  pageInfo: Pagination;
+};
+
+export type UserContactFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<UserContactFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  documentId?: InputMaybe<IdFilterInput>;
+  locale?: InputMaybe<StringFilterInput>;
+  localizations?: InputMaybe<UserContactFiltersInput>;
+  name?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<UserContactFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<UserContactFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+  user_contact_type?: InputMaybe<UserContactTypeFiltersInput>;
+  value?: InputMaybe<StringFilterInput>;
+};
+
+export type UserContactInput = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  photo?: InputMaybe<Scalars['ID']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  user_contact_type?: InputMaybe<Scalars['ID']['input']>;
+  value?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserContactRelationResponseCollection = {
+  __typename?: 'UserContactRelationResponseCollection';
+  nodes: Array<UserContact>;
+};
+
+export type UserContactType = {
+  __typename?: 'UserContactType';
+  baseLink: Scalars['String']['output'];
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  documentId: Scalars['ID']['output'];
+  locale?: Maybe<Scalars['String']['output']>;
+  localizations: Array<Maybe<UserContactType>>;
+  localizations_connection?: Maybe<UserContactTypeRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  type: Scalars['String']['output'];
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type UserContactTypeLocalizationsArgs = {
+  filters?: InputMaybe<UserContactTypeFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type UserContactTypeLocalizations_ConnectionArgs = {
+  filters?: InputMaybe<UserContactTypeFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type UserContactTypeEntityResponseCollection = {
+  __typename?: 'UserContactTypeEntityResponseCollection';
+  nodes: Array<UserContactType>;
+  pageInfo: Pagination;
+};
+
+export type UserContactTypeFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<UserContactTypeFiltersInput>>>;
+  baseLink?: InputMaybe<StringFilterInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  documentId?: InputMaybe<IdFilterInput>;
+  locale?: InputMaybe<StringFilterInput>;
+  localizations?: InputMaybe<UserContactTypeFiltersInput>;
+  not?: InputMaybe<UserContactTypeFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<UserContactTypeFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  type?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type UserContactTypeInput = {
+  baseLink?: InputMaybe<Scalars['String']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserContactTypeRelationResponseCollection = {
+  __typename?: 'UserContactTypeRelationResponseCollection';
+  nodes: Array<UserContactType>;
+};
+
+export type UserFeedback = {
+  __typename?: 'UserFeedback';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  documentId: Scalars['ID']['output'];
+  feedback: Scalars['String']['output'];
+  locale?: Maybe<Scalars['String']['output']>;
+  localizations: Array<Maybe<UserFeedback>>;
+  localizations_connection?: Maybe<UserFeedbackRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  user_contact?: Maybe<UserContact>;
+};
+
+
+export type UserFeedbackLocalizationsArgs = {
+  filters?: InputMaybe<UserFeedbackFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type UserFeedbackLocalizations_ConnectionArgs = {
+  filters?: InputMaybe<UserFeedbackFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type UserFeedbackEntityResponseCollection = {
+  __typename?: 'UserFeedbackEntityResponseCollection';
+  nodes: Array<UserFeedback>;
+  pageInfo: Pagination;
+};
+
+export type UserFeedbackFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<UserFeedbackFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  documentId?: InputMaybe<IdFilterInput>;
+  feedback?: InputMaybe<StringFilterInput>;
+  locale?: InputMaybe<StringFilterInput>;
+  localizations?: InputMaybe<UserFeedbackFiltersInput>;
+  not?: InputMaybe<UserFeedbackFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<UserFeedbackFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+  user_contact?: InputMaybe<UserContactFiltersInput>;
+};
+
+export type UserFeedbackInput = {
+  feedback?: InputMaybe<Scalars['String']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  user_contact?: InputMaybe<Scalars['ID']['input']>;
+};
+
+export type UserFeedbackRelationResponseCollection = {
+  __typename?: 'UserFeedbackRelationResponseCollection';
+  nodes: Array<UserFeedback>;
 };
 
 export type UsersPermissionsCreateRolePayload = {
@@ -2123,6 +2443,11 @@ export type MfosQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type MfosQuery = { __typename?: 'Query', mfos: Array<{ __typename?: 'Mfo', documentId: string, name: string, amount_from?: number | null, amount_to?: number | null, term_from?: number | null, term_to?: number | null, interest_rate?: number | null, interest_free_term?: number | null, partner_link: string, rich_description?: string | null, full_credit_price_to?: number | null, is_special?: boolean | null, Logo?: { __typename?: 'ComponentSharedMedia', svg?: string | null, file?: { __typename?: 'UploadFile', url: string } | null } | null, additional_filters: Array<{ __typename?: 'AdditionalFilter', documentId: string, code: string, name: string } | null>, obtaining_methods: Array<{ __typename?: 'ObtainingMethod', documentId: string, name: string } | null> } | null> };
 
+export type UserFeedbacksQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UserFeedbacksQuery = { __typename?: 'Query', userFeedbacks: Array<{ __typename?: 'UserFeedback', feedback: string, user_contact?: { __typename?: 'UserContact', name: string, value: string, photo?: { __typename?: 'UploadFile', url: string } | null, user_contact_type?: { __typename?: 'UserContactType', type: string, baseLink: string } | null } | null } | null> };
+
 export type GlobalQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2137,5 +2462,6 @@ export type WebsiteInfoQuery = { __typename?: 'Query', websiteInfo?: { __typenam
 export const ObtainingMethodsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ObtainingMethods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"obtainingMethods"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"name:asc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<ObtainingMethodsQuery, ObtainingMethodsQueryVariables>;
 export const AdditionalFiltersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AdditionalFilters"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"additionalFilters"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"name:asc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<AdditionalFiltersQuery, AdditionalFiltersQueryVariables>;
 export const MfosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Mfos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mfos"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1000"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"amount_from"}},{"kind":"Field","name":{"kind":"Name","value":"amount_to"}},{"kind":"Field","name":{"kind":"Name","value":"term_from"}},{"kind":"Field","name":{"kind":"Name","value":"term_to"}},{"kind":"Field","name":{"kind":"Name","value":"interest_rate"}},{"kind":"Field","name":{"kind":"Name","value":"interest_free_term"}},{"kind":"Field","name":{"kind":"Name","value":"partner_link"}},{"kind":"Field","name":{"kind":"Name","value":"rich_description"}},{"kind":"Field","name":{"kind":"Name","value":"full_credit_price_to"}},{"kind":"Field","name":{"kind":"Name","value":"is_special"}},{"kind":"Field","name":{"kind":"Name","value":"Logo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"svg"}}]}},{"kind":"Field","name":{"kind":"Name","value":"additional_filters"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"obtaining_methods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<MfosQuery, MfosQueryVariables>;
+export const UserFeedbacksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"UserFeedbacks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userFeedbacks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1000"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user_contact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"user_contact_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"baseLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}},{"kind":"Field","name":{"kind":"Name","value":"feedback"}}]}}]}}]} as unknown as DocumentNode<UserFeedbacksQuery, UserFeedbacksQueryVariables>;
 export const GlobalDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Global"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"global"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"siteName"}},{"kind":"Field","name":{"kind":"Name","value":"motto"}},{"kind":"Field","name":{"kind":"Name","value":"siteDescription"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"}},{"kind":"Field","name":{"kind":"Name","value":"legalDescription"}},{"kind":"Field","name":{"kind":"Name","value":"defaultSeo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"metaTitle"}},{"kind":"Field","name":{"kind":"Name","value":"metaDescription"}},{"kind":"Field","name":{"kind":"Name","value":"shareImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}}]}}]}}]}}]} as unknown as DocumentNode<GlobalQuery, GlobalQueryVariables>;
 export const WebsiteInfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"WebsiteInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"websiteInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"bannerTitle"}},{"kind":"Field","name":{"kind":"Name","value":"bannerText"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsClockTitle"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsClockText"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsThumbsUpTitle"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsThumbsUpText"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsZapTitle"}},{"kind":"Field","name":{"kind":"Name","value":"whyChooseUsZapText"}},{"kind":"Field","name":{"kind":"Name","value":"faq"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"}}]}}]}}]}}]} as unknown as DocumentNode<WebsiteInfoQuery, WebsiteInfoQueryVariables>;

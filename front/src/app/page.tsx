@@ -17,6 +17,9 @@ const MfosWithFilters = dynamic(
 const FeatureSection = dynamic(
   () => import("@/app/_components/featureSection"),
 );
+const TestimonialSection = dynamic(
+  () => import("@/app/_components/testimonialSection"),
+);
 const FAQSection = dynamic(() => import("@/app/_components/faqSection"));
 
 export default async function Home() {
@@ -67,7 +70,7 @@ export default async function Home() {
         <FeatureSection />
       </div>
 
-      {/*<TestimonialSection/>*/}
+      <TestimonialSection />
 
       <HydrationBoundary state={dehydrate(queryClient)}>
         <FAQSection />
