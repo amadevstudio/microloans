@@ -873,6 +873,7 @@ export interface ApiUserFeedbackUserFeedback
       'oneToOne',
       'api::user-contact.user-contact'
     >;
+    priority: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

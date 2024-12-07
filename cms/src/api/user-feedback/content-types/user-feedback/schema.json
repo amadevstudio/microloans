@@ -20,6 +20,10 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::user-contact.user-contact"
+    },
+    "priority": {
+      "type": "integer",
+      "default": 0
     }
   }
 }
