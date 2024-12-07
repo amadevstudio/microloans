@@ -19,7 +19,7 @@ export default function TestimonialSection() {
   return (
     <section className="py-12 bg-gradient-to-r from-primary/10 to-secondary/10 dark:from-primary/5 dark:to-secondary/5 rounded-lg">
       <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center text-primary dark:text-primary/90">
-        Отзывы наших клиентов
+        Отзывы наших пользователей
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
         {data.userFeedbacks.map((testimonial, index) => (
