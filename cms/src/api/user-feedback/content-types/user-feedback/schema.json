@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_feedbacks",
+  "info": {
+    "singularName": "user-feedback",
+    "pluralName": "user-feedbacks",
+    "displayName": "User Feedback",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "feedback": {
+      "type": "text",
+      "required": true
+    },
+    "user_contact": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::user-contact.user-contact"
+    }
+  }
+}

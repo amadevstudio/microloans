@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_contacts",
+  "info": {
+    "singularName": "user-contact",
+    "pluralName": "user-contacts",
+    "displayName": "User Contact"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "value": {
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "photo": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "user_contact_type": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::user-contact-type.user-contact-type"
+    }
+  }
+}

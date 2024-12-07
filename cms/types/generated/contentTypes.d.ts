@@ -790,6 +790,104 @@ export interface ApiObtainingMethodObtainingMethod
   };
 }
 
+export interface ApiUserContactUserContact extends Struct.CollectionTypeSchema {
+  collectionName: 'user_contacts';
+  info: {
+    singularName: 'user-contact';
+    pluralName: 'user-contacts';
+    displayName: 'User Contact';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    value: Schema.Attribute.String & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    photo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    user_contact_type: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::user-contact-type.user-contact-type'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-contact.user-contact'
+    >;
+  };
+}
+
+export interface ApiUserContactTypeUserContactType
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'user_contact_types';
+  info: {
+    singularName: 'user-contact-type';
+    pluralName: 'user-contact-types';
+    displayName: 'User Contact Type';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    type: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    baseLink: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-contact-type.user-contact-type'
+    >;
+  };
+}
+
+export interface ApiUserFeedbackUserFeedback
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'user_feedbacks';
+  info: {
+    singularName: 'user-feedback';
+    pluralName: 'user-feedbacks';
+    displayName: 'User Feedback';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    feedback: Schema.Attribute.Text & Schema.Attribute.Required;
+    user_contact: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::user-contact.user-contact'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-feedback.user-feedback'
+    >;
+  };
+}
+
 export interface ApiWebsiteInfoWebsiteInfo extends Struct.SingleTypeSchema {
   collectionName: 'website_infos';
   info: {
@@ -1209,6 +1307,9 @@ declare module '@strapi/strapi' {
       'api::global.global': ApiGlobalGlobal;
       'api::mfo.mfo': ApiMfoMfo;
       'api::obtaining-method.obtaining-method': ApiObtainingMethodObtainingMethod;
+      'api::user-contact.user-contact': ApiUserContactUserContact;
+      'api::user-contact-type.user-contact-type': ApiUserContactTypeUserContactType;
+      'api::user-feedback.user-feedback': ApiUserFeedbackUserFeedback;
       'api::website-info.website-info': ApiWebsiteInfoWebsiteInfo;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;

@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_contact_types",
+  "info": {
+    "singularName": "user-contact-type",
+    "pluralName": "user-contact-types",
+    "displayName": "User Contact Type",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "type": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "baseLink": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
